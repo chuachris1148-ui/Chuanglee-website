@@ -16,7 +16,8 @@ content:
       - { name: email, label: Email, type: string }
       - { name: address_1, label: Address Line 1, type: string }
       - { name: address_2, label: Address Line 2, type: string }
-      - { name: nav_cta, label: Nav Button Text, type: string }
+      - { name: nav_cta, label: "§ Nav — Order Online button label", type: string }
+      - { name: nav_cta_url, label: "§ Nav — Order Online button URL", type: string }
       - { name: copyright, label: Copyright Years, type: string }
       - name: topbar_messages
         label: Topbar Messages
@@ -414,3 +415,4 @@ content:
       - { name: cat_ban_5_h3, label: "§ Banner 5 — Heading", type: string }
       - { name: cat_promo_h3, label: "§ Promo — Headline", type: string }
       - { name: cat_promo_p, label: "§ Promo — Description", type: string }
+
