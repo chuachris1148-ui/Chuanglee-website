@@ -108,10 +108,17 @@ async function applyHome() {
   setBg('hero-img-sub', d.hero_img_sub);
 
   // STATS
-  if (d.stats && d.stats.length) {
+  const statFields = [
+    { num: d.stat_1_num, label: d.stat_1_label },
+    { num: d.stat_2_num, label: d.stat_2_label },
+    { num: d.stat_3_num, label: d.stat_3_label },
+    { num: d.stat_4_num, label: d.stat_4_label },
+    { num: d.stat_5_num, label: d.stat_5_label },
+  ].filter(s => s.num);
+  if (statFields.length) {
     const statsInner = document.querySelector('.stats-inner');
     if (statsInner) {
-      statsInner.innerHTML = d.stats.map(s =>
+      statsInner.innerHTML = statFields.map(s =>
         `<div class="stat reveal"><div class="stat-num">${s.num}</div><div class="stat-label">${s.label}</div></div>`
       ).join('');
     }
