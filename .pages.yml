@@ -1,0 +1,59 @@
+content:
+  - name: global
+    label: Global Settings
+    type: file
+    path: content/global.json
+    fields:
+      - { name: brand_name, label: Brand Name, type: string }
+      - { name: phone, label: Phone Number, type: string }
+      - { name: email, label: Email, type: string }
+      - { name: address_1, label: Address Line 1, type: string }
+      - { name: address_2, label: Address Line 2, type: string }
+      - { name: nav_cta, label: Nav Button Text, type: string }
+      - { name: copyright, label: Copyright Years, type: string }
+      - name: topbar_messages
+        label: Topbar Messages
+        type: string[]
+
+  - name: home
+    label: Home Page
+    type: file
+    path: content/home.json
+    fields:
+      - { name: hero_line1, label: Hero Line 1, type: string }
+      - { name: hero_line2_italic, label: Hero Line 2 (italic), type: string }
+      - { name: hero_line3, label: Hero Line 3, type: string }
+      - { name: hero_sub, label: Hero Sub-headline, type: string }
+      - { name: hero_lede, label: Hero Paragraph, type: string }
+      - { name: hero_cta_primary, label: Primary CTA, type: string }
+      - { name: hero_cta_secondary, label: Secondary CTA, type: string }
+
+  - name: farm
+    label: Farm Page
+    type: file
+    path: content/farm.json
+    fields:
+      - { name: hero_line1, label: Hero Line 1, type: string }
+      - { name: hero_italic, label: Hero Italic, type: string }
+      - { name: hero_line2, label: Hero Line 2, type: string }
+      - { name: hero_lede, label: Hero Lede, type: string }
+      - { name: para_1, label: Paragraph 1, type: string }
+      - { name: para_2, label: Paragraph 2, type: string }
+      - { name: quote, label: Pull Quote, type: string }
+      - { name: cta_h3, label: CTA Headline, type: string }
+      - { name: cta_desc, label: CTA Description, type: string }
+      - { name: cta_btn, label: CTA Button, type: string }
+
+  - name: contact
+    label: Contact Page
+    type: file
+    path: content/contact.json
+    fields:
+      - { name: eyebrow, label: Eyebrow, type: string }
+      - { name: headline, label: Headline, type: string }
+      - { name: lead, label: Lead Paragraph, type: string }
+      - { name: delivery, label: Delivery Info, type: string }
+      - { name: min_order, label: Minimum Order, type: string }
+      - { name: form_heading, label: Form Heading, type: string }
+      - { name: form_sub, label: Form Sub-line, type: string }
+      - { name: form_submit, label: Submit Button, type: string }
