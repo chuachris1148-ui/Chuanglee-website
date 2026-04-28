@@ -414,5 +414,3 @@ content:
       - { name: cat_ban_5_h3, label: "§ Banner 5 — Heading", type: string }
       - { name: cat_promo_h3, label: "§ Promo — Headline", type: string }
       - { name: cat_promo_p, label: "§ Promo — Description", type: string }
-
-
