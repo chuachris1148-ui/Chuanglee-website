@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chuanglee — Authentic East-Asian Foodservice Since 1989</title>
+<meta name="description" content="Family-run UK importer, manufacturing partner and foodservice distributor specialising in authentic Thai, Chinese, Malaysian and Vietnamese ingredients. Trusted by 450+ kitchens since 1989." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* Hero — preserved exactly */
+  .hero { position: relative; max-width: 1440px; margin: 0 auto; padding: 60px 48px 80px; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: end; }
+  .hero-meta { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--vermillion); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+  .hero-meta::before { content: ''; width: 32px; height: 1px; background: var(--vermillion); }
+  .hero-sub { margin-top: 36px; max-width: 480px; font-size: 17px; line-height: 1.6; color: var(--ink-soft); }
+  .hero-actions { margin-top: 40px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .hero-visual { position: relative; height: 580px; }
+  .hero-img-main { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=1200&q=80') center/cover; border-radius: 4px; box-shadow: var(--shadow); }
+  .hero-img-sub { position: absolute; bottom: -30px; left: -60px; width: 220px; height: 280px; background: url('https://images.unsplash.com/photo-1518983546435-91f8b87fe561?w=600&q=80') center/cover; border-radius: 4px; box-shadow: var(--shadow); border: 6px solid var(--paper); }
+  .hero-stamp { position: absolute; top: -20px; right: -20px; width: 130px; height: 130px; border-radius: 50%; background: var(--vermillion); color: var(--paper); display: grid; place-items: center; text-align: center; font-family: var(--display); font-size: 14px; line-height: 1.2; letter-spacing: 0.02em; transform: rotate(-8deg); animation: spin 30s linear infinite; }
+  .hero-stamp .yr { font-size: 28px; font-weight: 600; display: block; }
+  @keyframes spin { from { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } to { transform: rotate(-8deg); } }
+  @media (max-width: 1100px) {
+    .hero { padding: 40px 24px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { height: 420px; }
+  }
+</style>
+</head>
+<body data-page="home">
+
+<div class="topbar">
+  <div class="marquee">
+    <span><span class="dot"></span> Family-run since 1989</span>
+    <span><span class="dot"></span> Importer · Manufacturing Partner · Foodservice Distributor</span>
+    <span><span class="dot"></span> Direct from farm to kitchen</span>
+    <span><span class="dot"></span> Serving 450+ UK food businesses</span>
+    <span><span class="dot"></span> Nationwide distribution · Own London fleet</span>
+    <span><span class="dot"></span> Family-run since 1989</span>
+    <span><span class="dot"></span> Importer · Manufacturing Partner · Foodservice Distributor</span>
+    <span><span class="dot"></span> Direct from farm to kitchen</span>
+    <span><span class="dot"></span> Serving 450+ UK food businesses</span>
+    <span><span class="dot"></span> Nationwide distribution · Own London fleet</span>
+  </div>
+</div>
+
+<nav class="main">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Chuanglee <span class="est">Est. 1989</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="brands.html">Brands</a>
+      <a href="farm.html">The Farm</a>
+      <a href="#customers">Partners</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <span class="phone">0845 388 1688</span>
+      <a href="contact.html" class="order-btn">Order Online ↗</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-meta reveal">Volume I · Heritage Foodservice</div>
+      <h1 class="headline reveal">
+        The flavour<br />
+        of <span class="ital">East Asia</span>,<br />
+        from soil to <span class="ital">stove</span>.
+        <span class="cjk">創立</span>
+      </h1>
+      <p class="hero-sub reveal">
+        Chuanglee is a third-generation family business importing, manufacturing
+        and distributing authentic Thai, Chinese, Malaysian and Vietnamese
+        ingredients to over 450 restaurant kitchens, retailers and wholesalers
+        across the United Kingdom.
+      </p>
+      <div class="hero-actions reveal">
+        <a href="catalogue.html" class="btn-primary">Browse Catalogue</a>
+        <a href="#capabilities" class="btn-ghost">Our Capabilities <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="hero-img-main"></div>
+      <div class="hero-img-sub"></div>
+      <div class="hero-stamp"><div><span class="yr">36</span>Years<br />of Trade</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">£25<span class="accent">m</span></div><div class="stat-label">FY25 Revenue</div></div>
+    <div class="stat"><div class="stat-num">3,000<span class="accent">+</span></div><div class="stat-label">SKUs in Catalogue</div></div>
+    <div class="stat"><div class="stat-num">450<span class="accent">+</span></div><div class="stat-label">Foodservice Customers</div></div>
+    <div class="stat"><div class="stat-num">1989</div><div class="stat-label">Family Founded</div></div>
+    <div class="stat"><div class="stat-num">UK<span class="accent">·</span>TH</div><div class="stat-label">From Farm to Fork</div></div>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="editorial" id="story">
+  <div class="story-grid">
+    <div class="story-text">
+      <div class="eyebrow">Who We Are</div>
+      <h2 class="title">A family business with <em>Asia in its bones</em>.</h2>
+      <p class="lead">Founded in <em>1989 by Jimmy Chua</em>, Chuanglee is today led by siblings Christopher, Jennisa and Katriya — a family rooted in food, in trade, and in the long, patient work of building real partnerships on both sides of the world.</p>
+      <p>From a small importing operation in London, we have grown into a fully integrated supply partner: working directly with manufacturers across Thailand, China, Malaysia and Vietnam to bring authentic, consistent, scalable ingredients into UK kitchens — from independent operators to restaurant groups of 50+ sites and Michelin-starred establishments.</p>
+      <p>We supply ambient, chilled, frozen and fresh categories — full-basket, direct-into-kitchen, with our own fleet servicing London and Greater London multiple times a week.</p>
+      <div class="pull-quote">
+        Partnerships sit at the very core of what we do. We don't just import ingredients — we import the people, the recipes, and the standards behind them.
+        <cite>— The Chua Family</cite>
+      </div>
+    </div>
+    <div class="story-visual">
+      <span class="tag">Est. 1989 · London</span>
+      <div class="img-1"></div>
+      <div class="img-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<div class="capabilities" id="capabilities">
+  <div class="cap-inner">
+    <div class="cap-head">
+      <div>
+        <div class="eyebrow">What We Do</div>
+        <h2 class="title">A full-basket food <em>solution</em> partner.</h2>
+      </div>
+      <p>Five interconnected capabilities — sourcing, manufacturing, farming, distribution and technical support — wrapped into a single, reliable partnership. We solve real operational pain-points so kitchens can focus on what kitchens do best.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card cap-1">
+        <span class="num">01 / Direct Importing</span>
+        <h3>Long-term partnerships across Asia.</h3>
+        <p>Stable sourcing and consistent product supply through deep manufacturer relationships built across decades — not transactions.</p>
+        <div class="icon">↗</div>
+      </div>
+      <div class="cap-card cap-2">
+        <span class="num">02 / Foodservice & Wholesale</span>
+        <h3>Ambient, chilled, frozen, fresh.</h3>
+        <p>Delivered across London nationwide. Own fleet servicing London & Greater London with delivery direct into your kitchens.</p>
+        <div class="icon">↗</div>
+      </div>
+      <div class="cap-card cap-3">
+        <span class="num">03 / Menu & Product</span>
+        <h3>Sourcing, alternatives, development.</h3>
+        <p>Operational support for evolving menus and scalable product development.</p>
+        <div class="icon">↗</div>
+      </div>
+      <div class="cap-card cap-4">
+        <span class="num">04 / Bespoke Sauces</span>
+        <h3>Manufactured to your recipe in Thailand.</h3>
+        <p>Through our manufacturing partner NRF: ready-to-use sauces and components, scalable for multi-site groups.</p>
+        <div class="icon">↗</div>
+      </div>
+      <div class="cap-card cap-5">
+        <div class="text-side">
+          <span class="num">05 / The Farm</span>
+          <h3>Suree's Farm — fresh Thai herbs grown by our family.</h3>
+          <p style="margin-top:14px;max-width:38ch;">A family-run vegetable farm and packing house one hour outside Bangkok in Chachoengsao, supplying seasonal Thai herbs and vegetables flown weekly into the UK.</p>
+          <div class="icon" style="margin-top:auto;">↗</div>
+        </div>
+        <div class="img-side"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ECOSYSTEM -->
+<section class="ecosystem">
+  <div class="eco-head">
+    <div class="eyebrow">The Chuanglee Ecosystem</div>
+    <h2 class="title">From <em>manufacturer</em> to <em>menu</em>, fully integrated.</h2>
+  </div>
+  <div class="eco-flow">
+    <div class="eco-node"><div class="step">1</div><h4>Asian Manufacturers</h4><p>Long-term supplier relationships across Thailand and Asia.</p></div>
+    <div class="eco-node"><div class="step">2</div><h4>NRF Product Development</h4><p>Global expertise for private label and foodservice products.</p></div>
+    <div class="eco-node"><div class="step">3</div><h4>Manufacturing — Thailand</h4><p>Scalable sauces and ready-to-use components, tailored to recipe.</p></div>
+    <div class="eco-node"><div class="step">4</div><h4>Import & Logistics</h4><p>UK import management, consolidation and supply planning.</p></div>
+    <div class="eco-node"><div class="step">5</div><h4>UK Warehouse & Distribution</h4><p>Ambient, chilled, frozen and fresh — across London and nationwide.</p></div>
+  </div>
+</section>
+
+<!-- FARM -->
+<section class="farm" id="farm">
+  <div class="farm-inner">
+    <div class="farm-text">
+      <div class="eyebrow">Suree's Farm · Chachoengsao</div>
+      <h2 class="title">Granny Suree's herbs, on a <em>plane</em> every week.</h2>
+      <p>One hour outside Bangkok, our family farm and packing house grows organic Thai produce alongside trusted local farmers — packed to order, flown to the UK weekly.</p>
+      <ul class="farm-list">
+        <li><strong>Cha Plu Leaves</strong> — wild pepper leaf, peppery & aromatic</li>
+        <li><strong>Kaffir Lime Leaves</strong> — picked, packed, never frozen</li>
+        <li><strong>Calamansi · Sour Mango · Marian Plum</strong> — true seasonal rotation</li>
+        <li><strong>Morning Glory · Aubergine Pea · Jujube</strong> — restaurant-grade volumes</li>
+      </ul>
+      <a href="farm.html" class="btn-ghost" style="margin-top:36px; border-color:var(--gold); color:var(--gold);">Visit Suree's Farm <span class="arrow">→</span></a>
+    </div>
+    <div class="farm-visual">
+      <div class="farm-img-main"></div>
+      <div class="farm-grid-mini">
+        <div class="specimen"><div class="swatch s1"></div>Cha Plu</div>
+        <div class="specimen"><div class="swatch s2"></div>Calamansi</div>
+        <div class="specimen"><div class="swatch s3"></div>Lime Leaf</div>
+        <div class="specimen"><div class="swatch s4"></div>Morning Glory</div>
+        <div class="specimen"><div class="swatch s5"></div>Sour Mango</div>
+        <div class="specimen"><div class="swatch s6"></div>Jujube</div>
+        <div class="specimen"><div class="swatch s7"></div>Marian Plum</div>
+        <div class="specimen"><div class="swatch s8"></div>Pea Aubergine</div>
+      </div>
+    </div>
+  </div>
+  <div class="farm-quote">"<span class="cjk-char">家</span> Family farms it, family packs it, family delivers it."</div>
+</section>
+
+<!-- CUSTOMERS -->
+<section class="customers" id="customers">
+  <div class="cust-head">
+    <div>
+      <div class="eyebrow">Our Distribution Channels</div>
+      <h2 class="title">Trusted by the <em>kitchens</em> shaping British dining.</h2>
+    </div>
+    <p style="font-size:16px;line-height:1.7;color:var(--ink-soft);max-width:50ch;">From Michelin-starred dining rooms to multi-site groups, university caterers and our wholesale partners — Chuanglee operates as the back-of-house sourcing arm for some of the most ambitious East Asian food brands in the UK.</p>
+  </div>
+  <div class="cust-channels">
+    <div class="cust-channel">
+      <span class="ch-num">01</span><h4>Foodservice</h4><p class="cnt">Contract & Travel Catering</p>
+      <ul class="cust-list">
+        <li>Compass Group <span class="ftd">Featured</span></li>
+        <li>Chartwells</li><li>Gate Gourmet</li><li>Prestige</li><li>Woods Foodservice</li>
+      </ul>
+    </div>
+    <div class="cust-channel">
+      <span class="ch-num">02</span><h4>Restaurant Chains</h4><p class="cnt">National Multi-Site Groups</p>
+      <ul class="cust-list">
+        <li>Hakkasan Group <span class="ftd">Michelin</span></li>
+        <li>Din Tai Fung <span class="ftd">Michelin</span></li>
+        <li>Busaba</li><li>Pho</li><li>Banana Tree · Patara</li>
+      </ul>
+    </div>
+    <div class="cust-channel">
+      <span class="ch-num">03</span><h4>Independents</h4><p class="cnt">Chef-Led Restaurants</p>
+      <ul class="cust-list">
+        <li>Hutong</li><li>Poon's London</li><li>Singapore Garden</li>
+        <li>Mama Kitchen</li><li>Eat Vietnam · TukTuk</li>
+      </ul>
+    </div>
+    <div class="cust-channel">
+      <span class="ch-num">04</span><h4>Wholesalers</h4><p class="cnt">Trade Distribution</p>
+      <ul class="cust-list">
+        <li>Wing Yip</li><li>Wai Yee Hong</li><li>SeeWoo</li>
+        <li>Tazaki Cash & Carry</li><li>Korea Foods · Kwan Yick</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND WALL -->
+<div class="brand-wall">
+  <div class="brand-wall-head">
+    <div>
+      <div class="eyebrow">House Brands</div>
+      <h2 class="title">A pantry of <em>icons</em>, sourced direct.</h2>
+    </div>
+    <p>Over thirty heritage Asian brands distributed under one roof — including AROY-D, Mae Ploy, Chaokoh, Healthy Boy, Singha, Megachef, Por Kwan, Golden Mountain and Yee Kwan. Direct manufacturer relationships keep pricing competitive and supply consistent.</p>
+  </div>
+  <div class="brand-rows">
+    <div class="brand-row">
+      <span>AROY-D <em>· est. 1972</em></span><span>Mae Ploy</span><span>Chaokoh <em>· coconut</em></span><span>Healthy Boy</span><span>Singha</span><span>Megachef</span><span>Por Kwan</span><span>Golden Mountain</span>
+      <span>AROY-D <em>· est. 1972</em></span><span>Mae Ploy</span><span>Chaokoh <em>· coconut</em></span><span>Healthy Boy</span><span>Singha</span><span>Megachef</span><span>Por Kwan</span><span>Golden Mountain</span>
+    </div>
+    <div class="brand-row reverse">
+      <span>Lee Brand</span><span>Yee Kwan <em>· ice cream</em></span><span>Sriraja Panich</span><span>Khun Jim</span><span>Wai Wai</span><span>Foco</span><span>Manora</span><span>Kwong Cheong Thye</span>
+      <span>Lee Brand</span><span>Yee Kwan <em>· ice cream</em></span><span>Sriraja Panich</span><span>Khun Jim</span><span>Wai Wai</span><span>Foco</span><span>Manora</span><span>Kwong Cheong Thye</span>
+    </div>
+    <div class="brand-row">
+      <span>Nittaya <em>· thai curry</em></span><span>Cock Brand</span><span>PA Foods</span><span>Bala 百樂</span><span>PFP</span><span>Tsingtao</span><span>Maggi</span><span>Chang</span>
+      <span>Nittaya <em>· thai curry</em></span><span>Cock Brand</span><span>PA Foods</span><span>Bala 百樂</span><span>PFP</span><span>Tsingtao</span><span>Maggi</span><span>Chang</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERITAGE -->
+<section class="heritage" id="heritage">
+  <div class="heritage-head">
+    <div>
+      <div class="eyebrow">Our Heritage</div>
+      <h2 class="title">Three decades of <em>building partnerships</em>.</h2>
+    </div>
+    <p>What began as a small London importing business in 1989 is now a fully integrated foodservice ecosystem — but the philosophy hasn't changed: family-run, partnership-led, slow to commit, long to stay.</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">1989</div><div class="tl-event">Chuanglee founded by Jimmy Chua. Begins importing East Asian ingredients into the UK.</div></div>
+    <div class="tl-item"><div class="tl-year">2011</div><div class="tl-event">Chuanglee Cash & Carry acquired — expanding wholesale reach.</div></div>
+    <div class="tl-item"><div class="tl-year">2023</div><div class="tl-event">Joins NRF Group; acquires Chinese foodservice business — full ecosystem formed.</div></div>
+    <div class="tl-item"><div class="tl-year">2024</div><div class="tl-event">First Mini C Asian Pantry retail store opens in Greenwich, London.</div></div>
+    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-event">Multi-site ordering app launches. Revenue reaches £25M with 450+ customers.</div></div>
+    <div class="tl-item"><div class="tl-year">Tomorrow</div><div class="tl-event">The next generation continues the work — same family, same standards.</div></div>
+  </div>
+</section>
+
+<!-- APP -->
+<section class="app-section">
+  <div class="app-inner">
+    <div>
+      <div class="eyebrow">The Chuanglee App</div>
+      <h2 class="title">Ordering, but <em>better</em>.</h2>
+      <p>Built for multi-site restaurant management. Personalised pricing, order guides tied to each site, repeat ordering in seconds, real-time delivery tracking and full account control — purpose-built for the pace of professional kitchens.</p>
+      <div class="app-features">
+        <div><span>01</span> Personalised pricing per site</div>
+        <div><span>02</span> Multi-site order guides</div>
+        <div><span>03</span> Repeat & favourite ordering</div>
+        <div><span>04</span> Live delivery tracking</div>
+      </div>
+      <div class="app-buttons">
+        <a href="#" class="app-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-3.04 2.49-4.5 2.6-4.57-1.42-2.07-3.62-2.36-4.4-2.39-1.86-.19-3.65 1.1-4.6 1.1-.97 0-2.42-1.08-3.99-1.05-2.04.03-3.95 1.19-5 3.01-2.16 3.74-.55 9.27 1.53 12.31 1.04 1.49 2.27 3.16 3.84 3.1 1.55-.06 2.13-.99 4-.99s2.4.99 4.04.96c1.67-.03 2.72-1.51 3.74-3.01 1.18-1.73 1.66-3.43 1.69-3.51-.04-.02-3.24-1.24-3.27-4.94zM14.42 3.21c.85-1.04 1.43-2.48 1.27-3.92-1.23.05-2.72.83-3.6 1.86-.79.92-1.49 2.39-1.31 3.8 1.37.11 2.78-.7 3.64-1.74z"/></svg>
+          <div><small>Download on the</small><strong>App Store</strong></div>
+        </a>
+        <a href="#" class="app-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.215-5.418l2.474 1.431a1 1 0 010 1.74l-2.475 1.43-2.585-2.585 2.586-2.586zM5.265 1.49l10.937 6.333-2.302 2.302L5.265 1.49z"/></svg>
+          <div><small>Get it on</small><strong>Google Play</strong></div>
+        </a>
+      </div>
+    </div>
+    <div class="phone-mockup">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-content">
+            <div class="ph-greet">Good morning, <em>Chef Luca</em>.</div>
+            <div class="ph-search">🔍 Search 3,000+ products</div>
+            <div class="ph-cards">
+              <div class="ph-card"><div class="ph-img"></div><div><div class="ph-title">AROY-D Coconut Milk</div><div class="ph-meta">12 × 1L · £2.40/unit</div></div><div class="ph-add">+</div></div>
+              <div class="ph-card"><div class="ph-img" style="background:linear-gradient(135deg,#2f4a3a,#86b349);"></div><div><div class="ph-title">Kaffir Lime Leaves</div><div class="ph-meta">100g · fresh, weekly</div></div><div class="ph-add">+</div></div>
+              <div class="ph-card"><div class="ph-img" style="background:linear-gradient(135deg,#c0362c,#f4ede1);"></div><div><div class="ph-title">Mae Ploy Sweet Chilli</div><div class="ph-meta">730g · case of 12</div></div><div class="ph-add">+</div></div>
+              <div class="ph-card"><div class="ph-img" style="background:linear-gradient(135deg,#15212f,#c89b3c);"></div><div><div class="ph-title">Healthy Boy Soy</div><div class="ph-meta">700ml · case of 12</div></div><div class="ph-add">+</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="eyebrow">Get in Touch</div>
+      <h2 class="title">Let's <em>build</em> something delicious.</h2>
+      <p class="lead">Whether you're an independent kitchen, a multi-site group, a wholesale buyer or a brand exploring bespoke product development — our team speaks Thai, Mandarin, Cantonese and English.</p>
+      <div class="contact-meta">
+        <div class="item"><div class="label">Sales & Enquiries</div><div class="value">sales@chuanglee.co.uk<br />0845 388 1688</div></div>
+        <div class="item"><div class="label">Head Office & Warehouse</div><div class="value">Unit 7-9 Meridian Trading Estate<br />Bugsby Way, London SE7 7SJ</div></div>
+        <div class="item"><div class="label">Delivery Coverage</div><div class="value">London & Greater London — multiple times weekly<br />UK nationwide — once a week</div></div>
+        <div class="item"><div class="label">Minimum Order</div><div class="value">£300 minimum order<br />for own-fleet delivery</div></div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="event.preventDefault();alert('Thank you — we\'ll be in touch within 1 working day.');">
+      <h3>Open an Account</h3>
+      <p class="sub">Tell us about your business and we'll be in touch within one working day.</p>
+      <div class="form-grid">
+        <div class="form-row"><label>First Name</label><input type="text" required /></div>
+        <div class="form-row"><label>Last Name</label><input type="text" required /></div>
+      </div>
+      <div class="form-row"><label>Business Email</label><input type="email" required /></div>
+      <div class="form-row"><label>Business Name</label><input type="text" required /></div>
+      <div class="form-row">
+        <label>Business Type</label>
+        <select required>
+          <option value="">Please select…</option>
+          <option>Independent Restaurant</option>
+          <option>Multi-Site Restaurant Group</option>
+          <option>Foodservice / Contract Catering</option>
+          <option>Wholesaler / Retailer</option>
+          <option>Hotel / Travel</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Tell us what you're looking for</label><textarea rows="3" placeholder="Products, volumes, delivery location…"></textarea></div>
+      <button type="submit" class="form-submit">Send Enquiry →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand">Chuanglee <span class="est">Est. 1989</span></div>
+        <p>Family-run UK importer, manufacturing partner and foodservice distributor — bringing authentic East Asian ingredients from soil to stove since 1989.</p>
+      </div>
+      <div class="foot-col"><h5>Explore</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="brands.html">Our Brands</a></li><li><a href="farm.html">Suree's Farm</a></li><li><a href="#heritage">Heritage</a></li></ul></div>
+      <div class="foot-col"><h5>Trade</h5><ul><li><a href="catalogue.html">Order Online</a></li><li><a href="contact.html">Open Account</a></li><li><a href="contact.html">Bespoke Manufacturing</a></li><li><a href="#">Mini C Pantry</a></li></ul></div>
+      <div class="foot-col"><h5>Contact</h5><ul><li><a href="mailto:sales@chuanglee.co.uk">sales@chuanglee.co.uk</a></li><li><a href="tel:08453881688">0845 388 1688</a></li><li>Unit 7-9 Meridian Trading Estate</li><li>Bugsby Way, London SE7 7SJ</li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 1989–2025 Chuanglee Limited. All rights reserved.</div>
+      <div class="center">創立 一九八九</div>
+      <div class="right"><a href="#">Modern Slavery</a><a href="#">Terms & Conditions</a><a href="#">Privacy</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="/content-loader.js"></script>
+</body>
+</html>
