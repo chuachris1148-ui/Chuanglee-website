@@ -774,7 +774,22 @@ function resetQuote() {
 (async () => {
   await loadProducts();
   renderPills();
-  renderProducts();
+
+  // Read ?brand= param from URL (set by brand card clicks)
+  const urlParams = new URLSearchParams(window.location.search);
+  const brandParam = urlParams.get('brand');
+  if (brandParam) {
+    query = brandParam.trim();
+    searchInput.value = query;
+    searchWrap.classList.add('has-query');
+    // Scroll to toolbar after render
+    renderProducts();
+    requestAnimationFrame(() => {
+      document.getElementById('toolbar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  } else {
+    renderProducts();
+  }
 })();
 </script>
 </body>

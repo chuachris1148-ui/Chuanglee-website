@@ -8,6 +8,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+
+<style>
+a.brand-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+}
+a.brand-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(21,33,47,.4);
+}
+a.brand-card .bc-foot .arr {
+  transition: transform .2s;
+}
+a.brand-card:hover .bc-foot .arr {
+  transform: translateX(5px);
+}
+</style>
 </head>
 <body data-page="brands">
 
@@ -23,9 +43,7 @@
 <nav class="main">
   <div class="nav-inner">
     <a href="index.html" class="brand">Chuanglee <span class="est">Est. 1989</span></a>
-    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">☰</button>
     <div class="nav-links">
-      <button class="nav-close" onclick="toggleNav()">✕</button>
       <a href="index.html">Home</a>
       <a href="catalogue.html">Catalogue</a>
       <a href="brands.html" class="active">Brands</a>
@@ -42,21 +60,21 @@
 
 <div class="page-hero">
   <div class="breadcrumb"><a href="index.html">Chuanglee</a> → Brands</div>
-  <h1>A pantry of <em>icons</em>,<br />sourced direct.<span class="cjk-sm">品牌</span></h1>
-  <p class="lede">Over thirty heritage Asian brands distributed under one roof. Direct manufacturer relationships keep pricing competitive and supply consistent — from AROY-D's Thai coconut milk to Singha's lager, from Healthy Boy's naturally-brewed soy to Mae Ploy's fifty-year-old sweet chilli.</p>
+  <h1 id="brands-h1">A pantry of <em>icons</em>,<br />sourced direct.<span class="cjk-sm">品牌</span></h1>
+  <p class="lede" id="brands-lede">Over thirty heritage Asian brands distributed under one roof. Direct manufacturer relationships keep pricing competitive and supply consistent — from AROY-D's Thai coconut milk to Singha's lager, from Healthy Boy's naturally-brewed soy to Mae Ploy's fifty-year-old sweet chilli.</p>
 </div>
 
 <!-- PROMO — AROY-D -->
 <div class="promo-band vermillion">
   <div class="promo-band-inner">
     <div class="promo-text">
-      <div class="promo-tag">Brand Spotlight · This Month</div>
-      <h3>AROY-D — the original <em>Thai coconut milk</em>.</h3>
-      <p>Pure-pressed, no stabilisers, no preservatives. Trusted by Michelin chefs and 450+ UK kitchens. Available in 400ml, 1L UHT and catering-case sizes.</p>
-      <a href="catalogue.html#coconut" class="btn-primary">Shop AROY-D →</a>
+      <div class="promo-tag" id="brands-promo-tag">Brand Spotlight · This Month</div>
+      <h3 id="brands-promo-h3">AROY-D — the original <em>Thai coconut milk</em>.</h3>
+      <p id="brands-promo-p">Pure-pressed, no stabilisers, no preservatives. Trusted by Michelin chefs and 450+ UK kitchens. Available in 400ml, 1L UHT and catering-case sizes.</p>
+      <a href="catalogue.html?brand=AROY" class="btn-primary">Shop AROY-D →</a>
     </div>
     <div class="promo-visual">
-      <div class="pv-bg" id="brands-promo-img-1"></div>
+      <div class="pv-bg" style="background-image:url('https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80');"></div>
       <div class="stamp">Best<br>Seller<br>2025</div>
     </div>
   </div>
@@ -64,29 +82,29 @@
 
 <!-- BRAND GRID -->
 <div class="brands-grid">
-  <div class="brand-card red"><span class="bc-num">No. 01</span><div class="bc-cjk">原</div><h3>AROY-D</h3><div class="bc-origin">Thailand · Est. 1972</div><p>The benchmark Thai coconut milk. Pure, no stabilisers — trusted by Michelin restaurants worldwide.</p><div class="bc-foot"><span>Coconut · Sauces</span><span class="arr">→</span></div></div>
-  <div class="brand-card dark"><span class="bc-num">No. 02</span><div class="bc-cjk">梅</div><h3>Mae Ploy</h3><div class="bc-origin">Thailand · Est. 1971</div><p>Fifty years of Thai sweet chilli. The recipe hasn't changed — 100+ countries still pour it.</p><div class="bc-foot"><span>Sauces · Pastes</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 03</span><div class="bc-cjk">健</div><h3>Healthy Boy</h3><div class="bc-origin">Thailand · Est. 1947</div><p>Naturally brewed Thai soy sauce since 1947. The cooking soy that Bangkok kitchens swear by.</p><div class="bc-foot"><span>Soy & Seasoning</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 04</span><div class="bc-cjk">椰</div><h3>Chaokoh</h3><div class="bc-origin">Thailand · Est. 1976</div><p>Premium Thai coconut products. Coconut milk, cream, lychee in syrup — reliable restaurant-grade.</p><div class="bc-foot"><span>Coconut · Fruit</span><span class="arr">→</span></div></div>
-  <div class="brand-card gold-bg"><span class="bc-num">No. 05</span><div class="bc-cjk">獅</div><h3>Singha</h3><div class="bc-origin">Thailand · Est. 1933</div><p>The original Thai beer. A nine-decade institution and a permanent fixture on UK Thai menus.</p><div class="bc-foot"><span>Beverages</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 06</span><div class="bc-cjk">廚</div><h3>Megachef</h3><div class="bc-origin">Thailand · Premium</div><p>First-press anchovy fish sauce, fermented 12 months. The chef's-grade upgrade.</p><div class="bc-foot"><span>Premium Sauces</span><span class="arr">→</span></div></div>
-  <div class="brand-card dark"><span class="bc-num">No. 07</span><div class="bc-cjk">雞</div><h3>Cock Brand</h3><div class="bc-origin">Thailand · Heritage</div><p>Authentic Thai curry pastes — green, red, yellow, massaman. Restaurant-pack, no shortcuts.</p><div class="bc-foot"><span>Curry Pastes</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 08</span><div class="bc-cjk">虹</div><h3>Sriraja Panich</h3><div class="bc-origin">Thailand · Est. 1935</div><p>The original sriracha from Si Racha, Thailand. Not the American one — the real thing.</p><div class="bc-foot"><span>Hot Sauce</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 09</span><div class="bc-cjk">山</div><h3>Golden Mountain</h3><div class="bc-origin">Thailand · Heritage</div><p>Thai seasoning sauce — the umami undercurrent of Thai street food and restaurant kitchens.</p><div class="bc-foot"><span>Seasoning</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 10</span><div class="bc-cjk">蟹</div><h3>Por Kwan</h3><div class="bc-origin">Thailand · Specialty</div><p>Crab paste, fermented bean pastes, and traditional Thai pantry essentials.</p><div class="bc-foot"><span>Pastes & Specials</span><span class="arr">→</span></div></div>
-  <div class="brand-card red"><span class="bc-num">No. 11</span><div class="bc-cjk">冰</div><h3>Yee Kwan</h3><div class="bc-origin">UK · Asian Ice Cream</div><p>Asian-flavour ice cream made in the UK — black sesame, lychee, mango sticky rice, matcha.</p><div class="bc-foot"><span>Frozen Desserts</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 12</span><div class="bc-cjk">魚</div><h3>PFP</h3><div class="bc-origin">Thailand · Frozen</div><p>Fish cakes, seafood sets, and frozen Thai seafood — restaurant-grade, ready to fry.</p><div class="bc-foot"><span>Frozen Seafood</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 13</span><div class="bc-cjk">麵</div><h3>Wai Wai</h3><div class="bc-origin">Thailand · Heritage</div><p>Iconic Thai noodle brand — instant noodles, snack noodles, vermicelli.</p><div class="bc-foot"><span>Noodles · Snacks</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 14</span><div class="bc-cjk">餅</div><h3>PA Foods</h3><div class="bc-origin">Frozen Specialist</div><p>Paratha, baos, tofu puffs — frozen back-of-house staples for Asian kitchens.</p><div class="bc-foot"><span>Frozen Bakery</span><span class="arr">→</span></div></div>
-  <div class="brand-card dark"><span class="bc-num">No. 15</span><div class="bc-cjk">椰</div><h3>FOCO</h3><div class="bc-origin">Thailand · Beverages</div><p>Pure Thai coconut water, coconut juice with pulp, and tropical fruit drinks.</p><div class="bc-foot"><span>Beverages</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 16</span><div class="bc-cjk">蝦</div><h3>Manora</h3><div class="bc-origin">Thailand · Snacks</div><p>Prawn crackers, taro chips, vegan alternatives — Thai snacks for restaurant sides.</p><div class="bc-foot"><span>Snacks · Crackers</span><span class="arr">→</span></div></div>
-  <div class="brand-card gold-bg"><span class="bc-num">No. 17</span><div class="bc-cjk">茶</div><h3>Chatramue</h3><div class="bc-origin">Thailand · Est. 1945</div><p>The original Thai tea blend — that iconic orange brew that defines Thai milk tea worldwide.</p><div class="bc-foot"><span>Tea & Coffee</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 18</span><div class="bc-cjk">啤</div><h3>Chang</h3><div class="bc-origin">Thailand · Est. 1995</div><p>Thailand's most-consumed beer. Crisp, light, the Thai street-food companion.</p><div class="bc-foot"><span>Beverages</span><span class="arr">→</span></div></div>
-  <div class="brand-card dark"><span class="bc-num">No. 19</span><div class="bc-cjk">米</div><h3>Khaohom</h3><div class="bc-origin">Thailand · Premium Rice</div><p>Premium AAA-grade Thai jasmine rice. The fragrance you can't fake.</p><div class="bc-foot"><span>Rice</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 20</span><div class="bc-cjk">咖</div><h3>Nittaya</h3><div class="bc-origin">Thailand · Curry Pastes</div><p>Fresh Thai curry paste, no preservatives — the standard for authentic Thai restaurants.</p><div class="bc-foot"><span>Curry Pastes</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 21</span><div class="bc-cjk">百</div><h3>Bala 百樂</h3><div class="bc-origin">Malaysia · Sauces</div><p>Malaysian-style sauces and pastes — for laksa, rendang, and sambal-led menus.</p><div class="bc-foot"><span>Malaysian</span><span class="arr">→</span></div></div>
-  <div class="brand-card red"><span class="bc-num">No. 22</span><div class="bc-cjk">青</div><h3>Tsingtao</h3><div class="bc-origin">China · Est. 1903</div><p>China's most internationally recognised lager — permanent presence on Chinese restaurant menus.</p><div class="bc-foot"><span>Beverages</span><span class="arr">→</span></div></div>
-  <div class="brand-card"><span class="bc-num">No. 23</span><div class="bc-cjk">廣</div><h3>Kwong Cheong Thye</h3><div class="bc-origin">Singapore · Est. 1925</div><p>Premium soy sauce from Singapore — naturally brewed, century-old recipes.</p><div class="bc-foot"><span>Soy Sauce</span><span class="arr">→</span></div></div>
+  <a href="catalogue.html?brand=AROY" class="brand-card red" id="bc-aroy-d" data-search="AROY"><span class="bc-num">No. 01</span><div class="bc-cjk">原</div><h3>AROY-D</h3><div class="bc-origin">Thailand · Est. 1972</div><p>The benchmark Thai coconut milk. Pure, no stabilisers — trusted by Michelin restaurants worldwide.</p><div class="bc-foot"><span>Coconut · Sauces</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=MAEPLOY" class="brand-card dark" id="bc-mae-ploy" data-search="MAEPLOY"><span class="bc-num">No. 02</span><div class="bc-cjk">梅</div><h3>Mae Ploy</h3><div class="bc-origin">Thailand · Est. 1971</div><p>Fifty years of Thai sweet chilli. The recipe hasn't changed — 100+ countries still pour it.</p><div class="bc-foot"><span>Sauces · Pastes</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=HBOY" class="brand-card" id="bc-healthy-boy" data-search="HBOY"><span class="bc-num">No. 03</span><div class="bc-cjk">健</div><h3>Healthy Boy</h3><div class="bc-origin">Thailand · Est. 1947</div><p>Naturally brewed Thai soy sauce since 1947. The cooking soy that Bangkok kitchens swear by.</p><div class="bc-foot"><span>Soy & Seasoning</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=CHAOKOH" class="brand-card" id="bc-chaokoh" data-search="CHAOKOH"><span class="bc-num">No. 04</span><div class="bc-cjk">椰</div><h3>Chaokoh</h3><div class="bc-origin">Thailand · Est. 1976</div><p>Premium Thai coconut products. Coconut milk, cream, lychee in syrup — reliable restaurant-grade.</p><div class="bc-foot"><span>Coconut · Fruit</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=SINGHA" class="brand-card gold-bg" id="bc-singha" data-search="SINGHA"><span class="bc-num">No. 05</span><div class="bc-cjk">獅</div><h3>Singha</h3><div class="bc-origin">Thailand · Est. 1933</div><p>The original Thai beer. A nine-decade institution and a permanent fixture on UK Thai menus.</p><div class="bc-foot"><span>Beverages</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=MEGACHEF" class="brand-card" id="bc-megachef" data-search="MEGACHEF"><span class="bc-num">No. 06</span><div class="bc-cjk">廚</div><h3>Megachef</h3><div class="bc-origin">Thailand · Premium</div><p>First-press anchovy fish sauce, fermented 12 months. The chef's-grade upgrade.</p><div class="bc-foot"><span>Premium Sauces</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=COCK" class="brand-card dark" id="bc-cock-brand" data-search="COCK"><span class="bc-num">No. 07</span><div class="bc-cjk">雞</div><h3>Cock Brand</h3><div class="bc-origin">Thailand · Heritage</div><p>Authentic Thai curry pastes — green, red, yellow, massaman. Restaurant-pack, no shortcuts.</p><div class="bc-foot"><span>Curry Pastes</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=Panich" class="brand-card" id="bc-sriraja-panich" data-search="Panich"><span class="bc-num">No. 08</span><div class="bc-cjk">虹</div><h3>Sriraja Panich</h3><div class="bc-origin">Thailand · Est. 1935</div><p>The original sriracha from Si Racha, Thailand. Not the American one — the real thing.</p><div class="bc-foot"><span>Hot Sauce</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=Golden+Mountain" class="brand-card" id="bc-golden-mountain" data-search="Golden Mountain"><span class="bc-num">No. 09</span><div class="bc-cjk">山</div><h3>Golden Mountain</h3><div class="bc-origin">Thailand · Heritage</div><p>Thai seasoning sauce — the umami undercurrent of Thai street food and restaurant kitchens.</p><div class="bc-foot"><span>Seasoning</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=PORKWAN" class="brand-card" id="bc-por-kwan" data-search="PORKWAN"><span class="bc-num">No. 10</span><div class="bc-cjk">蟹</div><h3>Por Kwan</h3><div class="bc-origin">Thailand · Specialty</div><p>Crab paste, fermented bean pastes, and traditional Thai pantry essentials.</p><div class="bc-foot"><span>Pastes & Specials</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=YEE+KWAN" class="brand-card red" id="bc-yee-kwan" data-search="YEE KWAN"><span class="bc-num">No. 11</span><div class="bc-cjk">冰</div><h3>Yee Kwan</h3><div class="bc-origin">UK · Asian Ice Cream</div><p>Asian-flavour ice cream made in the UK — black sesame, lychee, mango sticky rice, matcha.</p><div class="bc-foot"><span>Frozen Desserts</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=PFP" class="brand-card" id="bc-pfp" data-search="PFP"><span class="bc-num">No. 12</span><div class="bc-cjk">魚</div><h3>PFP</h3><div class="bc-origin">Thailand · Frozen</div><p>Fish cakes, seafood sets, and frozen Thai seafood — restaurant-grade, ready to fry.</p><div class="bc-foot"><span>Frozen Seafood</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=WAIWAI" class="brand-card" id="bc-wai-wai" data-search="WAIWAI"><span class="bc-num">No. 13</span><div class="bc-cjk">麵</div><h3>Wai Wai</h3><div class="bc-origin">Thailand · Heritage</div><p>Iconic Thai noodle brand — instant noodles, snack noodles, vermicelli.</p><div class="bc-foot"><span>Noodles · Snacks</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=PA+" class="brand-card" id="bc-pa-foods" data-search="PA "><span class="bc-num">No. 14</span><div class="bc-cjk">餅</div><h3>PA Foods</h3><div class="bc-origin">Frozen Specialist</div><p>Paratha, baos, tofu puffs — frozen back-of-house staples for Asian kitchens.</p><div class="bc-foot"><span>Frozen Bakery</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=FOCO" class="brand-card dark" id="bc-foco" data-search="FOCO"><span class="bc-num">No. 15</span><div class="bc-cjk">椰</div><h3>FOCO</h3><div class="bc-origin">Thailand · Beverages</div><p>Pure Thai coconut water, coconut juice with pulp, and tropical fruit drinks.</p><div class="bc-foot"><span>Beverages</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=MANORA" class="brand-card" id="bc-manora" data-search="MANORA"><span class="bc-num">No. 16</span><div class="bc-cjk">蝦</div><h3>Manora</h3><div class="bc-origin">Thailand · Snacks</div><p>Prawn crackers, taro chips, vegan alternatives — Thai snacks for restaurant sides.</p><div class="bc-foot"><span>Snacks · Crackers</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=CHATRAMUE" class="brand-card gold-bg" id="bc-chatramue" data-search="CHATRAMUE"><span class="bc-num">No. 17</span><div class="bc-cjk">茶</div><h3>Chatramue</h3><div class="bc-origin">Thailand · Est. 1945</div><p>The original Thai tea blend — that iconic orange brew that defines Thai milk tea worldwide.</p><div class="bc-foot"><span>Tea & Coffee</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=CHANG" class="brand-card" id="bc-chang" data-search="CHANG"><span class="bc-num">No. 18</span><div class="bc-cjk">啤</div><h3>Chang</h3><div class="bc-origin">Thailand · Est. 1995</div><p>Thailand's most-consumed beer. Crisp, light, the Thai street-food companion.</p><div class="bc-foot"><span>Beverages</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=KHAOHOM" class="brand-card dark" id="bc-khaohom" data-search="KHAOHOM"><span class="bc-num">No. 19</span><div class="bc-cjk">米</div><h3>Khaohom</h3><div class="bc-origin">Thailand · Premium Rice</div><p>Premium AAA-grade Thai jasmine rice. The fragrance you can't fake.</p><div class="bc-foot"><span>Rice</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=NITTAYA" class="brand-card" id="bc-nittaya" data-search="NITTAYA"><span class="bc-num">No. 20</span><div class="bc-cjk">咖</div><h3>Nittaya</h3><div class="bc-origin">Thailand · Curry Pastes</div><p>Fresh Thai curry paste, no preservatives — the standard for authentic Thai restaurants.</p><div class="bc-foot"><span>Curry Pastes</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=BALA" class="brand-card" id="bc-bala-bala" data-search="BALA"><span class="bc-num">No. 21</span><div class="bc-cjk">百</div><h3>Bala 百樂</h3><div class="bc-origin">Malaysia · Sauces</div><p>Malaysian-style sauces and pastes — for laksa, rendang, and sambal-led menus.</p><div class="bc-foot"><span>Malaysian</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=TSINGTAO" class="brand-card red" id="bc-tsingtao" data-search="TSINGTAO"><span class="bc-num">No. 22</span><div class="bc-cjk">青</div><h3>Tsingtao</h3><div class="bc-origin">China · Est. 1903</div><p>China's most internationally recognised lager — permanent presence on Chinese restaurant menus.</p><div class="bc-foot"><span>Beverages</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=KCT" class="brand-card" id="bc-kwong-cheong-thye" data-search="KCT"><span class="bc-num">No. 23</span><div class="bc-cjk">廣</div><h3>Kwong Cheong Thye</h3><div class="bc-origin">Singapore · Est. 1925</div><p>Premium soy sauce from Singapore — naturally brewed, century-old recipes.</p><div class="bc-foot"><span>Soy Sauce</span><span class="arr">→</span></div></a>
   <div class="brand-card"><span class="bc-num">No. 24</span><div class="bc-cjk">郎</div><h3>Khun Jim</h3><div class="bc-origin">Thailand · Pantry</div><p>Authentic Thai pantry staples — pastes, dried herbs, and seasonings.</p><div class="bc-foot"><span>Pantry · Pastes</span><span class="arr">→</span></div></div>
 </div>
 
@@ -125,7 +143,7 @@
       <a href="contact.html" class="btn-primary">Make a Sourcing Request →</a>
     </div>
     <div class="promo-visual">
-      <div class="pv-bg" id="brands-promo-img-2"></div>
+      <div class="pv-bg" style="background-image:url('https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=900&q=80');"></div>
     </div>
   </div>
 </div>
