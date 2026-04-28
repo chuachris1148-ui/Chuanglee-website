@@ -64,18 +64,18 @@ a.brand-card:hover .bc-foot .arr {
   <p class="lede" id="brands-lede">Over thirty heritage Asian brands distributed under one roof. Direct manufacturer relationships keep pricing competitive and supply consistent — from AROY-D's Thai coconut milk to Singha's lager, from Healthy Boy's naturally-brewed soy to Mae Ploy's fifty-year-old sweet chilli.</p>
 </div>
 
-<!-- PROMO — AROY-D -->
-<div class="promo-band vermillion">
+<!-- BRAND SPOTLIGHT — driven by content/brands.json -->
+<div class="promo-band vermillion" id="brand-spotlight">
   <div class="promo-band-inner">
     <div class="promo-text">
-      <div class="promo-tag" id="brands-promo-tag">Brand Spotlight · This Month</div>
-      <h3 id="brands-promo-h3">AROY-D — the original <em>Thai coconut milk</em>.</h3>
-      <p id="brands-promo-p">Pure-pressed, no stabilisers, no preservatives. Trusted by Michelin chefs and 450+ UK kitchens. Available in 400ml, 1L UHT and catering-case sizes.</p>
-      <a href="catalogue.html?brand=AROY" class="btn-primary">Shop AROY-D →</a>
+      <div class="promo-tag" id="spotlight-tag">Brand Spotlight · This Month</div>
+      <h3 id="spotlight-name"></h3>
+      <p id="spotlight-desc"></p>
+      <a class="btn-primary" id="brands-spotlight-cta" href="#">Shop Now →</a>
     </div>
     <div class="promo-visual">
-      <div class="pv-bg" style="background-image:url('https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80');"></div>
-      <div class="stamp">Best<br>Seller<br>2025</div>
+      <div class="pv-bg" id="spotlight-img" style="background-image:url('https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80');"></div>
+      <div class="stamp" id="spotlight-stamp">Best<br>Seller<br>2025</div>
     </div>
   </div>
 </div>
@@ -90,7 +90,7 @@ a.brand-card:hover .bc-foot .arr {
   <a href="catalogue.html?brand=MEGACHEF" class="brand-card" id="bc-megachef" data-search="MEGACHEF"><span class="bc-num">No. 06</span><div class="bc-cjk">廚</div><h3>Megachef</h3><div class="bc-origin">Thailand · Premium</div><p>First-press anchovy fish sauce, fermented 12 months. The chef's-grade upgrade.</p><div class="bc-foot"><span>Premium Sauces</span><span class="arr">→</span></div></a>
   <a href="catalogue.html?brand=COCK" class="brand-card dark" id="bc-cock-brand" data-search="COCK"><span class="bc-num">No. 07</span><div class="bc-cjk">雞</div><h3>Cock Brand</h3><div class="bc-origin">Thailand · Heritage</div><p>Authentic Thai curry pastes — green, red, yellow, massaman. Restaurant-pack, no shortcuts.</p><div class="bc-foot"><span>Curry Pastes</span><span class="arr">→</span></div></a>
   <a href="catalogue.html?brand=Panich" class="brand-card" id="bc-sriraja-panich" data-search="Panich"><span class="bc-num">No. 08</span><div class="bc-cjk">虹</div><h3>Sriraja Panich</h3><div class="bc-origin">Thailand · Est. 1935</div><p>The original sriracha from Si Racha, Thailand. Not the American one — the real thing.</p><div class="bc-foot"><span>Hot Sauce</span><span class="arr">→</span></div></a>
-  <a href="catalogue.html?brand=Golden+Mountain" class="brand-card" id="bc-golden-mountain" data-search="Golden Mountain"><span class="bc-num">No. 09</span><div class="bc-cjk">山</div><h3>Golden Mountain</h3><div class="bc-origin">Thailand · Heritage</div><p>Thai seasoning sauce — the umami undercurrent of Thai street food and restaurant kitchens.</p><div class="bc-foot"><span>Seasoning</span><span class="arr">→</span></div></a>
+  <a href="catalogue.html?brand=GM" class="brand-card" id="bc-golden-mountain" data-search="GM"><span class="bc-num">No. 09</span><div class="bc-cjk">山</div><h3>Golden Mountain</h3><div class="bc-origin">Thailand · Heritage</div><p>Thai seasoning sauce — the umami undercurrent of Thai street food and restaurant kitchens.</p><div class="bc-foot"><span>Seasoning</span><span class="arr">→</span></div></a>
   <a href="catalogue.html?brand=PORKWAN" class="brand-card" id="bc-por-kwan" data-search="PORKWAN"><span class="bc-num">No. 10</span><div class="bc-cjk">蟹</div><h3>Por Kwan</h3><div class="bc-origin">Thailand · Specialty</div><p>Crab paste, fermented bean pastes, and traditional Thai pantry essentials.</p><div class="bc-foot"><span>Pastes & Specials</span><span class="arr">→</span></div></a>
   <a href="catalogue.html?brand=YEE+KWAN" class="brand-card red" id="bc-yee-kwan" data-search="YEE KWAN"><span class="bc-num">No. 11</span><div class="bc-cjk">冰</div><h3>Yee Kwan</h3><div class="bc-origin">UK · Asian Ice Cream</div><p>Asian-flavour ice cream made in the UK — black sesame, lychee, mango sticky rice, matcha.</p><div class="bc-foot"><span>Frozen Desserts</span><span class="arr">→</span></div></a>
   <a href="catalogue.html?brand=PFP" class="brand-card" id="bc-pfp" data-search="PFP"><span class="bc-num">No. 12</span><div class="bc-cjk">魚</div><h3>PFP</h3><div class="bc-origin">Thailand · Frozen</div><p>Fish cakes, seafood sets, and frozen Thai seafood — restaurant-grade, ready to fry.</p><div class="bc-foot"><span>Frozen Seafood</span><span class="arr">→</span></div></a>
@@ -140,7 +140,7 @@ a.brand-card:hover .bc-foot .arr {
       <div class="promo-tag" style="border-color:var(--ink);color:var(--ink);">Bespoke Sourcing</div>
       <h3>Looking for a <em>brand</em> we don't list?</h3>
       <p>Our procurement team can likely source it. Through our manufacturer network across Thailand, China, Malaysia and Vietnam, we have the relationships to find almost any authentic East Asian brand or product.</p>
-      <a href="contact.html" class="btn-primary">Make a Sourcing Request →</a>
+      <a href="contact.html" class="btn-primary" id="brands-sourcing-cta">Make a Sourcing Request →</a>
     </div>
     <div class="promo-visual">
       <div class="pv-bg" style="background-image:url('https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=900&q=80');"></div>
@@ -166,5 +166,35 @@ a.brand-card:hover .bc-foot .arr {
 
 <script src="script.js"></script>
 <script src="/content-loader.js"></script>
+
+<script>
+/* Brand Spotlight — reads active brand from content/brands.json */
+const BRAND_DATA = [{"name": "AROY-D", "origin": "Thailand · Est. 1972", "desc": "The benchmark Thai coconut milk. Pure, no stabilisers — trusted by Michelin restaurants worldwide.", "cats": "Coconut · Sauces", "search": "AROY", "url": "AROY"}, {"name": "Mae Ploy", "origin": "Thailand · Est. 1971", "desc": "Fifty years of Thai sweet chilli. The recipe hasn't changed — 100+ countries still pour it.", "cats": "Sauces · Pastes", "search": "MAEPLOY", "url": "MAEPLOY"}, {"name": "Healthy Boy", "origin": "Thailand · Est. 1947", "desc": "Naturally brewed Thai soy sauce since 1947. The cooking soy that Bangkok kitchens swear by.", "cats": "Soy & Seasoning", "search": "HBOY", "url": "HBOY"}, {"name": "Chaokoh", "origin": "Thailand · Est. 1976", "desc": "Premium Thai coconut products. Coconut milk, cream, lychee in syrup — reliable restaurant-grade.", "cats": "Coconut · Fruit", "search": "CHAOKOH", "url": "CHAOKOH"}, {"name": "Singha", "origin": "Thailand · Est. 1933", "desc": "The original Thai beer. A nine-decade institution and a permanent fixture on UK Thai menus.", "cats": "Beverages", "search": "SINGHA", "url": "SINGHA"}, {"name": "Megachef", "origin": "Thailand · Premium", "desc": "First-press anchovy fish sauce, fermented 12 months. The chef's-grade upgrade.", "cats": "Premium Sauces", "search": "MEGACHEF", "url": "MEGACHEF"}, {"name": "Cock Brand", "origin": "Thailand · Heritage", "desc": "Authentic Thai curry pastes — green, red, yellow, massaman. Restaurant-pack, no shortcuts.", "cats": "Curry Pastes", "search": "COCK", "url": "COCK"}, {"name": "Sriraja Panich", "origin": "Thailand · Est. 1935", "desc": "The original sriracha from Si Racha, Thailand. Not the American one — the real thing.", "cats": "Hot Sauce", "search": "Panich", "url": "Panich"}, {"name": "Golden Mountain", "origin": "Thailand · Heritage", "desc": "Thai seasoning sauce — the umami undercurrent of Thai street food and restaurant kitchens.", "cats": "Seasoning", "search": "GM", "url": "GM"}, {"name": "Por Kwan", "origin": "Thailand · Specialty", "desc": "Crab paste, fermented bean pastes, and traditional Thai pantry essentials.", "cats": "Pastes & Specials", "search": "PORKWAN", "url": "PORKWAN"}, {"name": "Yee Kwan", "origin": "UK · Asian Ice Cream", "desc": "Asian-flavour ice cream made in the UK — black sesame, lychee, mango sticky rice, matcha.", "cats": "Frozen Desserts", "search": "YEE KWAN", "url": "YEE+KWAN"}, {"name": "PFP", "origin": "Thailand · Frozen", "desc": "Fish cakes, seafood sets, and frozen Thai seafood — restaurant-grade, ready to fry.", "cats": "Frozen Seafood", "search": "PFP", "url": "PFP"}, {"name": "Wai Wai", "origin": "Thailand · Heritage", "desc": "Iconic Thai noodle brand — instant noodles, snack noodles, vermicelli.", "cats": "Noodles · Snacks", "search": "WAIWAI", "url": "WAIWAI"}, {"name": "PA Foods", "origin": "Frozen Specialist", "desc": "Paratha, baos, tofu puffs — frozen back-of-house staples for Asian kitchens.", "cats": "Frozen Bakery", "search": "PA", "url": "PA+"}, {"name": "FOCO", "origin": "Thailand · Beverages", "desc": "Pure Thai coconut water, coconut juice with pulp, and tropical fruit drinks.", "cats": "Beverages", "search": "FOCO", "url": "FOCO"}, {"name": "Manora", "origin": "Thailand · Snacks", "desc": "Prawn crackers, taro chips, vegan alternatives — Thai snacks for restaurant sides.", "cats": "Snacks · Crackers", "search": "MANORA", "url": "MANORA"}, {"name": "Chatramue", "origin": "Thailand · Est. 1945", "desc": "The original Thai tea blend — that iconic orange brew that defines Thai milk tea worldwide.", "cats": "Tea & Coffee", "search": "CHATRAMUE", "url": "CHATRAMUE"}, {"name": "Chang", "origin": "Thailand · Est. 1995", "desc": "Thailand's most-consumed beer. Crisp, light, the Thai street-food companion.", "cats": "Beverages", "search": "CHANG", "url": "CHANG"}, {"name": "Khaohom", "origin": "Thailand · Premium Rice", "desc": "Premium AAA-grade Thai jasmine rice. The fragrance you can't fake.", "cats": "Rice", "search": "KHAOHOM", "url": "KHAOHOM"}, {"name": "Nittaya", "origin": "Thailand · Curry Pastes", "desc": "Fresh Thai curry paste, no preservatives — the standard for authentic Thai restaurants.", "cats": "Curry Pastes", "search": "NITTAYA", "url": "NITTAYA"}, {"name": "Bala 百樂", "origin": "Malaysia · Sauces", "desc": "Malaysian-style sauces and pastes — for laksa, rendang, and sambal-led menus.", "cats": "Malaysian", "search": "BALA", "url": "BALA"}, {"name": "Tsingtao", "origin": "China · Est. 1903", "desc": "China's most internationally recognised lager — permanent presence on Chinese restaurant menus.", "cats": "Beverages", "search": "TSINGTAO", "url": "TSINGTAO"}, {"name": "Kwong Cheong Thye", "origin": "Singapore · Est. 1925", "desc": "Premium soy sauce from Singapore — naturally brewed, century-old recipes.", "cats": "Soy Sauce", "search": "KCT", "url": "KCT"}];
+
+async function loadSpotlight() {
+  let activeName = 'AROY-D'; // default fallback
+  try {
+    const r = await fetch('/content/brands.json');
+    if (r.ok) {
+      const d = await r.json();
+      if (d.spotlight) activeName = d.spotlight;
+    }
+  } catch(e) {}
+
+  const brand = BRAND_DATA.find(b => b.name === activeName) || BRAND_DATA[0];
+  if (!brand) return;
+
+  document.getElementById('spotlight-name').innerHTML = brand.name + ' — <em>' + brand.cats + '</em>.';
+  document.getElementById('spotlight-desc').textContent = brand.desc;
+  document.getElementById('spotlight-tag').textContent = 'Brand Spotlight · ' + brand.origin;
+  document.getElementById('spotlight-stamp').innerHTML = 'Top<br>Pick';
+
+  const cta = document.getElementById('brands-spotlight-cta');
+  cta.href = 'catalogue.html?brand=' + encodeURIComponent(brand.url);
+  cta.textContent = 'Shop ' + brand.name + ' →';
+}
+
+loadSpotlight();
+</script>
 </body>
 </html>
