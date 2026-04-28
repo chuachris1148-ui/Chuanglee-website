@@ -6,204 +6,11 @@
   "hero_lede": "UK importer, manufacturing partner, and foodservice distributor for authentic East Asian ingredients. 30+ heritage brands, a family farm in Thailand, and 3,000+ product lines in stock.",
   "hero_cta_primary": "Explore the Catalogue →",
   "hero_cta_secondary": "Open a Trade Account",
-  "hero_img_main": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=1200&q=80",
-  "hero_img_sub": "https://images.unsplash.com/photo-1518983546435-91f8b87fe561?w=600&q=80",
   "hero_stamp_num": "36",
   "hero_stamp_label": "Years of Trade",
-  "story_eyebrow": "Who We Are",
-  "story_h2": "A family business with Asia in its bones.",
-  "story_h2_italic": "Asia in its bones",
-  "story_lead": "Founded in 1989 by Jimmy Chua, Chuanglee is today led by siblings Christopher, Jennisa and Katriya — a family rooted in food, in trade, and in the long, patient work of building real partnerships on both sides of the world.",
-  "story_p2": "From a small importing operation in London, we have grown into a fully integrated supply partner: working directly with manufacturers across Thailand, China, Malaysia and Vietnam to bring authentic, consistent, scalable ingredients into UK kitchens — from independent operators to restaurant groups of 50+ sites and Michelin-starred establishments.",
-  "story_p3": "We supply ambient, chilled, frozen and fresh categories — full-basket, direct-into-kitchen, with our own fleet servicing London and Greater London multiple times a week.",
-  "story_quote": "Partnerships sit at the very core of what we do. We don't just import ingredients — we import the people, the recipes, and the standards behind them.",
-  "story_quote_cite": "— The Chua Family",
-  "story_tag": "Est. 1989 · London",
-  "story_img_1": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=900&q=80",
-  "story_img_2": "https://images.unsplash.com/photo-1543353071-10c8ba85a904?w=600&q=80",
-  "cap_eyebrow": "What We Do",
-  "cap_h2": "A full-basket food solution partner.",
-  "cap_h2_italic": "solution",
-  "cap_intro": "Five interconnected capabilities — sourcing, manufacturing, farming, distribution and technical support — wrapped into a single, reliable partnership. We solve real operational pain-points so kitchens can focus on what kitchens do best.",
-  "cap_img": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80",
-  "capabilities": [
-    {
-      "num": "01 / Direct Importing",
-      "title": "Long-term partnerships across Asia.",
-      "desc": "Stable sourcing and consistent product supply through deep manufacturer relationships built across decades — not transactions."
-    },
-    {
-      "num": "02 / Foodservice & Wholesale",
-      "title": "Ambient, chilled, frozen, fresh.",
-      "desc": "Delivered across London nationwide. Own fleet servicing London & Greater London with delivery direct into your kitchens."
-    },
-    {
-      "num": "03 / Menu & Product",
-      "title": "Sourcing, alternatives, development.",
-      "desc": "Operational support for evolving menus and scalable product development."
-    },
-    {
-      "num": "04 / Bespoke Sauces",
-      "title": "Manufactured to your recipe in Thailand.",
-      "desc": "Through our manufacturing partner NRF: ready-to-use sauces and components, scalable for multi-site groups."
-    },
-    {
-      "num": "05 / The Farm",
-      "title": "Suree's Farm — fresh Thai herbs grown by our family.",
-      "desc": "A family-run vegetable farm and packing house one hour outside Bangkok in Chachoengsao, supplying seasonal Thai herbs and vegetables flown weekly into the UK."
-    }
-  ],
-  "eco_eyebrow": "The Chuanglee Ecosystem",
-  "eco_h2": "From manufacturer to menu, fully integrated.",
-  "ecosystem": [
-    {
-      "step": "1",
-      "title": "Asian Manufacturers",
-      "desc": "Long-term supplier relationships across Thailand and Asia."
-    },
-    {
-      "step": "2",
-      "title": "NRF Product Development",
-      "desc": "Global expertise for private label and foodservice products."
-    },
-    {
-      "step": "3",
-      "title": "Manufacturing — Thailand",
-      "desc": "Scalable sauces and ready-to-use components, tailored to recipe."
-    },
-    {
-      "step": "4",
-      "title": "Import & Logistics",
-      "desc": "UK import management, consolidation and supply planning."
-    },
-    {
-      "step": "5",
-      "title": "UK Warehouse & Distribution",
-      "desc": "Ambient, chilled, frozen and fresh — across London and nationwide."
-    }
-  ],
-  "farm_eyebrow": "Suree's Farm · Chachoengsao",
-  "farm_h2": "Granny Suree's herbs, on a plane every week.",
-  "farm_h2_italic": "plane",
-  "farm_p": "One hour outside Bangkok, our family farm and packing house grows organic Thai produce alongside trusted local farmers — packed to order, flown to the UK weekly.",
-  "farm_herbs": [
-    {
-      "name": "Cha Plu Leaves",
-      "desc": "wild pepper leaf, peppery & aromatic"
-    },
-    {
-      "name": "Kaffir Lime Leaves",
-      "desc": "picked, packed, never frozen"
-    },
-    {
-      "name": "Calamansi · Sour Mango · Marian Plum",
-      "desc": "true seasonal rotation"
-    },
-    {
-      "name": "Morning Glory · Aubergine Pea · Jujube",
-      "desc": "restaurant-grade volumes"
-    }
-  ],
-  "farm_quote": "Family farms it, family packs it, family delivers it.",
-  "farm_img_main": "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1200&q=80",
-  "cust_eyebrow": "Our Distribution Channels",
-  "cust_h2": "Trusted by the kitchens shaping British dining.",
-  "cust_h2_italic": "kitchens",
-  "cust_intro": "From Michelin-starred dining rooms to multi-site groups, university caterers and our wholesale partners — Chuanglee operates as the back-of-house sourcing arm for some of the most ambitious East Asian food brands in the UK.",
-  "channels": [
-    {
-      "num": "01",
-      "title": "Foodservice",
-      "subtitle": "Contract & Travel Catering",
-      "clients": [
-        "Compass Group",
-        "Chartwells",
-        "Gate Gourmet",
-        "Prestige",
-        "Woods Foodservice"
-      ]
-    },
-    {
-      "num": "02",
-      "title": "Restaurant Chains",
-      "subtitle": "National Multi-Site Groups",
-      "clients": [
-        "Hakkasan Group",
-        "Din Tai Fung",
-        "Busaba",
-        "Pho",
-        "Banana Tree · Patara"
-      ]
-    },
-    {
-      "num": "03",
-      "title": "Independents",
-      "subtitle": "Chef-Led Restaurants",
-      "clients": [
-        "Hutong",
-        "Poon's London",
-        "Singapore Garden",
-        "Mama Kitchen",
-        "Eat Vietnam · TukTuk"
-      ]
-    },
-    {
-      "num": "04",
-      "title": "Wholesalers",
-      "subtitle": "Trade Distribution",
-      "clients": [
-        "Wing Yip",
-        "Wai Yee Hong",
-        "SeeWoo",
-        "Tazaki Cash & Carry",
-        "Korea Foods · Kwan Yick"
-      ]
-    }
-  ],
-  "heritage_eyebrow": "Our Heritage",
-  "heritage_h2": "Three decades of building partnerships.",
-  "heritage_h2_italic": "building partnerships",
-  "heritage_intro": "What began as a small London importing business in 1989 is now a fully integrated foodservice ecosystem — but the philosophy hasn't changed: family-run, partnership-led, slow to commit, long to stay.",
-  "timeline": [
-    {
-      "year": "1989",
-      "event": "Chuanglee founded by Jimmy Chua. Begins importing East Asian ingredients into the UK."
-    },
-    {
-      "year": "2011",
-      "event": "Chuanglee Cash & Carry acquired — expanding wholesale reach."
-    },
-    {
-      "year": "2023",
-      "event": "Joins NRF Group; acquires Chinese foodservice business — full ecosystem formed."
-    },
-    {
-      "year": "2024",
-      "event": "First Mini C Asian Pantry retail store opens in Greenwich, London."
-    },
-    {
-      "year": "2025",
-      "event": "Multi-site ordering app launches. Revenue reaches £25M with 450+ customers."
-    },
-    {
-      "year": "Tomorrow",
-      "event": "The next generation continues the work — same family, same standards."
-    }
-  ],
-  "app_eyebrow": "The Chuanglee App",
-  "app_h2": "Ordering, but better.",
-  "app_h2_italic": "better",
-  "app_desc": "Built for multi-site restaurant management. Personalised pricing, order guides tied to each site, repeat ordering in seconds, real-time delivery tracking and full account control — purpose-built for the pace of professional kitchens.",
-  "app_features": [
-    "Personalised pricing per site",
-    "Multi-site order guides",
-    "Repeat & favourite ordering",
-    "Live delivery tracking"
-  ],
-  "app_store_url": "#",
-  "play_store_url": "#",
-  "promo_img_1": "https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80",
-  "promo_img_2": "https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=900&q=80",
+  "hero_img_main": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=1200&q=80",
+  "hero_img_sub": "https://images.unsplash.com/photo-1518983546435-91f8b87fe561?w=600&q=80",
+
   "stat_1_num": "£25m",
   "stat_1_label": "FY25 Revenue",
   "stat_2_num": "3,000+",
@@ -213,5 +20,78 @@
   "stat_4_num": "1989",
   "stat_4_label": "Family Founded",
   "stat_5_num": "UK·TH",
-  "stat_5_label": "From Farm to Fork"
+  "stat_5_label": "From Farm to Fork",
+
+  "story_eyebrow": "Who We Are",
+  "story_lead": "Founded in 1989 by Jimmy Chua, Chuanglee is today led by siblings Christopher, Jennisa and Katriya — a family rooted in food, in trade, and in the long, patient work of building real partnerships on both sides of the world.",
+  "story_quote": "Partnerships sit at the very core of what we do. We don't just import ingredients — we import the people, the recipes, and the standards behind them.",
+  "story_cite": "— The Chua Family",
+  "story_tag": "Est. 1989 · London",
+  "story_img_1": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=900&q=80",
+  "story_img_2": "https://images.unsplash.com/photo-1543353071-10c8ba85a904?w=600&q=80",
+
+  "cap_eyebrow": "What We Do",
+  "cap_img": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80",
+  "cap_1_num": "01 / Direct Importing",
+  "cap_1_title": "Long-term partnerships across Asia.",
+  "cap_2_num": "02 / Foodservice & Wholesale",
+  "cap_2_title": "Ambient, chilled, frozen, fresh.",
+  "cap_3_num": "03 / Menu & Product",
+  "cap_3_title": "Sourcing, alternatives, development.",
+  "cap_4_num": "04 / Bespoke Sauces",
+  "cap_4_title": "Manufactured to your recipe in Thailand.",
+  "cap_5_num": "05 / The Farm",
+  "cap_5_title": "Suree's Farm — fresh Thai herbs grown by our family.",
+
+  "eco_eyebrow": "The Chuanglee Ecosystem",
+  "eco_1_title": "Asian Manufacturers",
+  "eco_1_desc": "Long-term supplier relationships across Thailand and Asia.",
+  "eco_2_title": "NRF Product Development",
+  "eco_2_desc": "Global expertise for private label and foodservice products.",
+  "eco_3_title": "Manufacturing — Thailand",
+  "eco_3_desc": "Scalable sauces and ready-to-use components, tailored to recipe.",
+  "eco_4_title": "Import & Logistics",
+  "eco_4_desc": "UK import management, consolidation and supply planning.",
+  "eco_5_title": "UK Warehouse & Distribution",
+  "eco_5_desc": "Ambient, chilled, frozen and fresh — across London and nationwide.",
+
+  "farm_home_eyebrow": "Suree's Farm · Chachoengsao",
+  "farm_home_p": "One hour outside Bangkok, our family farm and packing house grows organic Thai produce alongside trusted local farmers — packed to order, flown to the UK weekly.",
+  "farm_home_quote": "Family farms it, family packs it, family delivers it.",
+  "farm_img_main": "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1200&q=80",
+  "herb_1_name": "Cha Plu Leaves",
+  "herb_1_desc": "wild pepper leaf, peppery & aromatic",
+  "herb_2_name": "Kaffir Lime Leaves",
+  "herb_2_desc": "picked, packed, never frozen",
+  "herb_3_name": "Calamansi · Sour Mango · Marian Plum",
+  "herb_3_desc": "true seasonal rotation",
+  "herb_4_name": "Morning Glory · Aubergine Pea · Jujube",
+  "herb_4_desc": "restaurant-grade volumes",
+
+  "cust_eyebrow": "Our Distribution Channels",
+
+  "heritage_eyebrow": "Our Heritage",
+  "tl_1_year": "1989",
+  "tl_1_event": "Chuanglee founded by Jimmy Chua. Begins importing East Asian ingredients into the UK.",
+  "tl_2_year": "2011",
+  "tl_2_event": "Chuanglee Cash & Carry acquired — expanding wholesale reach.",
+  "tl_3_year": "2023",
+  "tl_3_event": "Joins NRF Group; acquires Chinese foodservice business — full ecosystem formed.",
+  "tl_4_year": "2024",
+  "tl_4_event": "First Mini C Asian Pantry retail store opens in Greenwich, London.",
+  "tl_5_year": "2025",
+  "tl_5_event": "Multi-site ordering app launches. Revenue reaches £25M with 450+ customers.",
+  "tl_6_year": "Tomorrow",
+  "tl_6_event": "The next generation continues the work — same family, same standards.",
+
+  "app_eyebrow": "The Chuanglee App",
+  "app_feat_1": "Personalised pricing per site",
+  "app_feat_2": "Multi-site order guides",
+  "app_feat_3": "Repeat & favourite ordering",
+  "app_feat_4": "Live delivery tracking",
+  "app_store_url": "#",
+  "play_store_url": "#",
+
+  "promo_img_1": "https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80",
+  "promo_img_2": "https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=900&q=80"
 }
