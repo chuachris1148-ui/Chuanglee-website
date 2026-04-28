@@ -3,6 +3,7 @@ branch: main
 media:
   input: images
   output: /images
+  extensions: [jpg, jpeg, png, webp, gif, svg]
 
 content:
   - name: global
@@ -26,17 +27,198 @@ content:
     type: file
     path: content/home.json
     fields:
-      - { name: hero_line1, label: Hero Line 1, type: string }
-      - { name: hero_line2_italic, label: Hero Line 2 (italic), type: string }
-      - { name: hero_line3, label: Hero Line 3, type: string }
-      - { name: hero_sub, label: Hero Sub-headline, type: string }
-      - { name: hero_lede, label: Hero Paragraph, type: string }
-      - { name: hero_cta_primary, label: Primary CTA, type: string }
-      - { name: hero_cta_secondary, label: Secondary CTA, type: string }
-      - { name: hero_img_main, label: Hero Main Image, type: image }
-      - { name: hero_img_sub, label: Hero Sub Image, type: image }
-      - { name: promo_img_1, label: Promo Banner 1 Image, type: image }
-      - { name: promo_img_2, label: Promo Banner 2 Image, type: image }
+      - name: hero_meta
+        label: "Hero — Eyebrow tag"
+        type: string
+      - name: hero_line1
+        label: "Hero — Headline line 1"
+        type: string
+      - name: hero_line2_italic
+        label: "Hero — Italic word (line 2)"
+        type: string
+      - name: hero_line3
+        label: "Hero — Italic word (line 3)"
+        type: string
+      - name: hero_lede
+        label: "Hero — Body paragraph"
+        type: string
+      - name: hero_cta_primary
+        label: "Hero — Primary button"
+        type: string
+      - name: hero_cta_secondary
+        label: "Hero — Secondary button"
+        type: string
+      - name: hero_stamp_num
+        label: "Hero — Stamp number"
+        type: string
+      - name: hero_stamp_label
+        label: "Hero — Stamp label"
+        type: string
+      - name: hero_img_main
+        label: "Hero — Main image"
+        type: image
+      - name: hero_img_sub
+        label: "Hero — Sub image"
+        type: image
+
+      - name: stats
+        label: Stats Strip
+        type: object[]
+        fields:
+          - { name: num, label: Number, type: string }
+          - { name: label, label: Label, type: string }
+
+      - name: story_eyebrow
+        label: "Story — Eyebrow"
+        type: string
+      - name: story_h2
+        label: "Story — Headline"
+        type: string
+      - name: story_h2_italic
+        label: "Story — Italic phrase"
+        type: string
+      - name: story_lead
+        label: "Story — Lead paragraph"
+        type: string
+      - name: story_p2
+        label: "Story — Paragraph 2"
+        type: string
+      - name: story_p3
+        label: "Story — Paragraph 3"
+        type: string
+      - name: story_quote
+        label: "Story — Pull quote"
+        type: string
+      - name: story_quote_cite
+        label: "Story — Quote citation"
+        type: string
+      - name: story_tag
+        label: "Story — Tag label"
+        type: string
+      - name: story_img_1
+        label: "Story — Image 1"
+        type: image
+      - name: story_img_2
+        label: "Story — Image 2"
+        type: image
+
+      - name: cap_eyebrow
+        label: "Capabilities — Eyebrow"
+        type: string
+      - name: cap_h2
+        label: "Capabilities — Headline"
+        type: string
+      - name: cap_intro
+        label: "Capabilities — Intro paragraph"
+        type: string
+      - name: cap_img
+        label: "Capabilities — Section image"
+        type: image
+      - name: capabilities
+        label: Capability Cards
+        type: object[]
+        fields:
+          - { name: num, label: Number & title, type: string }
+          - { name: title, label: Card headline, type: string }
+          - { name: desc, label: Description, type: string }
+
+      - name: eco_eyebrow
+        label: "Ecosystem — Eyebrow"
+        type: string
+      - name: eco_h2
+        label: "Ecosystem — Headline"
+        type: string
+      - name: ecosystem
+        label: Ecosystem Steps
+        type: object[]
+        fields:
+          - { name: step, label: Step number, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: desc, label: Description, type: string }
+
+      - name: farm_eyebrow
+        label: "Farm — Eyebrow"
+        type: string
+      - name: farm_h2
+        label: "Farm — Headline"
+        type: string
+      - name: farm_p
+        label: "Farm — Paragraph"
+        type: string
+      - name: farm_quote
+        label: "Farm — Pull quote"
+        type: string
+      - name: farm_img_main
+        label: "Farm — Main image"
+        type: image
+      - name: farm_herbs
+        label: Farm Herb List
+        type: object[]
+        fields:
+          - { name: name, label: Herb name, type: string }
+          - { name: desc, label: Description, type: string }
+
+      - name: cust_eyebrow
+        label: "Customers — Eyebrow"
+        type: string
+      - name: cust_h2
+        label: "Customers — Headline"
+        type: string
+      - name: cust_intro
+        label: "Customers — Intro paragraph"
+        type: string
+      - name: channels
+        label: Customer Channels
+        type: object[]
+        fields:
+          - { name: num, label: Number, type: string }
+          - { name: title, label: Channel title, type: string }
+          - { name: subtitle, label: Subtitle, type: string }
+          - name: clients
+            label: Client names
+            type: string[]
+
+      - name: heritage_eyebrow
+        label: "Heritage — Eyebrow"
+        type: string
+      - name: heritage_h2
+        label: "Heritage — Headline"
+        type: string
+      - name: heritage_intro
+        label: "Heritage — Intro paragraph"
+        type: string
+      - name: timeline
+        label: Timeline Events
+        type: object[]
+        fields:
+          - { name: year, label: Year, type: string }
+          - { name: event, label: Event description, type: string }
+
+      - name: app_eyebrow
+        label: "App — Eyebrow"
+        type: string
+      - name: app_h2
+        label: "App — Headline"
+        type: string
+      - name: app_desc
+        label: "App — Description"
+        type: string
+      - name: app_features
+        label: App Features
+        type: string[]
+      - name: app_store_url
+        label: "App Store URL"
+        type: string
+      - name: play_store_url
+        label: "Google Play URL"
+        type: string
+
+      - name: promo_img_1
+        label: "Promo Banner 1 Image"
+        type: image
+      - name: promo_img_2
+        label: "Promo Banner 2 Image"
+        type: image
 
   - name: brands
     label: Brands Page
@@ -68,6 +250,7 @@ content:
       - { name: cta_h3, label: CTA Headline, type: string }
       - { name: cta_desc, label: CTA Description, type: string }
       - { name: cta_btn, label: CTA Button, type: string }
+      - { name: farm_img_main, label: Farm Main Image, type: image }
       - { name: promo_img, label: Promo Banner Image, type: image }
 
   - name: contact
