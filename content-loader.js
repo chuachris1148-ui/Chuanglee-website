@@ -1,4 +1,4 @@
-// Chuanglee Content Loader v4 — full image support
+// Chuanglee Content Loader v5 — full home page support
 
 async function loadJSON(file) {
   try {
@@ -19,9 +19,21 @@ function setAll(selector, value) {
   document.querySelectorAll(selector).forEach(el => el.textContent = value);
 }
 
+function setHTML(selector, value) {
+  if (!value) return;
+  const el = document.querySelector(selector);
+  if (el) el.innerHTML = value;
+}
+
 function setBg(id, url) {
   if (!url) return;
   const el = document.getElementById(id);
+  if (el) el.style.backgroundImage = `url('${url}')`;
+}
+
+function setBgClass(selector, url) {
+  if (!url) return;
+  const el = document.querySelector(selector);
   if (el) el.style.backgroundImage = `url('${url}')`;
 }
 
@@ -72,6 +84,9 @@ async function applyGlobal() {
 async function applyHome() {
   const d = await loadJSON('home');
   if (!d || !Object.keys(d).length) return;
+
+  // HERO
+  if (d.hero_meta) set('.hero-meta', d.hero_meta);
   const headline = document.querySelector('h1.headline');
   if (headline) {
     headline.innerHTML = '';
@@ -85,22 +100,196 @@ async function applyHome() {
     const btn = document.querySelector('.hero-actions .btn-ghost');
     if (btn) btn.innerHTML = `${d.hero_cta_secondary} <span class="arrow">→</span>`;
   }
-  if (d.stats && d.stats.length) {
-    const statEls = document.querySelectorAll('.stat');
-    d.stats.forEach((s, i) => {
-      if (statEls[i]) {
-        const numEl = statEls[i].querySelector('.stat-num');
-        const labelEl = statEls[i].querySelector('.stat-label');
-        if (numEl) numEl.textContent = s.num;
-        if (labelEl) labelEl.textContent = s.label;
-      }
-    });
+  if (d.hero_stamp_num || d.hero_stamp_label) {
+    const stamp = document.querySelector('.hero-stamp');
+    if (stamp) stamp.innerHTML = `<div><span class="yr">${d.hero_stamp_num || '36'}</span>${d.hero_stamp_label || 'Years of Trade'}</div>`;
   }
   setBg('hero-img-main', d.hero_img_main);
   setBg('hero-img-sub', d.hero_img_sub);
+
+  // STATS
+  if (d.stats && d.stats.length) {
+    const statsInner = document.querySelector('.stats-inner');
+    if (statsInner) {
+      statsInner.innerHTML = d.stats.map(s =>
+        `<div class="stat reveal"><div class="stat-num">${s.num}</div><div class="stat-label">${s.label}</div></div>`
+      ).join('');
+    }
+  }
+
+  // STORY
+  if (d.story_eyebrow) set('#story .eyebrow', d.story_eyebrow);
+  if (d.story_h2 && d.story_h2_italic) {
+    const h2 = document.querySelector('#story h2.title');
+    if (h2) h2.innerHTML = d.story_h2.replace(d.story_h2_italic, `<em>${d.story_h2_italic}</em>`);
+  }
+  if (d.story_lead) set('#story .lead', d.story_lead);
+  if (d.story_p2 || d.story_p3) {
+    const paras = document.querySelectorAll('#story .story-text > p:not(.lead)');
+    if (paras[0] && d.story_p2) paras[0].textContent = d.story_p2;
+    if (paras[1] && d.story_p3) paras[1].textContent = d.story_p3;
+  }
+  if (d.story_quote) set('#story .pull-quote', d.story_quote);
+  if (d.story_quote_cite) {
+    const pq = document.querySelector('#story .pull-quote');
+    if (pq && d.story_quote) pq.innerHTML = `${d.story_quote}<cite>${d.story_quote_cite}</cite>`;
+  }
+  if (d.story_tag) set('#story .tag', d.story_tag);
   setBg('story-img-1', d.story_img_1);
   setBg('story-img-2', d.story_img_2);
-  setBg('cap-img', d.cap_img);
+
+  // CAPABILITIES
+  if (d.cap_eyebrow) set('.capabilities .eyebrow', d.cap_eyebrow);
+  if (d.cap_h2 && d.cap_h2_italic) {
+    const h2 = document.querySelector('.capabilities h2.title');
+    if (h2) h2.innerHTML = d.cap_h2.replace(d.cap_h2_italic, `<em>${d.cap_h2_italic}</em>`);
+  }
+  if (d.cap_intro) set('.cap-head > p', d.cap_intro);
+  if (d.capabilities && d.capabilities.length) {
+    const grid = document.querySelector('.cap-grid');
+    if (grid) {
+      const classes = ['cap-1', 'cap-2', 'cap-3', 'cap-4'];
+      const cards = d.capabilities.slice(0, 4).map((c, i) =>
+        `<div class="cap-card ${classes[i]} reveal">
+          <span class="num">${c.num}</span>
+          <h3>${c.title}</h3>
+          <p>${c.desc}</p>
+          <div class="icon">↗</div>
+        </div>`
+      ).join('');
+      const farm = d.capabilities[4];
+      const cap5 = farm ? `<div class="cap-card cap-5 reveal">
+        <div class="text-side">
+          <span class="num">${farm.num}</span>
+          <h3>${farm.title}</h3>
+          <p style="margin-top:14px;max-width:38ch;">${farm.desc}</p>
+          <div class="icon" style="margin-top:auto;">↗</div>
+        </div>
+        <div class="img-side" id="cap-img"></div>
+      </div>` : '';
+      grid.innerHTML = cards + cap5;
+      setBg('cap-img', d.cap_img);
+    }
+  }
+
+  // ECOSYSTEM
+  if (d.eco_eyebrow) set('.ecosystem .eyebrow', d.eco_eyebrow);
+  if (d.eco_h2) {
+    const h2 = document.querySelector('.ecosystem h2.title');
+    if (h2) h2.innerHTML = d.eco_h2
+      .replace('manufacturer', '<em>manufacturer</em>')
+      .replace('menu', '<em>menu</em>');
+  }
+  if (d.ecosystem && d.ecosystem.length) {
+    const flow = document.querySelector('.eco-flow');
+    if (flow) {
+      flow.innerHTML = d.ecosystem.map(e =>
+        `<div class="eco-node reveal">
+          <div class="step">${e.step}</div>
+          <h4>${e.title}</h4>
+          <p>${e.desc}</p>
+        </div>`
+      ).join('');
+    }
+  }
+
+  // FARM SECTION (homepage version)
+  if (d.farm_eyebrow) set('#farm .eyebrow', d.farm_eyebrow);
+  if (d.farm_h2 && d.farm_h2_italic) {
+    const h2 = document.querySelector('#farm h2.title');
+    if (h2) h2.innerHTML = d.farm_h2.replace(d.farm_h2_italic, `<em>${d.farm_h2_italic}</em>`);
+  }
+  if (d.farm_p) {
+    const p = document.querySelector('#farm .farm-text > p');
+    if (p) p.textContent = d.farm_p;
+  }
+  if (d.farm_herbs && d.farm_herbs.length) {
+    const list = document.querySelector('#farm .farm-list');
+    if (list) {
+      list.innerHTML = d.farm_herbs.map(h =>
+        `<li><strong>${h.name}</strong> — ${h.desc}</li>`
+      ).join('');
+    }
+  }
+  if (d.farm_quote) {
+    const q = document.querySelector('#farm .farm-quote');
+    if (q) q.innerHTML = `"<span class="cjk-char">家</span> ${d.farm_quote}"`;
+  }
+  setBgClass('#farm .farm-img-main', d.farm_img_main);
+
+  // CUSTOMERS
+  if (d.cust_eyebrow) set('#customers .eyebrow', d.cust_eyebrow);
+  if (d.cust_h2 && d.cust_h2_italic) {
+    const h2 = document.querySelector('#customers h2.title');
+    if (h2) h2.innerHTML = d.cust_h2.replace(d.cust_h2_italic, `<em>${d.cust_h2_italic}</em>`);
+  }
+  if (d.cust_intro) {
+    const p = document.querySelector('.cust-head > p');
+    if (p) p.textContent = d.cust_intro;
+  }
+  if (d.channels && d.channels.length) {
+    const channels = document.querySelector('.cust-channels');
+    if (channels) {
+      channels.innerHTML = d.channels.map(ch =>
+        `<div class="cust-channel reveal">
+          <span class="ch-num">${ch.num}</span>
+          <h4>${ch.title}</h4>
+          <p class="cnt">${ch.subtitle}</p>
+          <ul class="cust-list">
+            ${ch.clients.map(c => `<li>${c}</li>`).join('')}
+          </ul>
+        </div>`
+      ).join('');
+    }
+  }
+
+  // HERITAGE / TIMELINE
+  if (d.heritage_eyebrow) set('#heritage .eyebrow', d.heritage_eyebrow);
+  if (d.heritage_h2 && d.heritage_h2_italic) {
+    const h2 = document.querySelector('#heritage h2.title');
+    if (h2) h2.innerHTML = d.heritage_h2.replace(d.heritage_h2_italic, `<em>${d.heritage_h2_italic}</em>`);
+  }
+  if (d.heritage_intro) {
+    const p = document.querySelector('.heritage-head > p');
+    if (p) p.textContent = d.heritage_intro;
+  }
+  if (d.timeline && d.timeline.length) {
+    const tl = document.querySelector('.timeline');
+    if (tl) {
+      tl.innerHTML = d.timeline.map(t =>
+        `<div class="tl-item reveal">
+          <div class="tl-year">${t.year}</div>
+          <div class="tl-event">${t.event}</div>
+        </div>`
+      ).join('');
+    }
+  }
+
+  // APP SECTION
+  if (d.app_eyebrow) set('.app-section .eyebrow', d.app_eyebrow);
+  if (d.app_h2 && d.app_h2_italic) {
+    const h2 = document.querySelector('.app-section h2.title');
+    if (h2) h2.innerHTML = d.app_h2.replace(d.app_h2_italic, `<em>${d.app_h2_italic}</em>`);
+  }
+  if (d.app_desc) set('.app-section > .app-inner > div > p', d.app_desc);
+  if (d.app_features && d.app_features.length) {
+    const features = document.querySelector('.app-features');
+    if (features) {
+      features.innerHTML = d.app_features.map((f, i) =>
+        `<div><span>0${i + 1}</span> ${f}</div>`
+      ).join('');
+    }
+  }
+  if (d.app_store_url) {
+    const btn = document.querySelector('.app-btn');
+    if (btn) btn.href = d.app_store_url;
+  }
+  if (d.play_store_url) {
+    const btns = document.querySelectorAll('.app-btn');
+    if (btns[1]) btns[1].href = d.play_store_url;
+  }
+
+  // PROMO IMAGES
   setBg('promo-img-1', d.promo_img_1);
   setBg('promo-img-2', d.promo_img_2);
 }
