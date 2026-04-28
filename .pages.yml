@@ -350,12 +350,24 @@ content:
     type: file
     path: content/catalogue.json
     fields:
-      - { name: cat_img_sauces, label: Sauces Category Image, type: image }
-      - { name: cat_img_rice, label: Rice & Noodles Category Image, type: image }
-      - { name: cat_img_herbs, label: Fresh Herbs Category Image, type: image }
-      - { name: cat_img_coconut, label: Coconut Category Image, type: image }
-      - { name: cat_img_snacks, label: Snacks & Drinks Category Image, type: image }
-      - { name: promo_img_1, label: Promo Banner 1 Image, type: image }
-      - { name: promo_img_2, label: Promo Banner 2 Image, type: image }
-      - { name: promo_img_3, label: Promo Banner 3 Image, type: image }
+      - { name: cat_lede, label: "§ Hero — Lede paragraph", type: string }
+      - { name: flipbook_1_title, label: "§ Flipbook 1 — Title", type: string }
+      - { name: flipbook_1_sub, label: "§ Flipbook 1 — Sub-label", type: string }
+      - { name: flipbook_1_url, label: "§ Flipbook 1 — URL", type: string }
+      - { name: flipbook_2_title, label: "§ Flipbook 2 — Title", type: string }
+      - { name: flipbook_2_sub, label: "§ Flipbook 2 — Sub-label", type: string }
+      - { name: flipbook_2_url, label: "§ Flipbook 2 — URL", type: string }
+      - { name: cat_img_sauces, label: "§ Banner 1 — Sauces image", type: image }
+      - { name: cat_img_fresh, label: "§ Banner 2 — Fresh image", type: image }
+      - { name: cat_img_frozen, label: "§ Banner 3 — Frozen image", type: image }
+      - { name: cat_img_pantry, label: "§ Banner 4 — Pantry image", type: image }
+      - { name: cat_img_drinks, label: "§ Banner 5 — Drinks image", type: image }
+      - { name: cat_ban_1_h3, label: "§ Banner 1 — Heading", type: string }
+      - { name: cat_ban_2_h3, label: "§ Banner 2 — Heading", type: string }
+      - { name: cat_ban_3_h3, label: "§ Banner 3 — Heading", type: string }
+      - { name: cat_ban_4_h3, label: "§ Banner 4 — Heading", type: string }
+      - { name: cat_ban_5_h3, label: "§ Banner 5 — Heading", type: string }
+      - { name: cat_promo_h3, label: "§ Promo — Headline", type: string }
+      - { name: cat_promo_p, label: "§ Promo — Description", type: string }
+
 
