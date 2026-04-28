@@ -61,12 +61,16 @@ content:
         label: "Hero — Sub image"
         type: image
 
-      - name: stats
-        label: Stats Strip
-        type: object[]
-        fields:
-          - { name: num, label: Number, type: string }
-          - { name: label, label: Label, type: string }
+      - { name: stat_1_num, label: "Stat 1 — Number", type: string }
+      - { name: stat_1_label, label: "Stat 1 — Label", type: string }
+      - { name: stat_2_num, label: "Stat 2 — Number", type: string }
+      - { name: stat_2_label, label: "Stat 2 — Label", type: string }
+      - { name: stat_3_num, label: "Stat 3 — Number", type: string }
+      - { name: stat_3_label, label: "Stat 3 — Label", type: string }
+      - { name: stat_4_num, label: "Stat 4 — Number", type: string }
+      - { name: stat_4_label, label: "Stat 4 — Label", type: string }
+      - { name: stat_5_num, label: "Stat 5 — Number", type: string }
+      - { name: stat_5_label, label: "Stat 5 — Label", type: string }
 
       - name: story_eyebrow
         label: "Story — Eyebrow"
@@ -280,3 +284,4 @@ content:
       - { name: promo_img_1, label: Promo Banner 1 Image, type: image }
       - { name: promo_img_2, label: Promo Banner 2 Image, type: image }
       - { name: promo_img_3, label: Promo Banner 3 Image, type: image }
+
