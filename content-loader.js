@@ -73,8 +73,11 @@ async function applyHome() {
   const d = await loadJSON('home');
   if (!d || !Object.keys(d).length) return;
   const headline = document.querySelector('h1.headline');
-  if (headline && d.hero_line1) {
-    headline.innerHTML = `${d.hero_line1}<br />of <span class="ital">${d.hero_line2_italic || 'East Asia'}</span>,<br />from soil to <span class="ital">${d.hero_line3 || 'stove'}</span>.<span class="cjk">創立</span>`;
+  if (headline) {
+    headline.innerHTML = '';
+    if (d.hero_line1) {
+      headline.innerHTML = `${d.hero_line1}<br />of <span class="ital">${d.hero_line2_italic || 'East Asia'}</span>,<br />from soil to <span class="ital">${d.hero_line3 || 'stove'}</span>.<span class="cjk">創立</span>`;
+    }
   }
   if (d.hero_lede) set('.hero-sub', d.hero_lede);
   if (d.hero_cta_primary) set('.hero-actions .btn-primary', d.hero_cta_primary);
