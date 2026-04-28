@@ -236,14 +236,39 @@ async function applyContact() {
 async function applyCatalogue() {
   const d = await loadJSON('catalogue');
   if (!d || !Object.keys(d).length) return;
+
+  // Hero
+  if (d.cat_lede) id('cat-lede', d.cat_lede);
+
+  // Flipbook cards
+  id('flipbook-1-title', d.flipbook_1_title);
+  id('flipbook-1-sub', d.flipbook_1_sub);
+  id('flipbook-2-title', d.flipbook_2_title);
+  id('flipbook-2-sub', d.flipbook_2_sub);
+
+  // Flipbook URLs
+  const fc1 = document.querySelector('.flip-card.fc-rest');
+  if (fc1 && d.flipbook_1_url) fc1.href = d.flipbook_1_url;
+  const fc2 = document.querySelector('.flip-card.fc-whole');
+  if (fc2 && d.flipbook_2_url) fc2.href = d.flipbook_2_url;
+
+  // Category banner images
   bg('cat-img-sauces', d.cat_img_sauces);
-  bg('cat-img-rice', d.cat_img_rice);
-  bg('cat-img-herbs', d.cat_img_herbs);
-  bg('cat-img-coconut', d.cat_img_coconut);
-  bg('cat-img-snacks', d.cat_img_snacks);
-  bg('cat-promo-img-1', d.promo_img_1);
-  bg('cat-promo-img-2', d.promo_img_2);
-  bg('cat-promo-img-3', d.promo_img_3);
+  bg('cat-img-fresh', d.cat_img_fresh);
+  bg('cat-img-frozen', d.cat_img_frozen);
+  bg('cat-img-pantry', d.cat_img_pantry);
+  bg('cat-img-drinks', d.cat_img_drinks);
+
+  // Category banner headings
+  id('cat-ban-1-h3', d.cat_ban_1_h3);
+  id('cat-ban-2-h3', d.cat_ban_2_h3);
+  id('cat-ban-3-h3', d.cat_ban_3_h3);
+  id('cat-ban-4-h3', d.cat_ban_4_h3);
+  id('cat-ban-5-h3', d.cat_ban_5_h3);
+
+  // Promo band
+  id('cat-promo-h3', d.cat_promo_h3);
+  id('cat-promo-p', d.cat_promo_p);
 }
 
 (async () => {
