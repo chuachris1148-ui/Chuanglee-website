@@ -1,0 +1,20 @@
+{
+  "hero_line1": "The flavour",
+  "hero_line2_italic": "of East Asia,",
+  "hero_line3": "from soil to stove.",
+  "hero_sub": "Three generations. Direct from manufacturer.",
+  "hero_lede": "UK importer, manufacturing partner, and foodservice distributor for authentic East Asian ingredients. 30+ heritage brands, a family farm in Thailand, and 3,000+ product lines in stock.",
+  "hero_cta_primary": "Explore the Catalogue →",
+  "hero_cta_secondary": "Open a Trade Account",
+  "hero_img_main": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=1200&q=80",
+  "hero_img_sub": "https://images.unsplash.com/photo-1518983546435-91f8b87fe561?w=600&q=80",
+  "promo_img_1": "https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80",
+  "promo_img_2": "https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=900&q=80",
+  "stats": [
+    { "num": "1989", "label": "Est. London", "sub": "Family-run since founding" },
+    { "num": "3,000+", "label": "Product lines", "sub": "In stock, ready to ship" },
+    { "num": "450+", "label": "UK kitchens", "sub": "Active trade accounts" },
+    { "num": "30+", "label": "Heritage brands", "sub": "Direct manufacturer relationships" },
+    { "num": "35yr+", "label": "Relationships", "sub": "With the same manufacturers" }
+  ]
+}
