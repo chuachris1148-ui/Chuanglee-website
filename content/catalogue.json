@@ -1,0 +1,27 @@
+{
+  "cat_h1": "The full <em>pantry</em>,<br/>delivered direct.<span class=\"cjk-sm\">食材</span>",
+  "cat_lede": "2,700+ authentic East Asian ingredients across fresh, frozen, ambient and chilled categories. Search by product name, code, or sub-category — or browse our full flipbook catalogues below.",
+
+  "flipbook_1_title": "Restaurant Catalogue 2026",
+  "flipbook_1_sub": "Browse the full illustrated flipbook",
+  "flipbook_1_url": "https://heyzine.com/flip-book/e3a6d1b6f0.html",
+
+  "flipbook_2_title": "Wholesale Catalogue 2026",
+  "flipbook_2_sub": "Browse the full illustrated flipbook",
+  "flipbook_2_url": "https://heyzine.com/flip-book/2eb7ef706b.html",
+
+  "cat_img_sauces": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=1200&q=80",
+  "cat_img_fresh": "https://images.unsplash.com/photo-1576675784201-0e142b423952?w=1000&q=80",
+  "cat_img_frozen": "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=900&q=80",
+  "cat_img_pantry": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=900&q=80",
+  "cat_img_drinks": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=900&q=80",
+
+  "cat_ban_1_h3": "Sauces & Curry",
+  "cat_ban_2_h3": "Fresh Produce",
+  "cat_ban_3_h3": "Frozen Range",
+  "cat_ban_4_h3": "Pantry & Dry Goods",
+  "cat_ban_5_h3": "Beverages & Drinks",
+
+  "cat_promo_h3": "Ready to order? Open an account in 24 hours.",
+  "cat_promo_p": "Access full trade pricing across our entire 2,700+ product range. Dedicated account management, credit terms, multilingual support."
+}
