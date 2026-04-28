@@ -1,7 +1,4 @@
-// Chuanglee Content Loader v4 — with Cloudinary image support
-
-const CLOUDINARY_CLOUD = 'dtt5b1ysc';
-const CLOUDINARY_PRESET = 'Chuanglee';
+// Chuanglee Content Loader v4 — full image support
 
 async function loadJSON(file) {
   try {
@@ -98,6 +95,9 @@ async function applyHome() {
   }
   setBg('hero-img-main', d.hero_img_main);
   setBg('hero-img-sub', d.hero_img_sub);
+  setBg('story-img-1', d.story_img_1);
+  setBg('story-img-2', d.story_img_2);
+  setBg('cap-img', d.cap_img);
   setBg('promo-img-1', d.promo_img_1);
   setBg('promo-img-2', d.promo_img_2);
 }
@@ -137,6 +137,7 @@ async function applyFarm() {
   if (d.cta_h3) { const h3 = document.querySelector('.promo-band h3'); if (h3) h3.innerHTML = d.cta_h3; }
   if (d.cta_desc) set('.promo-text p', d.cta_desc);
   if (d.cta_btn) set('.promo-text .btn-primary', d.cta_btn);
+  setBg('farm-img-main', d.farm_img_main);
   setBg('farm-promo-img', d.promo_img);
 }
 
