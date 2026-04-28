@@ -42,3 +42,19 @@ if (searchEl) {
     });
   });
 }
+
+// Mobile nav toggle
+function toggleNav() {
+  const nav = document.querySelector('.nav-links');
+  if (nav) nav.classList.toggle('open');
+  document.body.style.overflow = nav && nav.classList.contains('open') ? 'hidden' : '';
+}
+
+// Close nav when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    const nav = document.querySelector('.nav-links');
+    if (nav) nav.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
