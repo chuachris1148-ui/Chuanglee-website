@@ -303,14 +303,59 @@ content:
     type: file
     path: content/brands.json
     fields:
-      - { name: hero_h1, label: Hero Headline, type: string }
-      - { name: hero_lede, label: Hero Lede, type: string }
-      - { name: spot_tag, label: Spotlight Tag, type: string }
-      - { name: spot_brand, label: Spotlight Brand, type: string }
-      - { name: spot_desc, label: Spotlight Description, type: string }
-      - { name: spot_cta, label: Spotlight CTA, type: string }
-      - { name: promo_img_1, label: Promo Banner 1 Image, type: image }
-      - { name: promo_img_2, label: Promo Banner 2 Image, type: image }
+      - name: spotlight
+        label: "§ Spotlight — Active brand"
+        type: select
+        options:
+          values:
+            - AROY-D
+            - Mae Ploy
+            - Healthy Boy
+            - Chaokoh
+            - Singha
+            - Megachef
+            - Cock Brand
+            - Sriraja Panich
+            - Por Kwan
+            - Yee Kwan
+            - PFP
+            - Wai Wai
+            - PA Foods
+            - FOCO
+            - Manora
+            - Chatramue
+            - Chang
+            - Khaohom
+            - Nittaya
+            - Bala 百樂
+            - Tsingtao
+            - Kwong Cheong Thye
+            - Khun Jim
+      - { name: spotlight_img, label: "§ Spotlight — Background image", type: image }
+      - { name: brands_spotlight_cta_label, label: "§ Spotlight CTA — Label", type: string }
+      - { name: brands_spotlight_cta_url, label: "§ Spotlight CTA — URL", type: string }
+      - { name: brands_sourcing_cta_label, label: "§ Sourcing CTA — Label", type: string }
+      - { name: brands_sourcing_cta_url, label: "§ Sourcing CTA — URL", type: string }
+
+  - name: buttons
+    label: "Button Links (All Pages)"
+    type: file
+    path: content/brands.json
+    fields:
+      - { name: hero_cta_primary_label, label: "§ Home Hero — Primary button label", type: string }
+      - { name: hero_cta_primary_url, label: "§ Home Hero — Primary button URL", type: string }
+      - { name: hero_cta_secondary_label, label: "§ Home Hero — Secondary button label", type: string }
+      - { name: hero_cta_secondary_url, label: "§ Home Hero — Secondary button URL", type: string }
+      - { name: farm_cta_label, label: "§ Home Farm — Button label", type: string }
+      - { name: farm_cta_url, label: "§ Home Farm — Button URL", type: string }
+      - { name: contact_cta_heading, label: "§ Home Contact — Heading", type: string }
+      - { name: contact_cta_sub, label: "§ Home Contact — Sub text", type: string }
+      - { name: contact_cta_label, label: "§ Home Contact — Button label", type: string }
+      - { name: contact_cta_url, label: "§ Home Contact — Button URL", type: string }
+      - { name: cat_account_cta_label, label: "§ Catalogue — Account CTA label", type: string }
+      - { name: cat_account_cta_url, label: "§ Catalogue — Account CTA URL", type: string }
+      - { name: farm_sourcing_cta_label, label: "§ Farm — Sourcing CTA label", type: string }
+      - { name: farm_sourcing_cta_url, label: "§ Farm — Sourcing CTA URL", type: string }
 
   - name: farm
     label: Farm Page
