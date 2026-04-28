@@ -359,4 +359,3 @@ content:
       - { name: promo_img_2, label: Promo Banner 2 Image, type: image }
       - { name: promo_img_3, label: Promo Banner 3 Image, type: image }
 
-
