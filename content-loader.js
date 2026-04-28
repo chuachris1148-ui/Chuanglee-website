@@ -31,6 +31,13 @@ function bg(elId, url) {
   if (el) el.style.backgroundImage = `url('${url}')`;
 }
 
+function btn(elemId, label, url) {
+  const el = document.getElementById(elemId);
+  if (!el) return;
+  if (label) el.textContent = label;
+  if (url) el.href = url;
+}
+
 function bgSel(selector, url) {
   if (!url) return;
   const el = document.querySelector(selector);
@@ -178,21 +185,35 @@ async function applyHome() {
   bg('promo-img-2', d.promo_img_2);
 }
 
+  // Button URLs (from brands.json — shared config file)
+  const b = await loadJSON('brands');
+  if (b) {
+    btn('hero-cta-primary', b.hero_cta_primary_label, b.hero_cta_primary_url);
+    btn('hero-cta-secondary', b.hero_cta_secondary_label, b.hero_cta_secondary_url);
+    btn('farm-cta', b.farm_cta_label, b.farm_cta_url);
+    id('contact-cta-heading', b.contact_cta_heading);
+    id('contact-cta-sub', b.contact_cta_sub);
+    btn('contact-cta-btn', b.contact_cta_label, b.contact_cta_url);
+  }
+}
+
 async function applyBrands() {
   const d = await loadJSON('brands');
   if (!d || !Object.keys(d).length) return;
-  bg('brands-promo-img-1', d.promo_img_1);
-  bg('brands-promo-img-2', d.promo_img_2);
-  if (d.brands && d.brands.length) {
-    const grid = document.querySelector('.brands-grid');
-    if (grid) {
-      grid.innerHTML = d.brands.map(b => {
-        const styleClass = b.style === 'dark' ? 'dark' : b.style === 'red' ? 'red' : b.style === 'gold' ? 'gold-bg' : '';
-        return `<div class="brand-card ${styleClass}"><span class="bc-num">${b.num}</span><div class="bc-cjk">${b.cjk}</div><h3>${b.name}</h3><div class="bc-origin">${b.origin}</div><p>${b.desc}</p><div class="bc-foot"><span>${b.tags}</span><span class="arr">→</span></div></div>`;
-      }).join('');
-    }
-  }
+
+  // Spotlight image
+  bg('spotlight-img', d.spotlight_img);
+
+  // Spotlight CTA button
+  btn('brands-spotlight-cta', d.brands_spotlight_cta_label, d.brands_spotlight_cta_url);
+
+  // Sourcing CTA button
+  btn('brands-sourcing-cta', d.brands_sourcing_cta_label, d.brands_sourcing_cta_url);
 }
+
+async function applyHome() {
+  const d = await loadJSON('home');
+  if (!d || !Object.keys(d).length) return;
 
 async function applyFarm() {
   const d = await loadJSON('farm');
@@ -231,6 +252,12 @@ async function applyContact() {
     if (label.textContent.includes('Delivery') && d.delivery) val.textContent = d.delivery;
     if (label.textContent.includes('Minimum') && d.min_order) val.textContent = d.min_order;
   });
+}
+
+  const b2 = await loadJSON('brands');
+  if (b2) {
+    btn('farm-sourcing-cta', b2.farm_sourcing_cta_label, b2.farm_sourcing_cta_url);
+  }
 }
 
 async function applyCatalogue() {
