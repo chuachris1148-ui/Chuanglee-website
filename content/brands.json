@@ -5,6 +5,8 @@
   "spot_brand": "AROY-D",
   "spot_desc": "Pure-pressed, no stabilisers, no preservatives. Trusted by Michelin chefs and 450+ UK kitchens. Available in 400ml, 1L UHT and catering-case sizes.",
   "spot_cta": "Shop AROY-D →",
+  "promo_img_1": "https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80",
+  "promo_img_2": "https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=900&q=80",
   "brands": [
     { "num": "No. 01", "cjk": "原", "name": "AROY-D", "origin": "Thailand · Est. 1972", "desc": "The benchmark Thai coconut milk. Pure, no stabilisers — trusted by Michelin restaurants worldwide.", "tags": "Coconut · Sauces", "style": "red" },
     { "num": "No. 02", "cjk": "梅", "name": "Mae Ploy", "origin": "Thailand · Est. 1971", "desc": "Fifty years of Thai sweet chilli. The recipe hasn't changed — 100+ countries still pour it.", "tags": "Sauces · Pastes", "style": "dark" },

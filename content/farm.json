@@ -1,12 +1,14 @@
 {
-  "hero_line1": "Granny Suree's Farm,",
+  "hero_line1": "Suree's Farm,",
   "hero_italic": "one hour",
   "hero_line2": "from Bangkok.",
   "hero_lede": "Chuanglee operates alongside Suree's Farm — a family-run vegetable farm and packing house in Chachoengsao, Thailand. Seasonal Thai herbs and vegetables, picked, packed and flown to the UK every single week.",
+  "eyebrow": "Suree's Farm · Chachoengsao",
   "para_1": "One hour outside Bangkok, our family farm and packing house grows organic Thai produce alongside trusted local farmers — packed to order, flown to the UK weekly. The supply chain is short on purpose: it keeps flavour intact and keeps the work in the hands of people we know.",
   "para_2": "For decades, Granny Suree has personally overseen the pack house, partnering with local farmers while growing her own organic produce. Everything is packed to order and flown to the UK on a weekly basis — ensuring fresh, high-quality, seasonal produce reaches kitchens at their peak.",
   "quote": "Family farms it, family packs it, family delivers it.",
   "cta_h3": "Need a specific herb for your menu?",
   "cta_desc": "Talk to us. Granny Suree's farm and our partner farmer network can grow Thai herbs and vegetables to a restaurant's specification. If you have a menu requirement we don't currently list, there's a good chance we can grow it.",
-  "cta_btn": "Discuss Custom Sourcing →"
+  "cta_btn": "Discuss Custom Sourcing →",
+  "promo_img": "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=900&q=80"
 }
