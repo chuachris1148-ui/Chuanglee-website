@@ -1,3 +1,9 @@
+branch: main
+
+media:
+  input: images
+  output: /images
+
 content:
   - name: global
     label: Global Settings
@@ -27,6 +33,24 @@ content:
       - { name: hero_lede, label: Hero Paragraph, type: string }
       - { name: hero_cta_primary, label: Primary CTA, type: string }
       - { name: hero_cta_secondary, label: Secondary CTA, type: string }
+      - { name: hero_img_main, label: Hero Main Image, type: image }
+      - { name: hero_img_sub, label: Hero Sub Image, type: image }
+      - { name: promo_img_1, label: Promo Banner 1 Image, type: image }
+      - { name: promo_img_2, label: Promo Banner 2 Image, type: image }
+
+  - name: brands
+    label: Brands Page
+    type: file
+    path: content/brands.json
+    fields:
+      - { name: hero_h1, label: Hero Headline, type: string }
+      - { name: hero_lede, label: Hero Lede, type: string }
+      - { name: spot_tag, label: Spotlight Tag, type: string }
+      - { name: spot_brand, label: Spotlight Brand, type: string }
+      - { name: spot_desc, label: Spotlight Description, type: string }
+      - { name: spot_cta, label: Spotlight CTA, type: string }
+      - { name: promo_img_1, label: Promo Banner 1 Image, type: image }
+      - { name: promo_img_2, label: Promo Banner 2 Image, type: image }
 
   - name: farm
     label: Farm Page
@@ -37,12 +61,14 @@ content:
       - { name: hero_italic, label: Hero Italic, type: string }
       - { name: hero_line2, label: Hero Line 2, type: string }
       - { name: hero_lede, label: Hero Lede, type: string }
+      - { name: eyebrow, label: Eyebrow, type: string }
       - { name: para_1, label: Paragraph 1, type: string }
       - { name: para_2, label: Paragraph 2, type: string }
       - { name: quote, label: Pull Quote, type: string }
       - { name: cta_h3, label: CTA Headline, type: string }
       - { name: cta_desc, label: CTA Description, type: string }
       - { name: cta_btn, label: CTA Button, type: string }
+      - { name: promo_img, label: Promo Banner Image, type: image }
 
   - name: contact
     label: Contact Page
@@ -57,3 +83,17 @@ content:
       - { name: form_heading, label: Form Heading, type: string }
       - { name: form_sub, label: Form Sub-line, type: string }
       - { name: form_submit, label: Submit Button, type: string }
+
+  - name: catalogue
+    label: Catalogue Page
+    type: file
+    path: content/catalogue.json
+    fields:
+      - { name: cat_img_sauces, label: Sauces Category Image, type: image }
+      - { name: cat_img_rice, label: Rice & Noodles Category Image, type: image }
+      - { name: cat_img_herbs, label: Fresh Herbs Category Image, type: image }
+      - { name: cat_img_coconut, label: Coconut Category Image, type: image }
+      - { name: cat_img_snacks, label: Snacks & Drinks Category Image, type: image }
+      - { name: promo_img_1, label: Promo Banner 1 Image, type: image }
+      - { name: promo_img_2, label: Promo Banner 2 Image, type: image }
+      - { name: promo_img_3, label: Promo Banner 3 Image, type: image }
