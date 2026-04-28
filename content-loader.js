@@ -1,4 +1,7 @@
-// Chuanglee Content Loader v3 — text + image support
+// Chuanglee Content Loader v4 — with Cloudinary image support
+
+const CLOUDINARY_CLOUD = 'dtt5b1ysc';
+const CLOUDINARY_PRESET = 'Chuanglee';
 
 async function loadJSON(file) {
   try {
