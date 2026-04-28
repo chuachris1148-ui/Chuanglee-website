@@ -72,6 +72,13 @@ async function applyGlobal() {
     });
   }
   if (g.nav_cta) selAll('.order-btn', g.nav_cta);
+  if (g.nav_cta_url) {
+    document.querySelectorAll('.order-btn').forEach(el => {
+      el.href = g.nav_cta_url;
+      el.target = '_blank';
+      el.rel = 'noopener';
+    });
+  }
   if (g.copyright) {
     document.querySelectorAll('.foot-bottom div').forEach(el => {
       if (el.textContent.includes('Chuanglee Limited')) {
