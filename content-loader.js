@@ -89,7 +89,8 @@ async function applyGlobal() {
   if (g.topbar_messages && g.topbar_messages.length) {
     const marquee = document.querySelector('.marquee');
     if (marquee) {
-      const msgs = [...g.topbar_messages, ...g.topbar_messages];
+      const rawMsgs = g.topbar_messages.map(m => typeof m === 'object' ? m.message : m);
+      const msgs = [...rawMsgs, ...rawMsgs];
       marquee.innerHTML = msgs.map(m => `<span><span class="dot"></span> ${m}</span>`).join('');
     }
   }
