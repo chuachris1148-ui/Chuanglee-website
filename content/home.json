@@ -1,6 +1,6 @@
 {
   "hero_meta": "Volume I · Heritage Foodservice",
-  "hero_line1": "The flavour",
+  "hero_line1": "The flavours",
   "hero_line2_italic": "East Asia",
   "hero_line3": "stove",
   "hero_lede": "UK importer, manufacturing partner, and foodservice distributor for authentic East Asian ingredients. 30+ heritage brands, a family farm in Thailand, and 3,000+ product lines in stock.",
@@ -8,10 +8,7 @@
   "hero_cta_secondary": "Open a Trade Account",
   "hero_stamp_num": "36",
   "hero_stamp_label": "Years of Trade",
-  "hero_img_main": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=1200&q=80",
-  "hero_img_sub": "https://images.unsplash.com/photo-1518983546435-91f8b87fe561?w=600&q=80",
-
-  "stat_1_num": "£25m",
+  "stat_1_num": "£26m",
   "stat_1_label": "FY25 Revenue",
   "stat_2_num": "3,000+",
   "stat_2_label": "SKUs in Catalogue",
@@ -21,17 +18,12 @@
   "stat_4_label": "Family Founded",
   "stat_5_num": "UK·TH",
   "stat_5_label": "From Farm to Fork",
-
   "story_eyebrow": "Who We Are",
   "story_lead": "Founded in 1989 by Jimmy Chua, Chuanglee is today led by siblings Christopher, Jennisa and Katriya — a family rooted in food, in trade, and in the long, patient work of building real partnerships on both sides of the world.",
   "story_quote": "Partnerships sit at the very core of what we do. We don't just import ingredients — we import the people, the recipes, and the standards behind them.",
   "story_cite": "— The Chua Family",
   "story_tag": "Est. 1989 · London",
-  "story_img_1": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=900&q=80",
-  "story_img_2": "https://images.unsplash.com/photo-1543353071-10c8ba85a904?w=600&q=80",
-
   "cap_eyebrow": "What We Do",
-  "cap_img": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80",
   "cap_1_num": "01 / Direct Importing",
   "cap_1_title": "Long-term partnerships across Asia.",
   "cap_2_num": "02 / Foodservice & Wholesale",
@@ -42,7 +34,6 @@
   "cap_4_title": "Manufactured to your recipe in Thailand.",
   "cap_5_num": "05 / The Farm",
   "cap_5_title": "Suree's Farm — fresh Thai herbs grown by our family.",
-
   "eco_eyebrow": "The Chuanglee Ecosystem",
   "eco_1_title": "Asian Manufacturers",
   "eco_1_desc": "Long-term supplier relationships across Thailand and Asia.",
@@ -54,11 +45,9 @@
   "eco_4_desc": "UK import management, consolidation and supply planning.",
   "eco_5_title": "UK Warehouse & Distribution",
   "eco_5_desc": "Ambient, chilled, frozen and fresh — across London and nationwide.",
-
   "farm_home_eyebrow": "Suree's Farm · Chachoengsao",
   "farm_home_p": "One hour outside Bangkok, our family farm and packing house grows organic Thai produce alongside trusted local farmers — packed to order, flown to the UK weekly.",
   "farm_home_quote": "Family farms it, family packs it, family delivers it.",
-  "farm_img_main": "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1200&q=80",
   "herb_1_name": "Cha Plu Leaves",
   "herb_1_desc": "wild pepper leaf, peppery & aromatic",
   "herb_2_name": "Kaffir Lime Leaves",
@@ -67,9 +56,7 @@
   "herb_3_desc": "true seasonal rotation",
   "herb_4_name": "Morning Glory · Aubergine Pea · Jujube",
   "herb_4_desc": "restaurant-grade volumes",
-
   "cust_eyebrow": "Our Distribution Channels",
-
   "heritage_eyebrow": "Our Heritage",
   "tl_1_year": "1989",
   "tl_1_event": "Chuanglee founded by Jimmy Chua. Begins importing East Asian ingredients into the UK.",
@@ -83,15 +70,11 @@
   "tl_5_event": "Multi-site ordering app launches. Revenue reaches £25M with 450+ customers.",
   "tl_6_year": "Tomorrow",
   "tl_6_event": "The next generation continues the work — same family, same standards.",
-
   "app_eyebrow": "The Chuanglee App",
   "app_feat_1": "Personalised pricing per site",
   "app_feat_2": "Multi-site order guides",
   "app_feat_3": "Repeat & favourite ordering",
   "app_feat_4": "Live delivery tracking",
   "app_store_url": "#",
-  "play_store_url": "#",
-
-  "promo_img_1": "https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80",
-  "promo_img_2": "https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=900&q=80"
+  "play_store_url": "#"
 }
