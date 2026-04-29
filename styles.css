@@ -1129,3 +1129,31 @@ footer { background: var(--ink); color: var(--paper); padding: 80px 48px 36px; }
 .thai {
   font-family: 'Sarabun', sans-serif;
 }
+
+/* Brand card Thai text */
+.bc-cjk {
+  position: relative;
+}
+.bc-thai {
+  display: block;
+  font-family: 'Sarabun', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gold);
+  opacity: 0.65;
+  letter-spacing: 0.02em;
+  margin-top: -8px;
+  line-height: 1.2;
+}
+
+/* Decorative block Thai (promo band) */
+.thai-deco-block {
+  display: block;
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.35em;
+  font-weight: 300;
+  color: rgba(244,237,225,0.06);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin-top: -0.2em;
+}
