@@ -1097,3 +1097,35 @@ footer { background: var(--ink); color: var(--paper); padding: 80px 48px 36px; }
   font-size: 1.05em;
   line-height: 1.8;
 }
+
+/* ===== THAI DECORATIVE TEXT ===== */
+.thai-deco {
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.55em;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  margin-left: 10px;
+  vertical-align: middle;
+  opacity: 0.75;
+}
+.thai-deco-sm {
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.7em;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  margin-left: 8px;
+  vertical-align: middle;
+  opacity: 0.75;
+}
+.thai-char {
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.85em;
+  color: var(--gold);
+  margin-left: 4px;
+  opacity: 0.8;
+}
+.thai {
+  font-family: 'Sarabun', sans-serif;
+}
