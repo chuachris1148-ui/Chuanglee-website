@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Delivery Areas — Chuanglee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="styles.css" />
+<style>
+/* ===== Delivery page ===== */
+.del-hero{padding:140px 48px 60px;text-align:center;position:relative}
+.del-hero .eyebrow{justify-content:center}
+.del-hero h1{font-family:var(--display);font-weight:400;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-.03em;max-width:16ch;margin:0 auto 20px}
+.del-hero h1 em{font-style:italic;color:var(--vermillion)}
+.del-hero .lede{font-size:17px;line-height:1.65;color:var(--ink-soft);max-width:52ch;margin:0 auto 40px}
+
+/* Postcode checker */
+.pc-checker{max-width:560px;margin:0 auto;position:relative}
+.pc-input-wrap{display:flex;gap:0;border:2px solid var(--rule);border-radius:999px;overflow:hidden;transition:all .25s;background:var(--paper)}
+.pc-input-wrap:focus-within{border-color:var(--vermillion);box-shadow:0 0 0 5px rgba(192,54,44,.08)}
+.pc-input-wrap input{flex:1;padding:18px 28px;border:none;background:transparent;font-family:var(--body);font-size:18px;color:var(--ink);outline:none;letter-spacing:.04em;text-transform:uppercase}
+.pc-input-wrap input::placeholder{color:var(--ink-soft);opacity:.45;text-transform:none}
+.pc-input-wrap button{padding:14px 32px;background:var(--vermillion);color:var(--paper);border:none;font-family:var(--body);font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin:4px;border-radius:999px;white-space:nowrap}
+.pc-input-wrap button:hover{background:#a82d25}
+
+/* Result */
+.pc-result{margin-top:28px;min-height:20px}
+.pc-result-card{background:var(--paper);border:2px solid var(--rule);border-radius:12px;padding:28px 32px;max-width:560px;margin:0 auto;text-align:left;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.pc-result-card.success{border-color:var(--jade);background:rgba(47,74,58,.04)}
+.pc-result-card.no-match{border-color:var(--gold)}
+.pc-result-card h3{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-.01em;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.pc-result-card h3 .ri{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.pc-result-card.success h3 .ri{background:var(--jade);color:var(--paper)}
+.pc-result-card.no-match h3 .ri{background:var(--gold);color:var(--ink)}
+.pc-result-card p{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:4px}
+.day-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.dp{padding:10px 20px;border-radius:999px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dp .dd{width:10px;height:10px;border-radius:50%}
+.dp.mon{background:rgba(59,158,255,.1);color:#2563eb;border:1px solid rgba(59,158,255,.25)}.dp.mon .dd{background:#3B9EFF}
+.dp.tue{background:rgba(34,197,94,.1);color:#16a34a;border:1px solid rgba(34,197,94,.25)}.dp.tue .dd{background:#22C55E}
+.dp.wed{background:rgba(249,115,22,.1);color:#ea580c;border:1px solid rgba(249,115,22,.25)}.dp.wed .dd{background:#F97316}
+.dp.thu{background:rgba(168,85,247,.1);color:#7c3aed;border:1px solid rgba(168,85,247,.25)}.dp.thu .dd{background:#A855F7}
+.dp.fri{background:rgba(239,68,68,.1);color:#dc2626;border:1px solid rgba(239,68,68,.25)}.dp.fri .dd{background:#EF4444}
+.result-cta{margin-top:18px;display:flex;gap:16px;flex-wrap:wrap}
+.result-cta a{font-size:13px;font-weight:500;color:var(--vermillion);text-decoration:underline;text-underline-offset:3px}
+
+/* Map */
+.map-section{padding:0 48px 80px}
+.map-wrap{max-width:1440px;margin:0 auto}
+.map-header{text-align:center;margin-bottom:32px}
+.map-header h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,3.5vw,44px);letter-spacing:-.02em;margin-bottom:8px}
+.map-header h2 em{font-style:italic;color:var(--vermillion)}
+.map-header p{font-size:14px;color:var(--ink-soft);max-width:52ch;margin:0 auto}
+#map{width:100%;height:600px;border-radius:12px;border:1px solid var(--rule);overflow:hidden}
+.map-legend{display:flex;gap:20px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+.ml-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft)}
+.ml-dot{width:12px;height:12px;border-radius:50%}
+
+/* Stats */
+.del-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:800px;margin:48px auto}
+.del-stat{text-align:center;padding:24px 16px;background:var(--paper-2);border-radius:8px;border:1px solid var(--rule)}
+.del-stat .ds-n{font-family:var(--display);font-weight:500;font-size:36px;letter-spacing:-.02em;color:var(--ink)}
+.del-stat .ds-l{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+
+/* Coverage grid */
+.cov-section{padding:0 48px 80px}
+.cov-grid{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.cov-day{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:24px 20px;transition:transform .2s}
+.cov-day:hover{transform:translateY(-3px)}
+.cov-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--rule)}
+.cov-dot{width:14px;height:14px;border-radius:50%}
+.cov-name{font-family:var(--display);font-weight:500;font-size:18px}
+.cov-areas{line-height:2}
+.cov-areas span{display:inline-block;padding:2px 10px;background:var(--paper-2);border-radius:999px;margin:2px 3px 2px 0;font-family:var(--display);font-weight:500;font-size:11px;color:var(--ink)}
+.cov-count{font-size:11px;color:var(--ink-soft);margin-top:12px;padding-top:8px;border-top:1px solid var(--rule)}
+
+/* Custom Leaflet popup */
+.leaflet-popup-content-wrapper{border-radius:8px!important;font-family:'Instrument Sans',sans-serif;box-shadow:0 8px 24px -8px rgba(21,33,47,.3)!important}
+.leaflet-popup-content{margin:12px 16px!important;font-size:13px}
+.pu-pc{font-family:'Fraunces',serif;font-weight:500;font-size:15px;letter-spacing:-.01em;margin-bottom:4px}
+.pu-days{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.pu-day{font-size:10px;font-weight:600;padding:3px 10px;border-radius:999px;letter-spacing:.05em;text-transform:uppercase}
+
+@media(max-width:1100px){
+  .del-hero{padding:120px 24px 50px}
+  .map-section{padding:0 24px 60px}
+  #map{height:450px}
+  .cov-section{padding:0 24px 60px}
+  .cov-grid{grid-template-columns:repeat(2,1fr)}
+  .del-stats{grid-template-columns:repeat(2,1fr);gap:12px;padding:0 24px}
+}
+@media(max-width:600px){
+  .pc-input-wrap{flex-direction:column;border-radius:12px}
+  .pc-input-wrap input{padding:16px 20px;text-align:center}
+  .pc-input-wrap button{margin:0 4px 4px;border-radius:8px}
+  .cov-grid{grid-template-columns:1fr}
+  #map{height:350px;border-radius:8px}
+}
+</style>
+</head>
+<body data-page="delivery">
+
+<div class="topbar"><div class="marquee"></div></div>
+
+<nav class="main"><div class="nav-inner">
+<a href="index.html" class="brand"><img src="/images/logo.png" alt="Chuanglee" style="height:48px;width:auto;display:block;" /></a>
+<button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">☰</button>
+<div class="nav-links">
+<button class="nav-close" onclick="toggleNav()">✕</button>
+<a href="index.html">Home</a><a href="catalogue.html">Catalogue</a><a href="brands.html">Brands</a><a href="farm.html">The Farm</a><a href="delivery.html" class="active">Delivery</a><a href="contact.html">Contact</a>
+</div>
+<div class="nav-cta"><span class="phone">0845 388 1688</span><a href="https://chuanglee.choco.com/" target="_blank" class="order-btn">Order Online ↗</a></div>
+</div></nav>
+
+<!-- HERO + POSTCODE CHECKER -->
+<section class="del-hero">
+<div class="eyebrow">Delivery Coverage</div>
+<h1>Do we <em>deliver</em> to you?</h1>
+<p class="lede">Enter your postcode below. If you're within 2 miles of any point on our delivery routes, we'll tell you exactly which days we can deliver.</p>
+<div class="pc-checker">
+<div class="pc-input-wrap">
+<input type="text" id="pc-input" placeholder="Enter your postcode e.g. SW1A 1AA" maxlength="10" autocomplete="postal-code" />
+<button onclick="checkPostcode()">Check Delivery</button>
+</div>
+<div class="pc-result" id="pc-result"></div>
+</div>
+</section>
+
+<!-- STATS -->
+<div style="max-width:1200px;margin:0 auto;padding:0 48px 60px;">
+<div class="del-stats">
+<div class="del-stat"><div class="ds-n">5</div><div class="ds-l">Days per week</div></div>
+<div class="del-stat"><div class="ds-n">64</div><div class="ds-l">Routes</div></div>
+<div class="del-stat"><div class="ds-n">260+</div><div class="ds-l">Delivery points</div></div>
+<div class="del-stat"><div class="ds-n">£300</div><div class="ds-l">Min. order</div></div>
+</div>
+</div>
+
+<!-- INTERACTIVE MAP -->
+<section class="map-section">
+<div class="map-wrap">
+<div class="map-header">
+<h2>Our <em>delivery</em> network</h2>
+<p>Each shaded area represents a 2-mile delivery zone on our routes, colour-coded by day. Click any zone to see delivery days. Enter your postcode above to check if you're within range.</p>
+</div>
+<div id="map"></div>
+<div class="map-legend">
+<div class="ml-item"><div class="ml-dot" style="background:#3B9EFF"></div>Monday</div>
+<div class="ml-item"><div class="ml-dot" style="background:#22C55E"></div>Tuesday</div>
+<div class="ml-item"><div class="ml-dot" style="background:#F97316"></div>Wednesday</div>
+<div class="ml-item"><div class="ml-dot" style="background:#A855F7"></div>Thursday</div>
+<div class="ml-item"><div class="ml-dot" style="background:#EF4444"></div>Friday</div>
+<div class="ml-item"><div class="ml-dot" style="background:var(--vermillion);border:2px solid var(--paper);box-shadow:0 0 0 2px var(--vermillion)"></div>HQ — SE7</div>
+</div>
+</div>
+</section>
+
+<!-- COVERAGE BY DAY -->
+<section class="cov-section">
+<div class="cov-grid" id="cov-grid"></div>
+</section>
+
+<!-- CTA -->
+<div class="promo-band vermillion">
+<div class="promo-band-inner">
+<div class="promo-text">
+<div class="promo-tag">Trade Customers</div>
+<h3>Ready to <em>order</em>?</h3>
+<p>Open a trade account in 24 hours. Full 2,700+ product range, dedicated account management, credit terms available.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
+<a href="contact.html" class="btn-primary" style="background:var(--ink);">Open an Account →</a>
+<a href="https://chuanglee.choco.com/" target="_blank" class="btn-primary" style="background:transparent;border:1px solid var(--paper);">Order on Choco ↗</a>
+</div>
+</div>
+<div class="promo-visual"><div class="pv-bg" style="background:linear-gradient(135deg,var(--ink),var(--vermillion));"></div></div>
+</div>
+</div>
+
+<footer><div class="foot-inner">
+<div class="foot-top">
+<div class="foot-brand"><div class="brand"><img src="/images/logo.png" alt="Chuanglee" style="height:56px;width:auto;display:block;filter:brightness(0) invert(1);" /></div><p>Family-run UK importer, manufacturing partner and foodservice distributor — bringing authentic East Asian ingredients from soil to stove since 1989.</p></div>
+<div class="foot-col"><h5>Explore</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="brands.html">Our Brands</a></li><li><a href="farm.html">Suree's Farm</a></li><li><a href="delivery.html">Delivery</a></li></ul></div>
+<div class="foot-col"><h5>Trade</h5><ul><li><a href="https://chuanglee.choco.com/" target="_blank">Order Online</a></li><li><a href="contact.html">Open Account</a></li><li><a href="contact.html">Bespoke Manufacturing</a></li></ul></div>
+<div class="foot-col"><h5>Contact</h5><ul><li><a href="mailto:sales@chuanglee.co.uk">sales@chuanglee.co.uk</a></li><li><a href="tel:08453881688">0845 388 1688</a></li><li>Unit 7-9 Meridian Trading Estate</li><li>Bugsby Way, London SE7 7SJ</li></ul></div>
+</div>
+<div class="foot-bottom">
+<div>© 1989–2025 Chuanglee Limited. All rights reserved.</div>
+<div class="center">創立 一九八九</div>
+<div class="right"><a href="#">Modern Slavery</a><a href="#">Terms & Conditions</a><a href="#">Privacy</a></div>
+</div>
+</div></footer>
+
+<script src="script.js"></script>
+<script>
+/* ============================================================
+   DELIVERY DATA
+   Points: [lat, lng, [days], postcode]
+   DC: district → [lat, lng] for geocoding user input
+   ============================================================ */
+const POINTS = [[51.53843,0.10688,["FRI","WED"],"IG11 7NP"],[51.50568,-0.09493,["FRI","MON","WED"],"SE1 8HA"],[51.50447,-0.09493,["FRI","MON"],"SE1 8DD"],[51.50558,-0.0949,["FRI","MON","WED"],"SE1 9BP"],[51.49583,-0.11201,["FRI","MON"],"SE11 5QY"],[51.50211,-0.09522,["FRI","MON","WED"],"SE1 0LH"],[51.50591,-0.09497,["FRI","WED"],"SE1 7AB"],[51.50541,-0.09491,["FRI","MON","WED"],"SE1 8TB"],[51.50451,-0.0951,["FRI","MON","WED"],"SE1 3QJ"],[51.51965,-0.08768,["FRI","MON","WED"],"EC2M 2QS"],[51.50315,-0.14168,["FRI","MON"],"W1J 8PG"],[51.51373,-0.12012,["FRI","MON","THU","TUE"],"WC2E 9DA"],[51.52039,-0.15373,["FRI","MON","THU","TUE"],"W1U 1BU"],[51.50419,-0.14175,["FRI"],"W1J 6QB"],[51.51185,-0.12847,["FRI","MON","THU"],"W1D 4UL"],[51.51462,-0.12849,["FRI","WED"],"W1D 4DP"],[51.51512,-0.14167,["FRI","TUE"],"W1B 5PW"],[51.51079,-0.1213,["FRI","WED"],"WC2N 4HG"],[51.51306,-0.13539,["FRI","MON","THU","TUE","WED"],"W1F 0TR"],[51.51597,-0.1354,["FRI","TUE"],"W1F 0QB"],[51.51204,-0.13541,["FRI","TUE"],"W1F 0DL"],[51.51372,-0.12784,["FRI","MON","TUE"],"WC2H 7JA"],[51.47943,-0.19405,["FRI","MON"],"SW6 2UL"],[51.49561,-0.15746,["FRI","TUE"],"SW1X 0EW"],[51.48813,-0.16926,["FRI","TUE"],"SW3 6JN"],[51.48535,-0.16944,["FRI","TUE"],"SW3 1NQ"],[51.47047,-0.16374,["FRI"],"SW11 1HN"],[51.50897,-0.15084,["FRI","MON","TUE"],"W1K 1BE"],[51.51892,-0.14626,["FRI","MON","WED"],"W1W 7LH"],[51.52012,-0.15003,["FRI","MON","TUE"],"W1G 7EQ"],[51.51056,-0.14191,["FRI","TUE"],"W1S 2QB"],[51.47958,0.00506,["FRI","MON","WED"],"SE10 9FR"],[51.53977,-0.0138,["FRI"],"E20 1EJ"],[51.56779,-0.00802,["FRI"],"E10 7JN"],[51.53986,-0.0138,["FRI","MON"],"E20 1ES"],[51.53641,-0.0138,["FRI","MON","THU","TUE"],"E20 1GL"],[51.47653,0.00472,["FRI","MON"],"SE10 0DX"],[51.5221,-0.19313,["FRI","TUE"],"W9 1PG"],[51.49264,-0.2074,["FRI"],"W14 0HJ"],[51.5169,-0.12908,["FRI","MON"],"WC1B 3NH"],[51.51727,-0.12909,["FRI","MON","WED"],"WC1B 3BQ"],[51.51061,-0.22237,["FRI"],"W12 7GA"],[51.31003,0.29329,["FRI","MON"],"TN15 8DA"],[51.30247,0.46227,["FRI","MON"],"ME20 6QL"],[51.22204,0.53264,["FRI","WED"],"TN12 0AR"],[51.35263,0.5457,["FRI","MON","WED"],"ME5 8NL"],[51.30255,0.4623,["FRI","MON"],"ME20 7LN"],[51.35362,0.54574,["FRI","MON","WED"],"ME5 9LL"],[51.22037,0.53298,["FRI","MON","WED"],"TN12 9AB"],[51.35245,0.54575,["FRI","MON","WED"],"ME5 9UP"],[51.29523,0.50171,["FRI","WED"],"ME6 5NJ"],[51.28535,0.41286,["FRI","MON"],"ME19 6QR"],[51.37173,-0.10022,["FRI"],"CR0 4RF"],[51.39446,-0.01984,["FRI","WED"],"BR3 5NP"],[51.40463,0.11629,["FRI"],"BR5 2RB"],[51.50597,0.1143,["FRI","MON","WED"],"SE28 8BG"],[51.44708,0.10545,["FRI","MON"],"DA15 7AA"],[51.52895,0.06409,["FRI","WED"],"E6 3PG"],[51.46002,0.14438,["FRI","WED"],"DA7 4JJ"],[51.39331,-0.17381,["FRI","MON"],"CR4 4HR"],[51.43418,-0.04404,["FRI","THU","TUE","WED"],"SE26 5BA"],[51.48775,0.27295,["FRI"],"RM20 2ZN"],[51.40239,0.01078,["FRI","TUE"],"BR1 1LE"],[51.2928,-0.7663,["FRI","TUE"],"GU14 6HA"],[51.32054,-0.56319,["FRI","MON"],"GU21 6JY"],[51.26973,-1.0936,["FRI","TUE"],"RG21 7DZ"],[51.26979,-1.09354,["FRI","TUE"],"RG21 8YT"],[51.29596,-0.7663,["FRI"],"GU14 6EJ"],[51.21568,-0.79794,["FRI"],"GU9 9LP"],[51.26762,-1.09357,["FRI","TUE"],"RG21 8EW"],[51.33638,-0.48417,["FRI","MON"],"KT14 7QL"],[51.23563,-0.20459,["FRI","MON"],"RH2 7AQ"],[51.29563,-0.7663,["FRI","TUE"],"GU14 6DH"],[51.23644,-0.17693,["FRI"],"RH1 1DP"],[51.73876,0.47868,["FRI","MON"],"CM1 1XD"],[51.2362,-0.20486,["FRI"],"RH2 0AA"],[51.51124,-0.12785,["FRI","MON","THU","TUE"],"WC2H 7BA"],[51.51175,-0.12783,["FRI","MON","THU","TUE"],"WC2H 7PR"],[51.42853,-0.20785,["FRI"],"SW19 1QE"],[51.38203,0.5607,["FRI","WED"],"ME7 2HN"],[51.43834,0.37208,["FRI","WED"],"DA12 5LS"],[51.3746,0.54143,["FRI","WED"],"ME4 4DH"],[51.37563,0.54146,["FRI","WED"],"ME4 5BL"],[51.38262,0.56083,["FRI","WED"],"ME7 5TR"],[51.38766,0.50005,["FRI","WED"],"ME1 2EP"],[51.38314,0.56066,["FRI","WED"],"ME7 1DJ"],[51.3834,0.56072,["FRI","MON","WED"],"ME7 2YX"],[51.36997,0.60001,["FRI","WED"],"ME8 7PJ"],[51.44817,0.60242,["FRI","WED"],"ME3 7AT"],[51.38685,0.50009,["FRI","MON","WED"],"ME1 3JS"],[51.37115,0.60003,["FRI","MON","WED"],"ME8 8BA"],[51.49183,-0.13965,["MON","TUE"],"SW1V 1DE"],[51.50567,-0.09518,["MON"],"SE1 1RQ"],[51.51013,-0.08428,["MON"],"EC3 3AJ"],[51.50362,-0.02164,["MON"],"E14 5AR"],[51.51326,-0.13539,["MON","THU"],"W1F 0UG"],[51.51392,-0.12019,["MON","TUE"],"WC2E 7BD"],[51.51162,-0.12011,["MON"],"WC2E 9JD"],[51.51483,-0.13509,["MON"],"W1F 8WN"],[51.48021,-0.19795,["MON","TUE"],"SW6 5HJ"],[51.40985,-0.30569,["MON"],"KT1 1BB"],[51.42713,-0.20772,["MON"],"SW19 5DX"],[51.46328,-0.13612,["MON","THU","TUE"],"SW4 7AB"],[51.46947,-0.16375,["MON"],"SW11 1EG"],[51.45557,-0.19283,["MON"],"SW18 4ES"],[51.4809,-0.19411,["MON"],"SW6 1EP"],[51.45608,-0.19281,["MON"],"SW18 4TE"],[51.43223,-0.09978,["MON"],"SE27 9BQ"],[51.52373,-0.08496,["MON"],"EC2A 4AQ"],[51.51202,-0.12014,["MON","THU"],"WC2E 8PS"],[51.51551,-0.18278,["MON"],"W2 4UA"],[51.51271,-0.12781,["MON"],"WC2H 8AR"],[51.55345,-0.31165,["MON","THU"],"HA0 1ER"],[51.53371,-0.2657,["MON"],"NW10 6QN"],[51.53446,-0.26567,["MON"],"NW10 7NU"],[51.53586,-0.26566,["MON"],"NW10 7SF"],[51.65486,-0.08098,["MON","WED"],"EN1 1RG"],[51.53384,-0.26567,["MON"],"NW10 7LU"],[51.47674,0.00472,["MON","WED"],"SE10 0EN"],[51.47664,0.00473,["MON"],"SE10 0RA"],[51.47826,0.00505,["MON"],"SE10 9BJ"],[51.50879,-0.30859,["MON"],"W5 1QY"],[51.51065,-0.22237,["MON","TUE"],"W12 7GE"],[51.52193,-0.15352,["MON"],"W1U 6TL"],[51.50833,-0.30854,["MON"],"W5 2XA"],[51.90533,-2.07185,["MON"],"GL50 3NX"],[51.74391,-0.02892,["MON","THU"],"EN8 9LS"],[51.56257,-0.22121,["MON","THU"],"NW2 6LN"],[51.90403,-0.20433,["MON"],"SG1 2UA"],[51.23178,-0.33554,["MON","THU"],"RH4 2EW"],[51.23035,-0.33557,["MON","THU"],"RH4 1SG"],[51.23313,-0.33559,["MON","THU"],"RH4 1BL"],[51.49854,-0.05647,["MON"],"SE16 4RA"],[51.51389,-0.12784,["MON","THU","TUE"],"WC2H 7JR"],[51.27701,1.07962,["MON"],"CT1 2HW"],[51.5039,-0.13391,["THU"],"SW1A 2AQ"],[51.44814,-0.15131,["THU"],"SW12 9SG"],[51.46151,-0.13603,["THU"],"SW4 9JX"],[51.42584,-0.20763,["THU"],"SW19 7PA"],[51.46984,-0.16373,["THU"],"SW11 1SJ"],[51.45075,-0.15133,["THU"],"SW12 9AZ"],[51.44867,-0.15133,["THU"],"SW12 9HA"],[51.44917,0.22162,["THU"],"DA1 1HP"],[51.15852,-0.18038,["THU"],"RH6 0LL"],[51.49123,-0.26666,["THU","TUE"],"W4 1PU"],[51.18239,-0.04405,["THU"],"RH7 6HL"],[51.0034,-0.08864,["THU"],"RH16 3AS"],[51.00391,-0.08867,["THU"],"RH16 2HN"],[51.15572,-0.18038,["THU"],"RH6 0PH"],[51.50902,-0.12131,["THU","WED"],"WC2N 4BP"],[51.51837,-0.14395,["THU"],"W1A 1AB"],[51.42919,-0.98425,["THU"],"RG2 0JT"],[51.57351,-0.91042,["THU"],"RG9 2AR"],[51.45672,-0.96933,["THU"],"RG1 1EL"],[51.39478,-0.50488,["THU"],"KT16 9BE"],[51.45521,-0.96929,["THU"],"RG1 2HG"],[51.23386,-0.33557,["THU"],"RH4 1QT"],[51.50687,-0.02163,["THU","WED"],"E14 5LB"],[51.51953,-0.10478,["THU","TUE"],"EC1N 8QS"],[51.50998,0.02144,["THU"],"E16 1AH"],[51.50372,-0.02163,["THU"],"E14 5NY"],[51.60772,-0.4249,["THU"],"HA6 2XY"],[51.54098,-0.47468,["THU","TUE"],"UB8 2YF"],[51.54178,-0.1223,["THU"],"N1C 4AG"],[51.53502,-0.14029,["THU"],"NW1 7JE"],[51.53505,-0.14029,["THU","TUE"],"NW1 7JH"],[51.56787,-0.10536,["THU","TUE"],"N4 3PZ"],[51.53557,-0.10182,["THU"],"N1 0PN"],[51.58842,-0.12276,["THU","TUE"],"N8 8PT"],[51.51831,-0.21164,["THU","TUE"],"W10 6AH"],[51.60013,-0.2655,["THU"],"HA8 7JE"],[51.58647,-0.37496,["THU"],"HA5 4HS"],[51.49543,-0.13327,["THU","TUE"],"SW1P 2BL"],[51.41647,-0.29733,["THU","TUE"],"KT2 7PS"],[51.35959,-0.19755,["THU"],"SM2 6LE"],[51.41695,-0.29742,["THU","TUE"],"KT2 5BW"],[51.43704,-0.36631,["THU","TUE"],"TW13 6PE"],[51.23531,-0.58205,["THU"],"GU1 3HE"],[53.55732,-2.19162,["THU"],"M24 1SW"],[51.47515,-0.02528,["THU"],"SE8 5BZ"],[51.52547,-0.12555,["THU","TUE"],"WC1H 0JZ"],[51.47257,-0.08549,["THU"],"SE5 8RX"],[51.49849,-0.15718,["THU"],"SW1X 7QL"],[51.55352,-0.16809,["TUE"],"NW3 6TP"],[51.58618,-0.12273,["TUE"],"N8 9DG"],[51.52743,-0.09806,["TUE"],"EC1V 4NJ"],[51.54604,-0.18693,["TUE"],"NW6 1XN"],[50.94877,-0.43383,["TUE"],"RH20 4LA"],[50.83447,-0.18466,["TUE"],"BN3 1JE"],[50.83376,-0.18455,["TUE"],"BN3 4EF"],[50.83223,-0.11576,["TUE"],"BN2 1TP"],[50.82678,-0.13779,["TUE"],"BN1 3WA"],[50.8288,-0.13788,["TUE"],"BN1 1ND"],[51.50595,-0.14171,["TUE"],"W1J 7QQ"],[51.42513,-0.2076,["TUE"],"SW19 8HQ"],[51.49076,-0.26651,["TUE"],"W4 5TF"],[51.49422,-0.17688,["TUE"],"SW7 4ET"],[51.48816,-0.16941,["TUE"],"SW3 2EP"],[51.4966,-0.17692,["TUE"],"SW7 3ES"],[51.32742,-0.31895,["TUE"],"KT22 7SU"],[51.44866,-0.93878,["TUE"],"RG6 1RB"],[51.51274,0.02157,["TUE"],"E16 4TL"],[51.52722,-0.02222,["TUE"],"E3 4PH"],[51.44514,-0.04454,["TUE"],"SE23 1AG"],[51.40851,-0.30567,["TUE"],"KT1 1JT"],[51.48574,-0.62091,["TUE"],"SL4 1PJ"],[51.50247,-0.09511,["WED"],"SE1 3JW"],[51.50594,-0.09497,["WED"],"SE1 7AE"],[51.60195,-0.12067,["WED"],"N22 6XG"],[51.56018,-0.22118,["WED"],"NW2 7LN"],[51.79876,-0.07387,["WED"],"SG14 1RB"],[51.51192,-0.28148,["WED"],"W3 9QP"],[51.58431,-0.37506,["WED"],"HA5 1QG"],[51.5192,-0.13379,["WED"],"W1T 2NN"],[51.51868,-0.1338,["WED"],"W1T 2LX"],[51.51442,-0.12776,["WED"],"WC2H 9NY"],[51.51384,-0.12842,["WED"],"W1D 6DP"],[51.6007,-1.23482,["WED"],"OX11 0GL"],[51.90423,-2.07182,["WED"],"GL50 4FA"],[51.75069,-1.25609,["WED"],"OX1 2BQ"],[51.74932,-1.25611,["WED"],"OX1 1PG"],[52.04387,-1.8424,["WED"],"WR11 4EU"],[51.90585,-2.07185,["WED"],"GL50 3PN"],[51.71098,-1.9742,["WED"],"GL7 1QH"],[51.69369,-1.09698,["WED"],"OX44 7UR"],[52.34534,-1.4778,["WED"],"CV8 1HD"],[52.45728,-1.96207,["WED"],"B17 9NE"],[52.34596,-1.4778,["WED"],"CV8 1JD"],[52.46956,-1.90526,["WED"],"B5 4BG"],[52.48031,-1.89661,["WED"],"B2 4BQ"],[51.60954,-0.60635,["WED"],"HP9 1LX"],[51.5102,-0.09205,["WED"],"EC4R 9AT"],[51.51612,-0.06435,["WED"],"E1 6AG"],[52.04048,-0.76056,["WED"],"MK9 3AG"],[52.13272,-0.47323,["WED"],"MK40 2TH"],[52.04054,-0.76059,["WED"],"MK9 2FS"],[52.0027,-0.47055,["WED"],"MK45 5JH"],[52.04251,-0.76063,["WED"],"MK9 1EH"],[51.38288,-2.35833,["WED"],"BA1 1DE"],[51.48228,-3.18048,["WED"],"CF10 1BG"],[51.47678,0.00506,["WED"],"SE10 9JN"],[51.50305,-0.02169,["WED"],"E14 3WA"],[51.51317,-0.0643,["WED"],"E1 7LJ"],[51.22194,0.53264,["WED"],"TN12 0AH"],[51.44276,0.26981,["WED"],"DA9 9SJ"],[51.6323,-0.01105,["WED"],"E4 6AN"],[51.45246,0.07072,["WED"],"SE9 2EB"],[51.41338,0.10826,["WED"],"DA14 5DE"],[51.38335,0.56072,["WED"],"ME7 2YS"],[51.39416,0.49919,["WED"],"ME2 4BP"],[51.39435,0.49909,["WED"],"ME2 1EY"],[51.38252,0.56066,["WED"],"ME7 1BJ"],[50.73938,-1.8665,["WED"],"BH9 2AJ"],[50.87499,-1.7807,["WED"],"BH24 1JD"],[50.73723,-1.9282,["WED"],"BH12 5BU"],[50.71994,-1.88211,["WED"],"BH2 6DT"],[50.8611,-1.23381,["WED"],"PO15 7PD"],[51.06384,-1.33174,["WED"],"SO22 6EW"],[51.06633,-1.31957,["WED"],"SO23 8RZ"],[50.79535,-1.09382,["WED"],"PO1 3TR"],[50.73516,-1.85233,["WED"],"BH8 9QJ"],[50.79884,-1.09383,["WED"],"PO1 3FA"]];
+const DC = {"SE11":[51.494,-0.112],"SE1":[51.504,-0.095],"IG11":[51.537,0.105],"EC2M":[51.518,-0.089],"WC2E":[51.512,-0.121],"W1U":[51.52,-0.154],"W1J":[51.505,-0.143],"W1D":[51.513,-0.13],"W1B":[51.515,-0.141],"WC2H":[51.513,-0.126],"W1F":[51.514,-0.135],"WC2N":[51.509,-0.123],"SW1X":[51.497,-0.159],"SW6":[51.481,-0.196],"SW3":[51.487,-0.17],"SW11":[51.469,-0.164],"W1W":[51.519,-0.145],"W1G":[51.521,-0.149],"W1K":[51.509,-0.151],"W1S":[51.511,-0.14],"SE10":[51.478,0.005],"E20":[51.538,-0.014],"E10":[51.569,-0.009],"WC1B":[51.518,-0.128],"W12":[51.509,-0.222],"W9":[51.524,-0.192],"W14":[51.491,-0.209],"ME20":[51.302,0.463],"TN15":[51.312,0.294],"ME19":[51.286,0.413],"ME5":[51.353,0.546],"ME6":[51.295,0.503],"TN12":[51.222,0.531],"ME1":[51.388,0.502],"BR3":[51.393,-0.019],"BR5":[51.404,0.115],"CR0":[51.373,-0.101],"DA15":[51.449,0.107],"E6":[51.527,0.065],"DA7":[51.459,0.143],"BR1":[51.403,0.01],"SE28":[51.506,0.116],"SE26":[51.434,-0.044],"CR4":[51.394,-0.172],"RM20":[51.488,0.271],"GU14":[51.294,-0.766],"RG21":[51.269,-1.094],"RH2":[51.236,-0.205],"GU9":[51.216,-0.799],"GU21":[51.319,-0.565],"KT14":[51.336,-0.484],"CM1":[51.738,0.479],"RH1":[51.235,-0.178],"ME7":[51.383,0.559],"ME8":[51.371,0.599],"ME4":[51.374,0.541],"ME3":[51.449,0.601],"DA12":[51.438,0.372],"SW19":[51.427,-0.206],"SW1V":[51.491,-0.139],"SW1P":[51.496,-0.133],"E14":[51.505,-0.023],"EC3":[51.511,-0.084],"KT1":[51.41,-0.307],"SW4":[51.462,-0.136],"SW18":[51.456,-0.191],"EC2A":[51.523,-0.084],"NW10":[51.534,-0.264],"EN1":[51.654,-0.08],"HA0":[51.553,-0.313],"W5":[51.508,-0.307],"GL50":[51.904,-2.07],"NW2":[51.562,-0.221],"SG1":[51.904,-0.205],"EN8":[51.744,-0.027],"RH4":[51.232,-0.334],"SE16":[51.499,-0.056],"CT1":[51.279,1.079],"SW12":[51.449,-0.151],"SW1A":[51.502,-0.133],"RH16":[51.003,-0.088],"RH6":[51.157,-0.181],"RH7":[51.183,-0.044],"W4":[51.49,-0.265],"DA1":[51.448,0.22],"RG9":[51.574,-0.909],"RG1":[51.455,-0.97],"KT16":[51.393,-0.503],"RG2":[51.43,-0.984],"E16":[51.511,0.022],"EC1N":[51.521,-0.106],"HA6":[51.607,-0.425],"UB8":[51.54,-0.476],"N8":[51.587,-0.122],"N1":[51.535,-0.102],"N4":[51.566,-0.107],"NW1":[51.535,-0.141],"N1C":[51.54,-0.124],"HA5":[51.585,-0.376],"W10":[51.519,-0.213],"HA8":[51.601,-0.264],"SM2":[51.358,-0.198],"KT2":[51.417,-0.298],"TW13":[51.436,-0.368],"GU1":[51.236,-0.581],"WC1H":[51.526,-0.124],"SE8":[51.476,-0.024],"SE5":[51.472,-0.087],"M24":[53.558,-2.19],"NW3":[51.553,-0.167],"NW6":[51.548,-0.187],"EC1V":[51.527,-0.097],"BN3":[50.835,-0.183],"BN1":[50.827,-0.138],"BN2":[50.831,-0.115],"RH20":[50.95,-0.434],"SW7":[51.496,-0.178],"RG6":[51.45,-0.94],"KT22":[51.327,-0.32],"E3":[51.528,-0.024],"SE23":[51.444,-0.043],"SL4":[51.484,-0.619],"N22":[51.602,-0.12],"SG14":[51.797,-0.074],"W3":[51.511,-0.281],"W1T":[51.519,-0.135],"OX1":[51.751,-1.256],"GL7":[51.71,-1.975],"WR11":[52.043,-1.844],"OX11":[51.6,-1.234],"HP9":[51.609,-0.606],"B17":[52.456,-1.963],"B5":[52.47,-1.905],"B2":[52.481,-1.895],"CV8":[52.347,-1.477],"OX44":[51.693,-1.095],"E1":[51.515,-0.063],"EC4R":[51.511,-0.094],"MK9":[52.041,-0.762],"MK40":[52.132,-0.474],"MK45":[52.001,-0.471],"BA1":[51.381,-2.357],"CF10":[51.481,-3.181],"DA9":[51.444,0.27],"E4":[51.633,-0.012],"SE9":[51.452,0.069],"DA14":[51.415,0.109],"ME2":[51.393,0.501],"SO23":[51.065,-1.318],"PO15":[50.862,-1.233],"PO1":[50.797,-1.092],"BH2":[50.72,-1.881],"BH8":[50.736,-1.851],"SO22":[51.065,-1.33],"BH12":[50.737,-1.928],"BH24":[50.876,-1.779],"BH9":[50.739,-1.868],"SE27":[51.432,-0.099],"W2":[51.515,-0.183],"W1A":[51.519,-0.144],"W1":[51.514,-0.143],"EC2":[51.518,-0.089],"WC2":[51.512,-0.122],"SW1":[51.499,-0.138],"SE":[51.465,-0.04],"SW":[51.47,-0.17],"NW":[51.56,-0.19],"EN":[51.654,-0.072],"HA":[51.58,-0.34],"ME":[51.38,0.53],"TN":[51.16,0.27],"BR":[51.4,0.02],"CR":[51.375,-0.1],"RM":[51.56,0.17],"SG":[51.904,-0.2],"SO":[51.065,-1.318],"PO":[50.8,-1.09],"BH":[50.73,-1.88],"CT":[51.279,1.079],"SL":[51.51,-0.6],"UB":[51.54,-0.476],"N":[51.563,-0.115],"E":[51.53,0.0],"W":[51.505,-0.24],"GL":[51.86,-2.24],"OX":[51.752,-1.258],"MK":[52.04,-0.76],"GU":[51.236,-0.58],"RG":[51.454,-0.972],"KT":[51.387,-0.31],"BN":[50.83,-0.138],"DA":[51.455,0.22],"RH":[51.18,-0.19],"WC1":[51.52,-0.12],"EC1":[51.52,-0.1]};
+
+const DAY_N = {MON:'Monday',TUE:'Tuesday',WED:'Wednesday',THU:'Thursday',FRI:'Friday'};
+const DAY_C = {MON:'#3B9EFF',TUE:'#22C55E',WED:'#F97316',THU:'#A855F7',FRI:'#EF4444'};
+const DAY_O = ['MON','TUE','WED','THU','FRI'];
+
+/* ============================================================
+   HAVERSINE — distance in miles between two lat/lng points
+   ============================================================ */
+function haversine(lat1,lng1,lat2,lng2){
+  const R=3958.8,dLat=(lat2-lat1)*Math.PI/180,dLng=(lng2-lng1)*Math.PI/180;
+  const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+/* ============================================================
+   GEOCODE — approximate a postcode to lat/lng using DC lookup
+   Same logic as the route-map getCoord function
+   ============================================================ */
+function geocode(pc){
+  const k=pc.replace(/\s/g,'').toUpperCase();
+  // Extract outward code (everything before the inward part)
+  const outward=k.replace(/[0-9][A-Z]{2}$/,'');
+  // Try exact
+  if(DC[outward]) return DC[outward];
+  // Try full k (some entries like SE11, EC2M)
+  if(DC[k.split(' ')[0]]) return DC[k.split(' ')[0]];
+  // Progressive shorter
+  for(let i=outward.length;i>=1;i--){
+    const key=outward.slice(0,i);
+    if(DC[key]) return DC[key];
+  }
+  // Try with original spacing
+  const parts=pc.trim().toUpperCase().split(/\s+/);
+  if(parts[0] && DC[parts[0]]) return DC[parts[0]];
+  return null;
+}
+
+/* ============================================================
+   POSTCODE CHECKER — find all delivery points within 2 miles
+   ============================================================ */
+function checkPostcode(){
+  const raw=document.getElementById('pc-input').value.trim();
+  const result=document.getElementById('pc-result');
+  if(!raw||raw.length<2){result.innerHTML='';return;}
+
+  const coord=geocode(raw);
+  if(!coord){
+    result.innerHTML=`<div class="pc-result-card no-match">
+      <h3><span class="ri">?</span> Postcode not recognised</h3>
+      <p>We couldn't locate that postcode. Please check the format (e.g. SW1A 1AA) and try again, or contact our sales team directly.</p>
+      <div class="result-cta"><a href="tel:08453881688">Call 0845 388 1688</a><a href="contact.html">Contact us →</a></div>
+    </div>`;
+    return;
+  }
+
+  // Find all points within 2 miles
+  const nearby=[];
+  const daysInRange=new Set();
+  for(const pt of POINTS){
+    const d=haversine(coord[0],coord[1],pt[0],pt[1]);
+    if(d<=2){
+      nearby.push({lat:pt[0],lng:pt[1],days:pt[2],pc:pt[3],dist:d});
+      pt[2].forEach(day=>daysInRange.add(day));
+    }
+  }
+
+  if(nearby.length>0){
+    const sortedDays=DAY_O.filter(d=>daysInRange.has(d));
+    const pills=sortedDays.map(d=>`<div class="dp ${d.toLowerCase()}"><span class="dd"></span>${DAY_N[d]}</div>`).join('');
+    const closest=nearby.sort((a,b)=>a.dist-b.dist)[0];
+
+    result.innerHTML=`<div class="pc-result-card success">
+      <h3><span class="ri">✓</span> We deliver to your area!</h3>
+      <p>Your postcode is within our delivery coverage — we have <strong>${nearby.length}</strong> delivery zone${nearby.length>1?'s':''} within 2 miles of your location.</p>
+      <p>We can deliver to your area on:</p>
+      <div class="day-pills">${pills}</div>
+      <div class="result-cta">
+        <a href="contact.html">Open an account →</a>
+        <a href="https://chuanglee.choco.com/" target="_blank">Order on Choco ↗</a>
+        <a href="catalogue.html">Browse catalogue →</a>
+      </div>
+    </div>`;
+
+    // Pan map to this location and add a marker
+    if(map){
+      if(userMarker) map.removeLayer(userMarker);
+      if(userCircle) map.removeLayer(userCircle);
+      userMarker=L.marker(coord,{icon:L.divIcon({className:'',html:'<div style="width:16px;height:16px;background:var(--vermillion);border:3px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4);"></div>',iconSize:[16,16],iconAnchor:[8,8]})}).addTo(map);
+      userCircle=L.circle(coord,{radius:3218.69,color:'#c0362c',fillColor:'#c0362c',fillOpacity:0.08,weight:1.5,dashArray:'6 4'}).addTo(map);
+      map.flyTo(coord,13,{duration:0.8});
+    }
+  } else {
+    result.innerHTML=`<div class="pc-result-card no-match">
+      <h3><span class="ri">→</span> Nationwide delivery available</h3>
+      <p>Your postcode isn't within 2 miles of our current own-fleet routes, but we deliver nationwide via courier partners. Contact our sales team to arrange delivery to your location.</p>
+      <div class="result-cta">
+        <a href="contact.html">Contact sales team →</a>
+        <a href="tel:08453881688">Call 0845 388 1688</a>
+        <a href="mailto:sales@chuanglee.co.uk">Email us</a>
+      </div>
+    </div>`;
+
+    if(map && coord){
+      if(userMarker) map.removeLayer(userMarker);
+      if(userCircle) map.removeLayer(userCircle);
+      userMarker=L.marker(coord,{icon:L.divIcon({className:'',html:'<div style="width:16px;height:16px;background:#888;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4);"></div>',iconSize:[16,16],iconAnchor:[8,8]})}).addTo(map);
+      userCircle=L.circle(coord,{radius:3218.69,color:'#888',fillColor:'#888',fillOpacity:0.06,weight:1,dashArray:'6 4'}).addTo(map);
+      map.flyTo(coord,12,{duration:0.8});
+    }
+  }
+}
+
+document.getElementById('pc-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPostcode();});
+
+/* ============================================================
+   LEAFLET MAP — real interactive map with all delivery points
+   ============================================================ */
+let map,userMarker,userCircle;
+
+function initMap(){
+  map=L.map('map',{center:[51.49,-0.05],zoom:10,zoomControl:true,scrollWheelZoom:true});
+
+  // Light tile layer matching the cream aesthetic
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    maxZoom:18,
+    attribution:'&copy; OpenStreetMap &copy; CARTO'
+  }).addTo(map);
+
+  // HQ marker (SE7)
+  const hqIcon=L.divIcon({
+    className:'',
+    html:`<div style="position:relative;">
+      <div style="width:20px;height:20px;background:#c0362c;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 12px rgba(192,54,44,.5);"></div>
+      <div style="position:absolute;top:-8px;left:28px;background:#15212f;color:#f4ede1;padding:4px 10px;border-radius:4px;font-family:Fraunces,serif;font-size:11px;font-weight:500;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.2);">HQ · Bugsby Way SE7</div>
+    </div>`,
+    iconSize:[20,20],iconAnchor:[10,10]
+  });
+  L.marker([51.487,0.053],{icon:hqIcon}).addTo(map);
+
+  // Plot delivery coverage areas (2-mile radius circles)
+  // Using large circles to show coverage zones, not individual customer locations
+  for(const pt of POINTS){
+    const [lat,lng,days,pc]=pt;
+    let col;
+    if(days.length>1){
+      col='#c89b3c';
+    } else {
+      col=DAY_C[days[0]]||'#888';
+    }
+
+    // 2 miles = 3218.69 metres
+    const circle=L.circle([lat,lng],{
+      radius:3218.69,
+      color:col,
+      fillColor:col,
+      fillOpacity:0.08,
+      weight:1,
+      opacity:0.3
+    });
+
+    // Popup shows area and days only — no customer-identifying info
+    const outward=pc.split(' ')[0];
+    const dayChips=days.map(d=>`<span class="pu-day" style="background:${DAY_C[d]}22;color:${DAY_C[d]};border:1px solid ${DAY_C[d]}44">${DAY_N[d]}</span>`).join('');
+    circle.bindPopup(`<div class="pu-pc">${outward} area</div><div class="pu-days">${dayChips}</div>`);
+
+    circle.addTo(map);
+  }
+}
+
+/* ============================================================
+   COVERAGE GRID
+   ============================================================ */
+function renderCoverage(){
+  const grid=document.getElementById('cov-grid');
+  // Build outward → days mapping
+  const outward={};
+  for(const pt of POINTS){
+    const ow=pt[3].split(' ')[0];
+    if(!outward[ow]) outward[ow]=new Set();
+    pt[2].forEach(d=>outward[ow].add(d));
+  }
+
+  let html='';
+  for(const day of DAY_O){
+    const areas=Object.entries(outward).filter(([,days])=>days.has(day)).map(([ow])=>ow).sort();
+    html+=`<div class="cov-day">
+      <div class="cov-hdr"><div class="cov-dot" style="background:${DAY_C[day]}"></div><div class="cov-name">${DAY_N[day]}</div></div>
+      <div class="cov-areas">${areas.map(a=>`<span>${a}</span>`).join('')}</div>
+      <div class="cov-count">${areas.length} postcode areas</div>
+    </div>`;
+  }
+  grid.innerHTML=html;
+}
+
+// Init
+window.addEventListener('load',()=>{initMap();renderCoverage();});
+</script>
+<script src="script.js"></script>
+<script src="/content-loader.js"></script>
+</body>
+</html>
