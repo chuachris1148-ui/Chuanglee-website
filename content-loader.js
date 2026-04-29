@@ -201,6 +201,14 @@ async function applyHome() {
   bg('promo-img-1', d.promo_img_1);
   bg('promo-img-2', d.promo_img_2);
 
+  // APP IMAGE
+  if (d.app_img) bg('app-img', d.app_img);
+
+  // HOME CAROUSEL
+  const homeImgs = [];
+  for (let i = 1; i <= 20; i++) { if (d['carousel_img_' + i]) homeImgs.push(d['carousel_img_' + i]); }
+  if (homeImgs.length > 0) initCarousel('home-carousel', homeImgs);
+
   // BUTTON URLS (from brands.json)
   const b = await loadJSON('brands');
   if (b) {
@@ -220,6 +228,16 @@ async function applyBrands() {
   bg('spotlight-img', d.spotlight_img);
   btn('brands-spotlight-cta', d.brands_spotlight_cta_label, d.brands_spotlight_cta_url);
   btn('brands-sourcing-cta', d.brands_sourcing_cta_label, d.brands_sourcing_cta_url);
+
+  // BRANDS LANDSCAPE CAROUSEL
+  const brandsImgs = [];
+  for (let i = 1; i <= 20; i++) { if (d['brands_carousel_img_' + i]) brandsImgs.push(d['brands_carousel_img_' + i]); }
+  if (brandsImgs.length > 0) initCarousel('brands-carousel', brandsImgs);
+
+  // POSTER CAROUSEL
+  const posterImgs = [];
+  for (let i = 1; i <= 5; i++) { if (d['poster_img_' + i]) posterImgs.push(d['poster_img_' + i]); }
+  if (posterImgs.length > 0) initPosterCarousel('brands-poster-carousel', posterImgs);
 }
 
 async function applyFarm() {

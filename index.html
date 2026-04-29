@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <style>
   /* Hero — preserved exactly */
@@ -85,10 +86,17 @@
   </div>
 </section>
 
+<!-- HOME LANDSCAPE CAROUSEL -->
+<div class="carousel-wrap carousel-landscape" id="home-carousel">
+  <div class="carousel-track" id="home-carousel-track"></div>
+  <button class="carousel-btn carousel-prev" onclick="carouselPrev('home-carousel')">‹</button>
+  <button class="carousel-btn carousel-next" onclick="carouselNext('home-carousel')">›</button>
+  <div class="carousel-dots" id="home-carousel-dots"></div>
+</div>
+
 <!-- Stats -->
 <div class="stats">
   <div class="stats-inner">
-    <div class="stat"><div class="stat-num" id="stat-1-num">£25<span class="accent">m</span></div><div class="stat-label" id="stat-1-label">FY25 Revenue</div></div>
     <div class="stat"><div class="stat-num" id="stat-2-num">3,000<span class="accent">+</span></div><div class="stat-label" id="stat-2-label">SKUs in Catalogue</div></div>
     <div class="stat"><div class="stat-num" id="stat-3-num">450<span class="accent">+</span></div><div class="stat-label" id="stat-3-label">Foodservice Customers</div></div>
     <div class="stat"><div class="stat-num" id="stat-4-num">1989</div><div class="stat-label" id="stat-4-label">Family Founded</div></div>
@@ -323,21 +331,8 @@
         </a>
       </div>
     </div>
-    <div class="phone-mockup">
-      <div class="phone-frame">
-        <div class="phone-screen">
-          <div class="phone-content">
-            <div class="ph-greet">Good morning, <em>Chef Luca</em>.</div>
-            <div class="ph-search">🔍 Search 3,000+ products</div>
-            <div class="ph-cards">
-              <div class="ph-card"><div class="ph-img"></div><div><div class="ph-title">AROY-D Coconut Milk</div><div class="ph-meta">12 × 1L · £2.40/unit</div></div><div class="ph-add">+</div></div>
-              <div class="ph-card"><div class="ph-img" style="background:linear-gradient(135deg,#2f4a3a,#86b349);"></div><div><div class="ph-title">Kaffir Lime Leaves</div><div class="ph-meta">100g · fresh, weekly</div></div><div class="ph-add">+</div></div>
-              <div class="ph-card"><div class="ph-img" style="background:linear-gradient(135deg,#c0362c,#f4ede1);"></div><div><div class="ph-title">Mae Ploy Sweet Chilli</div><div class="ph-meta">730g · case of 12</div></div><div class="ph-add">+</div></div>
-              <div class="ph-card"><div class="ph-img" style="background:linear-gradient(135deg,#15212f,#c89b3c);"></div><div><div class="ph-title">Healthy Boy Soy</div><div class="ph-meta">700ml · case of 12</div></div><div class="ph-add">+</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="app-visual">
+      <div class="app-visual-img" id="app-img"></div>
     </div>
   </div>
 </section>
@@ -386,6 +381,7 @@
   </div>
 </footer>
 
+<script src="/carousel.js"></script>
 <script src="script.js"></script>
 <script src="/content-loader.js"></script>
 </body>
