@@ -72,6 +72,11 @@ async function applyGlobal() {
       }
     });
   }
+  if (g.logo_url) {
+    document.querySelectorAll('a.brand img, .brand img').forEach(img => {
+      img.src = g.logo_url;
+    });
+  }
   if (g.nav_cta) selAll('.order-btn', g.nav_cta);
   if (g.nav_cta_url) {
     document.querySelectorAll('.order-btn').forEach(el => {
