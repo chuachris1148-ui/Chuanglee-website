@@ -73,10 +73,16 @@ function goToSlide(wrapperId, index) {
 /* ---- Poster carousel (5 vertical cards, shows 5 at once, loops) ---- */
 function initPosterCarousel(wrapperId, images) {
   const track = document.getElementById(wrapperId + '-track');
-  if (!track || !images || images.length === 0) return;
+  if (!track) return;
 
-  const imgs = images.filter(Boolean);
-  if (imgs.length === 0) return;
+  const imgs = images ? images.filter(Boolean) : [];
+  // Show 5 placeholder slots if no images yet
+  if (imgs.length === 0) {
+    track.innerHTML = Array(5).fill(0).map(() =>
+      '<div class="poster-slide poster-empty"></div>'
+    ).join('');
+    return;
+  }
 
   track.innerHTML = imgs.map(src =>
     `<div class="poster-slide" style="background-image:url('${src}')"></div>`

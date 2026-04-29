@@ -234,10 +234,10 @@ async function applyBrands() {
   for (let i = 1; i <= 20; i++) { if (d['brands_carousel_img_' + i]) brandsImgs.push(d['brands_carousel_img_' + i]); }
   if (brandsImgs.length > 0) initCarousel('brands-carousel', brandsImgs);
 
-  // POSTER CAROUSEL
+  // POSTER CAROUSEL — always init (shows placeholders if no images)
   const posterImgs = [];
   for (let i = 1; i <= 5; i++) { if (d['poster_img_' + i]) posterImgs.push(d['poster_img_' + i]); }
-  if (posterImgs.length > 0) initPosterCarousel('brands-poster-carousel', posterImgs);
+  initPosterCarousel('brands-poster-carousel', posterImgs);
 }
 
 async function applyFarm() {

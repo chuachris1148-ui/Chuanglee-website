@@ -1045,26 +1045,29 @@ footer { background: var(--ink); color: var(--paper); padding: 80px 48px 36px; }
 
 /* Poster carousel */
 .poster-carousel-section {
-  padding: 0 0 48px;
-  background: var(--paper-2);
+  padding: 0;
+  background: var(--ink);
 }
 .poster-carousel-wrap {
   position: relative;
   overflow: hidden;
-  max-width: 100%;
+  width: 100%;
 }
 .poster-track {
   display: flex;
   transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+  min-height: 420px;
 }
 .poster-slide {
   flex: 0 0 20%;
   aspect-ratio: 3/4;
   background-size: cover;
   background-position: center;
+  background-color: var(--paper-2);
+  min-height: 380px;
 }
-.poster-prev { left: 12px; }
-.poster-next { right: 12px; }
+.poster-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+.poster-next { right: 12px; top: 50%; transform: translateY(-50%); }
 
 /* App image */
 .app-visual {
@@ -1156,4 +1159,26 @@ footer { background: var(--ink); color: var(--paper); padding: 80px 48px 36px; }
   letter-spacing: 0.1em;
   line-height: 1;
   margin-top: -0.2em;
+}
+
+/* Poster placeholder slots */
+.poster-empty {
+  background: var(--paper-2);
+  border-right: 1px solid var(--rule);
+  position: relative;
+}
+.poster-empty::after {
+  content: 'Upload poster image in CMS';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.3;
+  padding: 16px;
+  text-align: center;
 }
