@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("dP1Ap4N6mQMLmAeHZ");</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Catalogue — Chuanglee | 2,700+ Authentic Asian Ingredients</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -695,7 +697,7 @@ function updateQuoteUI() {
   container.insertAdjacentHTML('beforeend', html);
 }
 
-function submitQuote() {
+async function submitQuote() {
   const first = document.getElementById('qf-first').value.trim();
   const last = document.getElementById('qf-last').value.trim();
   const email = document.getElementById('qf-email').value.trim();
@@ -703,49 +705,52 @@ function submitQuote() {
   const company = document.getElementById('qf-company').value.trim();
   const type = document.getElementById('qf-type').value;
   const notes = document.getElementById('qf-notes').value.trim();
-  
+
   if (!first || !last || !email || !company || !type) {
     alert('Please fill in all required fields (marked with *).');
     return;
   }
-  
-  // Build email body
-  let body = 'QUOTE REQUEST\n';
-  body += '══════════════════\n\n';
-  body += '— CONTACT DETAILS —\n\n';
-  body += `Name: ${first} ${last}\n`;
-  body += `Email: ${email}\n`;
-  if (phone) body += `Phone: ${phone}\n`;
-  body += `Company: ${company}\n`;
-  body += `Customer Type: ${type}\n`;
-  if (notes) body += `Notes: ${notes}\n`;
-  
-  body += '\n\n— PRODUCTS REQUESTED —\n\n';
-  
+
+  // Build products string
+  let products = '';
   let itemNum = 1;
   for (const [base, item] of Object.entries(quoteItems)) {
     const name = item.name.replace(/\d+x/i,'').replace(/(\d+\.?\d*)(ml|ltr|lit|kg|g|oz|lb|pcs|pack)s?/gi,'').trim().replace(/\s{2,}/g,' ');
-    body += `${itemNum}. ${name}\n`;
-    if (item.brand) body += `   Brand: ${item.brand}\n`;
-    body += `   Category: ${item.sub}\n`;
-    body += `   Qty: ${item.qty}\n`;
-    if (item.singleCode) body += `   Single: ${extractSize(item.singleName) || 'Single'} (Code: #${item.singleCode})\n`;
-    if (item.caseCode) body += `   Case: ${extractSize(item.caseName) || 'Case'} (Code: #${item.caseCode})\n`;
-    body += '\n';
+    products += `${itemNum}. ${name}\n`;
+    if (item.brand) products += `   Brand: ${item.brand}\n`;
+    products += `   Category: ${item.sub}\n`;
+    products += `   Qty: ${item.qty}\n`;
+    if (item.singleCode) products += `   Single: ${extractSize(item.singleName) || 'Single'} (Code: #${item.singleCode})\n`;
+    if (item.caseCode) products += `   Case: ${extractSize(item.caseName) || 'Case'} (Code: #${item.caseCode})\n`;
+    products += '\n';
     itemNum++;
   }
-  
-  body += `Total products: ${Object.keys(quoteItems).length}\n`;
-  body += '\n══════════════════\n';
-  body += `Submitted via chuanglee.co.uk · ${new Date().toLocaleString('en-GB')}\n`;
-  
-  const subject = `Quote Request — ${company} (${type}) — ${Object.keys(quoteItems).length} products`;
-  
-  window.location.href = `mailto:sales@chuanglee.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  
-  // Show success
-  document.getElementById('q-form-fields').style.display = 'none';
-  document.getElementById('q-success').style.display = '';
+
+  // Disable button and show sending state
+  const btn = document.getElementById('q-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    await emailjs.send('service_gx55nsk', 'template_8mc9axm', {
+      from_name: `${first} ${last}`,
+      from_email: email,
+      phone: phone || 'Not provided',
+      company: company,
+      customer_type: type,
+      notes: notes || 'None',
+      products: products,
+      product_count: Object.keys(quoteItems).length,
+    });
+    // Show success
+    document.getElementById('q-form-fields').style.display = 'none';
+    document.getElementById('q-success').style.display = '';
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    alert('Sorry, there was an error sending your quote. Please email us directly at sales@chuanglee.co.uk');
+    btn.disabled = false;
+    btn.textContent = 'Send Quote Request →';
+  }
 }
 
 function resetQuote() {

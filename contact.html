@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("dP1Ap4N6mQMLmAeHZ");</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Contact & Open Account — Chuanglee</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,18 +51,18 @@
         <div class="item"><div class="label">Minimum Order</div><div class="value">£300 minimum order<br />for own-fleet delivery</div></div>
       </div>
     </div>
-    <form class="contact-form" onsubmit="event.preventDefault();alert('Thank you — we\'ll be in touch within 1 working day.');">
+    <form class="contact-form" id="contact-form" onsubmit="submitContactForm(event)">
       <h3>Open an Account</h3>
       <p class="sub">Tell us about your business and we'll be in touch within one working day.</p>
       <div class="form-grid">
-        <div class="form-row"><label>First Name</label><input type="text" required /></div>
-        <div class="form-row"><label>Last Name</label><input type="text" required /></div>
+        <div class="form-row"><label>First Name</label><input type="text" id="cf-first" required /></div>
+        <div class="form-row"><label>Last Name</label><input type="text" id="cf-last" required /></div>
       </div>
-      <div class="form-row"><label>Business Email</label><input type="email" required /></div>
-      <div class="form-row"><label>Business Name</label><input type="text" required /></div>
+      <div class="form-row"><label>Business Email</label><input type="email" id="cf-email" required /></div>
+      <div class="form-row"><label>Business Name</label><input type="text" id="cf-business" required /></div>
       <div class="form-row">
         <label>Business Type</label>
-        <select required>
+        <select id="cf-type" required>
           <option value="">Please select…</option>
           <option>Independent Restaurant</option>
           <option>Multi-Site Restaurant Group</option>
@@ -70,8 +72,8 @@
           <option>Other</option>
         </select>
       </div>
-      <div class="form-row"><label>What are you looking for?</label><textarea rows="4" placeholder="Products, volumes, delivery location, bespoke manufacturing…"></textarea></div>
-      <button type="submit" class="form-submit">Send Enquiry →</button>
+      <div class="form-row"><label>What are you looking for?</label><textarea id="cf-message" rows="4" placeholder="Products, volumes, delivery location, bespoke manufacturing…"></textarea></div>
+      <button type="submit" class="form-submit" id="cf-submit">Send Enquiry →</button>
     </form>
   </div>
 </section>
@@ -136,5 +138,41 @@
 
 <script src="script.js"></script>
 <script src="/content-loader.js"></script>
+<script>
+async function submitContactForm(e) {
+  e.preventDefault();
+  const first = document.getElementById('cf-first').value.trim();
+  const last = document.getElementById('cf-last').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const business = document.getElementById('cf-business').value.trim();
+  const type = document.getElementById('cf-type').value;
+  const message = document.getElementById('cf-message').value.trim();
+
+  const btn = document.getElementById('cf-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    await emailjs.send('service_gx55nsk', 'template_zzmh59a', {
+      from_name: `${first} ${last}`,
+      from_email: email,
+      business_name: business,
+      business_type: type,
+      message: message || 'No message provided',
+    });
+    document.getElementById('contact-form').innerHTML = `
+      <div style="text-align:center;padding:40px 0;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--vermillion);color:var(--paper);display:grid;place-items:center;margin:0 auto 16px;font-size:22px;">✓</div>
+        <h3 style="font-family:var(--display);font-size:24px;font-weight:500;margin-bottom:8px;">Enquiry Sent</h3>
+        <p style="color:var(--ink-soft);font-size:14px;">We'll be in touch within one working day.</p>
+      </div>`;
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    alert('Sorry, there was an error. Please email us directly at sales@chuanglee.co.uk');
+    btn.disabled = false;
+    btn.textContent = 'Send Enquiry →';
+  }
+}
+</script>
 </body>
 </html>
