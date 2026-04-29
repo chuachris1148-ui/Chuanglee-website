@@ -87,12 +87,16 @@ async function applyGlobal() {
       }
     });
   }
-  if (g.topbar_messages && g.topbar_messages.length) {
+  if (g.topbar_messages) {
     const marquee = document.querySelector('.marquee');
     if (marquee) {
-      const rawMsgs = g.topbar_messages.map(m => typeof m === 'object' ? m.message : m);
-      const msgs = [...rawMsgs, ...rawMsgs];
-      marquee.innerHTML = msgs.map(m => `<span><span class="dot"></span> ${m}</span>`).join('');
+      // Handle string, comma-separated string, array of strings, or array of objects
+      let msgs = g.topbar_messages;
+      if (typeof msgs === 'string') msgs = msgs.split(',').map(m => m.trim());
+      if (!Array.isArray(msgs)) msgs = [msgs];
+      const rawMsgs = msgs.map(m => typeof m === 'object' ? (m.message || '') : m).filter(Boolean);
+      const doubled = [...rawMsgs, ...rawMsgs];
+      marquee.innerHTML = doubled.map(m => `<span><span class="dot"></span> ${m}</span>`).join('');
     }
   }
 }
