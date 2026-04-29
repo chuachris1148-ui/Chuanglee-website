@@ -93,8 +93,30 @@ nav.main {
   height: 44px;
   width: auto;
   display: block;
+  flex-shrink: 0;
 }
 .brand .est { display: none; }
+.brand-name {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.brand-name span {
+  display: block;
+  font-family: var(--body);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vermillion);
+  font-weight: 600;
+  margin-top: 2px;
+}
+.foot-brand .brand-name {
+  color: var(--paper);
+}
 .nav-links {
   display: flex;
   gap: 32px;
@@ -597,6 +619,7 @@ footer { background: var(--ink); color: var(--paper); padding: 80px 48px 36px; }
   gap: 14px;
   margin-bottom: 18px;
   text-decoration: none;
+  flex-direction: row;
 }
 .foot-brand .brand img {
   height: 52px;
