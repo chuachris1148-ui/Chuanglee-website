@@ -18,8 +18,8 @@
   .hero-sub { margin-top: 36px; max-width: 480px; font-size: 17px; line-height: 1.6; color: var(--ink-soft); }
   .hero-actions { margin-top: 40px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
   .hero-visual { position: relative; height: 580px; }
-  .hero-img-main { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=1200&q=80') center/cover; border-radius: 4px; box-shadow: var(--shadow); }
-  .hero-img-sub { position: absolute; bottom: -30px; left: -60px; width: 220px; height: 280px; background: url('https://images.unsplash.com/photo-1518983546435-91f8b87fe561?w=600&q=80') center/cover; border-radius: 4px; box-shadow: var(--shadow); border: 6px solid var(--paper); }
+  .hero-img-main { position: absolute; inset: 0; background-size: cover; background-position: center; border-radius: 4px; box-shadow: var(--shadow); }
+  .hero-img-sub { position: absolute; bottom: -30px; left: -60px; width: 220px; height: 280px; background-size: cover; background-position: center; border-radius: 4px; box-shadow: var(--shadow); border: 6px solid var(--paper); }
   .hero-stamp { position: absolute; top: -20px; right: -20px; width: 130px; height: 130px; border-radius: 50%; background: var(--vermillion); color: var(--paper); display: grid; place-items: center; text-align: center; font-family: var(--display); font-size: 14px; line-height: 1.2; letter-spacing: 0.02em; transform: rotate(-8deg); animation: spin 30s linear infinite; }
   .hero-stamp .yr { font-size: 28px; font-weight: 600; display: block; }
   @keyframes spin { from { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } to { transform: rotate(-8deg); } }
@@ -88,8 +88,8 @@
       </div>
     </div>
     <div class="hero-visual reveal">
-      <div class="hero-img-main"></div>
-      <div class="hero-img-sub"></div>
+      <div class="hero-img-main" id="hero-img-main"></div>
+      <div class="hero-img-sub" id="hero-img-sub"></div>
       <div class="hero-stamp"><div><span class="yr">36</span>Years<br />of Trade</div></div>
     </div>
   </div>
@@ -98,11 +98,11 @@
 <!-- Stats -->
 <div class="stats">
   <div class="stats-inner">
-    <div class="stat"><div class="stat-num" id="stat-1-num">£25<span class="accent">m</span></div><div class="stat-label" id="stat-1-label">FY25 Revenue</div></div>
-    <div class="stat"><div class="stat-num" id="stat-2-num">3,000<span class="accent">+</span></div><div class="stat-label" id="stat-2-label">SKUs in Catalogue</div></div>
-    <div class="stat"><div class="stat-num" id="stat-3-num">450<span class="accent">+</span></div><div class="stat-label" id="stat-3-label">Foodservice Customers</div></div>
-    <div class="stat"><div class="stat-num" id="stat-4-num">1989</div><div class="stat-label" id="stat-4-label">Family Founded</div></div>
-    <div class="stat"><div class="stat-num" id="stat-5-num">UK<span class="accent">·</span>TH</div><div class="stat-label" id="stat-5-label">From Farm to Fork</div></div>
+    <div class="stat"><div class="stat-num">£25<span class="accent">m</span></div><div class="stat-label">FY25 Revenue</div></div>
+    <div class="stat"><div class="stat-num">3,000<span class="accent">+</span></div><div class="stat-label">SKUs in Catalogue</div></div>
+    <div class="stat"><div class="stat-num">450<span class="accent">+</span></div><div class="stat-label">Foodservice Customers</div></div>
+    <div class="stat"><div class="stat-num">1989</div><div class="stat-label">Family Founded</div></div>
+    <div class="stat"><div class="stat-num">UK<span class="accent">·</span>TH</div><div class="stat-label">From Farm to Fork</div></div>
   </div>
 </div>
 
@@ -110,20 +110,20 @@
 <section class="editorial" id="story">
   <div class="story-grid">
     <div class="story-text">
-      <div class="eyebrow" id="story-eyebrow">Who We Are</div>
+      <div class="eyebrow">Who We Are</div>
       <h2 class="title">A family business with <em>Asia in its bones</em>.</h2>
-      <p class="lead" id="story-lead">Founded in <em>1989 by Jimmy Chua</em>, Chuanglee is today led by siblings Christopher, Jennisa and Katriya — a family rooted in food, in trade, and in the long, patient work of building real partnerships on both sides of the world.</p>
+      <p class="lead">Founded in <em>1989 by Jimmy Chua</em>, Chuanglee is today led by siblings Christopher, Jennisa and Katriya — a family rooted in food, in trade, and in the long, patient work of building real partnerships on both sides of the world.</p>
       <p>From a small importing operation in London, we have grown into a fully integrated supply partner: working directly with manufacturers across Thailand, China, Malaysia and Vietnam to bring authentic, consistent, scalable ingredients into UK kitchens — from independent operators to restaurant groups of 50+ sites and Michelin-starred establishments.</p>
       <p>We supply ambient, chilled, frozen and fresh categories — full-basket, direct-into-kitchen, with our own fleet servicing London and Greater London multiple times a week.</p>
       <div class="pull-quote">
-        <span id="story-quote">Partnerships sit at the very core of what we do. We don't just import ingredients — we import the people, the recipes, and the standards behind them.
-        </span><cite id="story-cite">— The Chua Family</cite>
+        Partnerships sit at the very core of what we do. We don't just import ingredients — we import the people, the recipes, and the standards behind them.
+        <cite>— The Chua Family</cite>
       </div>
     </div>
     <div class="story-visual">
-      <span class="tag" id="story-tag">Est. 1989 · London</span>
-      <div class="img-1" id="story-img-1"></div>
-      <div class="img-2" id="story-img-2"></div>
+      <span class="tag">Est. 1989 · London</span>
+      <div class="img-1"></div>
+      <div class="img-2"></div>
     </div>
   </div>
 </section>
@@ -133,40 +133,40 @@
   <div class="cap-inner">
     <div class="cap-head">
       <div>
-        <div class="eyebrow" id="cap-eyebrow">What We Do</div>
+        <div class="eyebrow">What We Do</div>
         <h2 class="title">A full-basket food <em>solution</em> partner.</h2>
       </div>
       <p>Five interconnected capabilities — sourcing, manufacturing, farming, distribution and technical support — wrapped into a single, reliable partnership. We solve real operational pain-points so kitchens can focus on what kitchens do best.</p>
     </div>
     <div class="cap-grid">
       <div class="cap-card cap-1">
-        <span class="num" id="cap-1-num">01 / Direct Importing</span>
-        <h3 id="cap-1-title">Long-term partnerships across Asia.</h3>
+        <span class="num">01 / Direct Importing</span>
+        <h3>Long-term partnerships across Asia.</h3>
         <p>Stable sourcing and consistent product supply through deep manufacturer relationships built across decades — not transactions.</p>
         <div class="icon">↗</div>
       </div>
       <div class="cap-card cap-2">
-        <span class="num" id="cap-2-num">02 / Foodservice & Wholesale</span>
-        <h3 id="cap-2-title">Ambient, chilled, frozen, fresh.</h3>
+        <span class="num">02 / Foodservice & Wholesale</span>
+        <h3>Ambient, chilled, frozen, fresh.</h3>
         <p>Delivered across London nationwide. Own fleet servicing London & Greater London with delivery direct into your kitchens.</p>
         <div class="icon">↗</div>
       </div>
       <div class="cap-card cap-3">
-        <span class="num" id="cap-3-num">03 / Menu & Product</span>
-        <h3 id="cap-3-title">Sourcing, alternatives, development.</h3>
+        <span class="num">03 / Menu & Product</span>
+        <h3>Sourcing, alternatives, development.</h3>
         <p>Operational support for evolving menus and scalable product development.</p>
         <div class="icon">↗</div>
       </div>
       <div class="cap-card cap-4">
-        <span class="num" id="cap-4-num">04 / Bespoke Sauces</span>
-        <h3 id="cap-4-title">Manufactured to your recipe in Thailand.</h3>
+        <span class="num">04 / Bespoke Sauces</span>
+        <h3>Manufactured to your recipe in Thailand.</h3>
         <p>Through our manufacturing partner NRF: ready-to-use sauces and components, scalable for multi-site groups.</p>
         <div class="icon">↗</div>
       </div>
       <div class="cap-card cap-5">
         <div class="text-side">
-          <span class="num" id="cap-5-num">05 / The Farm</span>
-          <h3 id="cap-5-title">Suree's Farm — fresh Thai herbs grown by our family.</h3>
+          <span class="num">05 / The Farm</span>
+          <h3>Suree's Farm — fresh Thai herbs grown by our family.</h3>
           <p style="margin-top:14px;max-width:38ch;">A family-run vegetable farm and packing house one hour outside Bangkok in Chachoengsao, supplying seasonal Thai herbs and vegetables flown weekly into the UK.</p>
           <div class="icon" style="margin-top:auto;">↗</div>
         </div>
@@ -179,15 +179,15 @@
 <!-- ECOSYSTEM -->
 <section class="ecosystem">
   <div class="eco-head">
-    <div class="eyebrow" id="eco-eyebrow">The Chuanglee Ecosystem</div>
+    <div class="eyebrow">The Chuanglee Ecosystem</div>
     <h2 class="title">From <em>manufacturer</em> to <em>menu</em>, fully integrated.</h2>
   </div>
   <div class="eco-flow">
-    <div class="eco-node"><div class="step">1</div><h4 id="eco-1-title">Asian Manufacturers</h4><p id="eco-1-desc">Long-term supplier relationships across Thailand and Asia.</p></div>
-    <div class="eco-node"><div class="step">2</div><h4 id="eco-2-title">NRF Product Development</h4><p id="eco-2-desc">Global expertise for private label and foodservice products.</p></div>
-    <div class="eco-node"><div class="step">3</div><h4 id="eco-3-title">Manufacturing — Thailand</h4><p id="eco-3-desc">Scalable sauces and ready-to-use components, tailored to recipe.</p></div>
-    <div class="eco-node"><div class="step">4</div><h4 id="eco-4-title">Import & Logistics</h4><p id="eco-4-desc">UK import management, consolidation and supply planning.</p></div>
-    <div class="eco-node"><div class="step">5</div><h4 id="eco-5-title">UK Warehouse & Distribution</h4><p id="eco-5-desc">Ambient, chilled, frozen and fresh — across London and nationwide.</p></div>
+    <div class="eco-node"><div class="step">1</div><h4>Asian Manufacturers</h4><p>Long-term supplier relationships across Thailand and Asia.</p></div>
+    <div class="eco-node"><div class="step">2</div><h4>NRF Product Development</h4><p>Global expertise for private label and foodservice products.</p></div>
+    <div class="eco-node"><div class="step">3</div><h4>Manufacturing — Thailand</h4><p>Scalable sauces and ready-to-use components, tailored to recipe.</p></div>
+    <div class="eco-node"><div class="step">4</div><h4>Import & Logistics</h4><p>UK import management, consolidation and supply planning.</p></div>
+    <div class="eco-node"><div class="step">5</div><h4>UK Warehouse & Distribution</h4><p>Ambient, chilled, frozen and fresh — across London and nationwide.</p></div>
   </div>
 </section>
 
@@ -195,9 +195,9 @@
 <section class="farm" id="farm">
   <div class="farm-inner">
     <div class="farm-text">
-      <div class="eyebrow" id="farm-home-eyebrow">Suree's Farm · Chachoengsao</div>
+      <div class="eyebrow">Suree's Farm · Chachoengsao</div>
       <h2 class="title">Granny Suree's herbs, on a <em>plane</em> every week.</h2>
-      <p id="farm-home-p">One hour outside Bangkok, our family farm and packing house grows organic Thai produce alongside trusted local farmers — packed to order, flown to the UK weekly.</p>
+      <p>One hour outside Bangkok, our family farm and packing house grows organic Thai produce alongside trusted local farmers — packed to order, flown to the UK weekly.</p>
       <ul class="farm-list">
         <li><strong>Cha Plu Leaves</strong> — wild pepper leaf, peppery & aromatic</li>
         <li><strong>Kaffir Lime Leaves</strong> — picked, packed, never frozen</li>
@@ -207,7 +207,7 @@
       <a href="farm.html" class="btn-ghost" id="farm-cta" style="margin-top:36px; border-color:var(--gold); color:var(--gold);">Visit Suree's Farm <span class="arrow">→</span></a>
     </div>
     <div class="farm-visual">
-      <div class="farm-img-main" id="farm-img-main"></div>
+      <div class="farm-img-main"></div>
       <div class="farm-grid-mini">
         <div class="specimen"><div class="swatch s1"></div>Cha Plu</div>
         <div class="specimen"><div class="swatch s2"></div>Calamansi</div>
@@ -220,14 +220,14 @@
       </div>
     </div>
   </div>
-  <div class="farm-quote">"<span class="cjk-char">家</span> <span id="farm-home-quote">Family farms it, family packs it, family delivers it.</span>"</div>
+  <div class="farm-quote">"<span class="cjk-char">家</span> Family farms it, family packs it, family delivers it."</div>
 </section>
 
 <!-- CUSTOMERS -->
 <section class="customers" id="customers">
   <div class="cust-head">
     <div>
-      <div class="eyebrow" id="cust-eyebrow">Our Distribution Channels</div>
+      <div class="eyebrow">Our Distribution Channels</div>
       <h2 class="title">Trusted by the <em>kitchens</em> shaping British dining.</h2>
     </div>
     <p style="font-size:16px;line-height:1.7;color:var(--ink-soft);max-width:50ch;">From Michelin-starred dining rooms to multi-site groups, university caterers and our wholesale partners — Chuanglee operates as the back-of-house sourcing arm for some of the most ambitious East Asian food brands in the UK.</p>
@@ -294,18 +294,18 @@
 <section class="heritage" id="heritage">
   <div class="heritage-head">
     <div>
-      <div class="eyebrow" id="heritage-eyebrow">Our Heritage</div>
+      <div class="eyebrow">Our Heritage</div>
       <h2 class="title">Three decades of <em>building partnerships</em>.</h2>
     </div>
     <p>What began as a small London importing business in 1989 is now a fully integrated foodservice ecosystem — but the philosophy hasn't changed: family-run, partnership-led, slow to commit, long to stay.</p>
   </div>
   <div class="timeline">
-    <div class="tl-item"><div class="tl-year" id="tl-1-year">1989</div><div class="tl-event" id="tl-1-event">Chuanglee founded by Jimmy Chua. Begins importing East Asian ingredients into the UK.</div></div>
-    <div class="tl-item"><div class="tl-year" id="tl-2-year">2011</div><div class="tl-event" id="tl-2-event">Chuanglee Cash & Carry acquired — expanding wholesale reach.</div></div>
-    <div class="tl-item"><div class="tl-year" id="tl-3-year">2023</div><div class="tl-event" id="tl-3-event">Joins NRF Group; acquires Chinese foodservice business — full ecosystem formed.</div></div>
-    <div class="tl-item"><div class="tl-year" id="tl-4-year">2024</div><div class="tl-event" id="tl-4-event">First Mini C Asian Pantry retail store opens in Greenwich, London.</div></div>
-    <div class="tl-item"><div class="tl-year" id="tl-5-year">2025</div><div class="tl-event" id="tl-5-event">Multi-site ordering app launches. Revenue reaches £25M with 450+ customers.</div></div>
-    <div class="tl-item"><div class="tl-year" id="tl-6-year">Tomorrow</div><div class="tl-event" id="tl-6-event">The next generation continues the work — same family, same standards.</div></div>
+    <div class="tl-item"><div class="tl-year">1989</div><div class="tl-event">Chuanglee founded by Jimmy Chua. Begins importing East Asian ingredients into the UK.</div></div>
+    <div class="tl-item"><div class="tl-year">2011</div><div class="tl-event">Chuanglee Cash & Carry acquired — expanding wholesale reach.</div></div>
+    <div class="tl-item"><div class="tl-year">2023</div><div class="tl-event">Joins NRF Group; acquires Chinese foodservice business — full ecosystem formed.</div></div>
+    <div class="tl-item"><div class="tl-year">2024</div><div class="tl-event">First Mini C Asian Pantry retail store opens in Greenwich, London.</div></div>
+    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-event">Multi-site ordering app launches. Revenue reaches £25M with 450+ customers.</div></div>
+    <div class="tl-item"><div class="tl-year">Tomorrow</div><div class="tl-event">The next generation continues the work — same family, same standards.</div></div>
   </div>
 </section>
 
@@ -313,14 +313,14 @@
 <section class="app-section">
   <div class="app-inner">
     <div>
-      <div class="eyebrow" id="app-eyebrow">The Chuanglee App</div>
+      <div class="eyebrow">The Chuanglee App</div>
       <h2 class="title">Ordering, but <em>better</em>.</h2>
-      <p id="app-desc">Built for multi-site restaurant management. Personalised pricing, order guides tied to each site, repeat ordering in seconds, real-time delivery tracking and full account control — purpose-built for the pace of professional kitchens.</p>
+      <p>Built for multi-site restaurant management. Personalised pricing, order guides tied to each site, repeat ordering in seconds, real-time delivery tracking and full account control — purpose-built for the pace of professional kitchens.</p>
       <div class="app-features">
-        <div id="app-feat-1"><span>01</span> Personalised pricing per site</div>
-        <div id="app-feat-2"><span>02</span> Multi-site order guides</div>
-        <div id="app-feat-3"><span>03</span> Repeat & favourite ordering</div>
-        <div id="app-feat-4"><span>04</span> Live delivery tracking</div>
+        <div><span>01</span> Personalised pricing per site</div>
+        <div><span>02</span> Multi-site order guides</div>
+        <div><span>03</span> Repeat & favourite ordering</div>
+        <div><span>04</span> Live delivery tracking</div>
       </div>
       <div class="app-buttons">
         <a href="#" class="app-btn">
