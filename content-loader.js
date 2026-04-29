@@ -1,4 +1,4 @@
-// Chuanglee Content Loader v6 — direct ID targeting, no array rebuilding
+// Chuanglee Content Loader v7 — fixed structure
 
 async function loadJSON(file) {
   try {
@@ -47,6 +47,7 @@ function bgSel(selector, url) {
 async function applyGlobal() {
   const g = await loadJSON('global');
   if (!g || !Object.keys(g).length) return;
+
   if (g.phone) {
     selAll('.phone', g.phone);
     document.querySelectorAll('a[href^="tel:"]').forEach(el => {
@@ -103,15 +104,14 @@ async function applyHome() {
   // HERO
   sel('.hero-meta', d.hero_meta);
   const headline = document.querySelector('h1.headline');
-  if (headline) {
-    headline.innerHTML = '';
-    if (d.hero_line1) headline.innerHTML = `${d.hero_line1}<br />of <span class="ital">${d.hero_line2_italic || 'East Asia'}</span>,<br />from soil to <span class="ital">${d.hero_line3 || 'stove'}</span>.<span class="cjk">創立</span>`;
+  if (headline && d.hero_line1) {
+    headline.innerHTML = `${d.hero_line1}<br />of <span class="ital">${d.hero_line2_italic || 'East Asia'}</span>,<br />from soil to <span class="ital">${d.hero_line3 || 'stove'}</span>.<span class="cjk">創立</span>`;
   }
   sel('.hero-sub', d.hero_lede);
   sel('.hero-actions .btn-primary', d.hero_cta_primary);
   if (d.hero_cta_secondary) {
-    const btn = document.querySelector('.hero-actions .btn-ghost');
-    if (btn) btn.innerHTML = `${d.hero_cta_secondary} <span class="arrow">→</span>`;
+    const b = document.querySelector('.hero-actions .btn-ghost');
+    if (b) b.innerHTML = `${d.hero_cta_secondary} <span class="arrow">→</span>`;
   }
   if (d.hero_stamp_num || d.hero_stamp_label) {
     const stamp = document.querySelector('.hero-stamp');
@@ -120,7 +120,7 @@ async function applyHome() {
   bg('hero-img-main', d.hero_img_main);
   bg('hero-img-sub', d.hero_img_sub);
 
-  // STATS — direct ID targeting
+  // STATS
   id('stat-1-num', d.stat_1_num); id('stat-1-label', d.stat_1_label);
   id('stat-2-num', d.stat_2_num); id('stat-2-label', d.stat_2_label);
   id('stat-3-num', d.stat_3_num); id('stat-3-label', d.stat_3_label);
@@ -151,7 +151,7 @@ async function applyHome() {
     id(`eco-${i}-desc`, d[`eco_${i}_desc`]);
   }
 
-  // FARM (homepage)
+  // FARM (homepage section)
   id('farm-home-eyebrow', d.farm_home_eyebrow);
   id('farm-home-p', d.farm_home_p);
   id('farm-home-quote', d.farm_home_quote);
@@ -180,20 +180,19 @@ async function applyHome() {
     id(`app-feat-${i}`, d[`app_feat_${i}`]);
   }
   if (d.app_store_url && d.app_store_url !== '#') {
-    const btn = document.querySelector('.app-btn');
-    if (btn) btn.href = d.app_store_url;
+    const appBtn = document.querySelector('.app-btn');
+    if (appBtn) appBtn.href = d.app_store_url;
   }
   if (d.play_store_url && d.play_store_url !== '#') {
-    const btns = document.querySelectorAll('.app-btn');
-    if (btns[1]) btns[1].href = d.play_store_url;
+    const appBtns = document.querySelectorAll('.app-btn');
+    if (appBtns[1]) appBtns[1].href = d.play_store_url;
   }
 
   // PROMO IMAGES
   bg('promo-img-1', d.promo_img_1);
   bg('promo-img-2', d.promo_img_2);
-}
 
-  // Button URLs (from brands.json — shared config file)
+  // BUTTON URLS (from brands.json)
   const b = await loadJSON('brands');
   if (b) {
     btn('hero-cta-primary', b.hero_cta_primary_label, b.hero_cta_primary_url);
@@ -209,23 +208,15 @@ async function applyBrands() {
   const d = await loadJSON('brands');
   if (!d || !Object.keys(d).length) return;
 
-  // Spotlight image
   bg('spotlight-img', d.spotlight_img);
-
-  // Spotlight CTA button
   btn('brands-spotlight-cta', d.brands_spotlight_cta_label, d.brands_spotlight_cta_url);
-
-  // Sourcing CTA button
   btn('brands-sourcing-cta', d.brands_sourcing_cta_label, d.brands_sourcing_cta_url);
 }
-
-async function applyHome() {
-  const d = await loadJSON('home');
-  if (!d || !Object.keys(d).length) return;
 
 async function applyFarm() {
   const d = await loadJSON('farm');
   if (!d || !Object.keys(d).length) return;
+
   const h1 = document.querySelector('.page-hero h1');
   if (h1 && d.hero_line1) h1.innerHTML = `${d.hero_line1}<br /><em>${d.hero_italic || 'one hour'}</em> ${d.hero_line2 || 'from Bangkok.'}<span class="cjk-sm">農家</span>`;
   sel('.page-hero .lede', d.hero_lede);
@@ -237,18 +228,31 @@ async function applyFarm() {
     const q = document.querySelector('.farm-quote');
     if (q) q.innerHTML = `"<span class="cjk-char">家</span> ${d.quote}"`;
   }
-  if (d.cta_h3) { const h3 = document.querySelector('.promo-band h3'); if (h3) h3.innerHTML = d.cta_h3; }
+  if (d.cta_h3) {
+    const h3 = document.querySelector('.promo-band h3');
+    if (h3) h3.innerHTML = d.cta_h3;
+  }
   sel('.promo-text p', d.cta_desc);
   sel('.promo-text .btn-primary', d.cta_btn);
   bg('farm-img-main', d.farm_img_main);
   bg('farm-promo-img', d.promo_img);
+
+  // BUTTON URLS (from brands.json)
+  const b = await loadJSON('brands');
+  if (b) {
+    btn('farm-sourcing-cta', b.farm_sourcing_cta_label, b.farm_sourcing_cta_url);
+  }
 }
 
 async function applyContact() {
   const d = await loadJSON('contact');
   if (!d || !Object.keys(d).length) return;
+
   sel('.contact .eyebrow', d.eyebrow);
-  if (d.headline) { const h2 = document.querySelector('.contact h2.title'); if (h2) h2.innerHTML = d.headline; }
+  if (d.headline) {
+    const h2 = document.querySelector('.contact h2.title');
+    if (h2) h2.innerHTML = d.headline;
+  }
   sel('.contact .lead', d.lead);
   sel('.contact-form h3', d.form_heading);
   sel('.contact-form .sub', d.form_sub);
@@ -262,48 +266,42 @@ async function applyContact() {
   });
 }
 
-  const b2 = await loadJSON('brands');
-  if (b2) {
-    btn('farm-sourcing-cta', b2.farm_sourcing_cta_label, b2.farm_sourcing_cta_url);
-  }
-}
-
 async function applyCatalogue() {
   const d = await loadJSON('catalogue');
   if (!d || !Object.keys(d).length) return;
 
-  // Hero
   if (d.cat_lede) id('cat-lede', d.cat_lede);
 
-  // Flipbook cards
   id('flipbook-1-title', d.flipbook_1_title);
   id('flipbook-1-sub', d.flipbook_1_sub);
   id('flipbook-2-title', d.flipbook_2_title);
   id('flipbook-2-sub', d.flipbook_2_sub);
 
-  // Flipbook URLs
   const fc1 = document.querySelector('.flip-card.fc-rest');
   if (fc1 && d.flipbook_1_url) fc1.href = d.flipbook_1_url;
   const fc2 = document.querySelector('.flip-card.fc-whole');
   if (fc2 && d.flipbook_2_url) fc2.href = d.flipbook_2_url;
 
-  // Category banner images
   bg('cat-img-sauces', d.cat_img_sauces);
   bg('cat-img-fresh', d.cat_img_fresh);
   bg('cat-img-frozen', d.cat_img_frozen);
   bg('cat-img-pantry', d.cat_img_pantry);
   bg('cat-img-drinks', d.cat_img_drinks);
 
-  // Category banner headings
   id('cat-ban-1-h3', d.cat_ban_1_h3);
   id('cat-ban-2-h3', d.cat_ban_2_h3);
   id('cat-ban-3-h3', d.cat_ban_3_h3);
   id('cat-ban-4-h3', d.cat_ban_4_h3);
   id('cat-ban-5-h3', d.cat_ban_5_h3);
 
-  // Promo band
   id('cat-promo-h3', d.cat_promo_h3);
   id('cat-promo-p', d.cat_promo_p);
+
+  // BUTTON URLS (from brands.json)
+  const b = await loadJSON('brands');
+  if (b) {
+    btn('cat-account-cta', b.cat_account_cta_label, b.cat_account_cta_url);
+  }
 }
 
 (async () => {
