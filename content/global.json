@@ -7,5 +7,11 @@
   "nav_cta": "Order Online ↗",
   "nav_cta_url": "https://chuanglee.choco.com/",
   "copyright": "1989–2025",
-  "topbar_messages": "Family-run since 1989,Importer · Manufacturing Partner · Foodservice Distributor,Direct from farm to kitchen,Serving 450+ UK food businesses,Nationwide distribution · Own London fleet"
+  "topbar_messages": [
+    "Family-run since 1989",
+    "Importer · Manufacturing Partner · Foodservice Distributor",
+    "Direct from farm to kitchen",
+    "Serving 450+ UK food businesses",
+    "Nationwide distribution · Own London fleet"
+  ]
 }
