@@ -302,6 +302,29 @@ content:
         label: "§ Promo Banner 2 Image"
         type: image
 
+      - { name: app_img, label: "§ App — Feature image", type: image }
+
+      - { name: carousel_img_1, label: "§ Carousel — Image 1", type: image }
+      - { name: carousel_img_2, label: "§ Carousel — Image 2", type: image }
+      - { name: carousel_img_3, label: "§ Carousel — Image 3", type: image }
+      - { name: carousel_img_4, label: "§ Carousel — Image 4", type: image }
+      - { name: carousel_img_5, label: "§ Carousel — Image 5", type: image }
+      - { name: carousel_img_6, label: "§ Carousel — Image 6", type: image }
+      - { name: carousel_img_7, label: "§ Carousel — Image 7", type: image }
+      - { name: carousel_img_8, label: "§ Carousel — Image 8", type: image }
+      - { name: carousel_img_9, label: "§ Carousel — Image 9", type: image }
+      - { name: carousel_img_10, label: "§ Carousel — Image 10", type: image }
+      - { name: carousel_img_11, label: "§ Carousel — Image 11", type: image }
+      - { name: carousel_img_12, label: "§ Carousel — Image 12", type: image }
+      - { name: carousel_img_13, label: "§ Carousel — Image 13", type: image }
+      - { name: carousel_img_14, label: "§ Carousel — Image 14", type: image }
+      - { name: carousel_img_15, label: "§ Carousel — Image 15", type: image }
+      - { name: carousel_img_16, label: "§ Carousel — Image 16", type: image }
+      - { name: carousel_img_17, label: "§ Carousel — Image 17", type: image }
+      - { name: carousel_img_18, label: "§ Carousel — Image 18", type: image }
+      - { name: carousel_img_19, label: "§ Carousel — Image 19", type: image }
+      - { name: carousel_img_20, label: "§ Carousel — Image 20", type: image }
+
   - name: brands
     label: Brands Page
     type: file
@@ -340,6 +363,33 @@ content:
       - { name: brands_spotlight_cta_url, label: "§ Spotlight CTA — URL", type: string }
       - { name: brands_sourcing_cta_label, label: "§ Sourcing CTA — Label", type: string }
       - { name: brands_sourcing_cta_url, label: "§ Sourcing CTA — URL", type: string }
+
+      - { name: brands_carousel_img_1, label: "§ Brands Carousel — Image 1", type: image }
+      - { name: brands_carousel_img_2, label: "§ Brands Carousel — Image 2", type: image }
+      - { name: brands_carousel_img_3, label: "§ Brands Carousel — Image 3", type: image }
+      - { name: brands_carousel_img_4, label: "§ Brands Carousel — Image 4", type: image }
+      - { name: brands_carousel_img_5, label: "§ Brands Carousel — Image 5", type: image }
+      - { name: brands_carousel_img_6, label: "§ Brands Carousel — Image 6", type: image }
+      - { name: brands_carousel_img_7, label: "§ Brands Carousel — Image 7", type: image }
+      - { name: brands_carousel_img_8, label: "§ Brands Carousel — Image 8", type: image }
+      - { name: brands_carousel_img_9, label: "§ Brands Carousel — Image 9", type: image }
+      - { name: brands_carousel_img_10, label: "§ Brands Carousel — Image 10", type: image }
+      - { name: brands_carousel_img_11, label: "§ Brands Carousel — Image 11", type: image }
+      - { name: brands_carousel_img_12, label: "§ Brands Carousel — Image 12", type: image }
+      - { name: brands_carousel_img_13, label: "§ Brands Carousel — Image 13", type: image }
+      - { name: brands_carousel_img_14, label: "§ Brands Carousel — Image 14", type: image }
+      - { name: brands_carousel_img_15, label: "§ Brands Carousel — Image 15", type: image }
+      - { name: brands_carousel_img_16, label: "§ Brands Carousel — Image 16", type: image }
+      - { name: brands_carousel_img_17, label: "§ Brands Carousel — Image 17", type: image }
+      - { name: brands_carousel_img_18, label: "§ Brands Carousel — Image 18", type: image }
+      - { name: brands_carousel_img_19, label: "§ Brands Carousel — Image 19", type: image }
+      - { name: brands_carousel_img_20, label: "§ Brands Carousel — Image 20", type: image }
+
+      - { name: poster_img_1, label: "§ Poster 1", type: image }
+      - { name: poster_img_2, label: "§ Poster 2", type: image }
+      - { name: poster_img_3, label: "§ Poster 3", type: image }
+      - { name: poster_img_4, label: "§ Poster 4", type: image }
+      - { name: poster_img_5, label: "§ Poster 5", type: image }
 
   - name: buttons
     label: "Button Links (All Pages)"
