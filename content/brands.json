@@ -1,29 +1,8 @@
 {
   "spotlight": "AROY-D",
-  "spotlight_img": "https://images.unsplash.com/photo-1581873372796-635b67ca2008?w=900&q=80",
-  "spotlight_stamp": "Best\nSeller\n2025",
-
-  "hero_cta_primary_label": "Browse Catalogue",
-  "hero_cta_primary_url": "catalogue.html",
-  "hero_cta_secondary_label": "Our Capabilities",
-  "hero_cta_secondary_url": "#capabilities",
-
-  "farm_cta_label": "Visit Suree's Farm",
-  "farm_cta_url": "farm.html",
-
-  "contact_cta_heading": "Open a Trade Account",
-  "contact_cta_sub": "Tell us about your business and we'll be in touch within one working day.",
-  "contact_cta_label": "Open an Account →",
-  "contact_cta_url": "contact.html",
-
+  "spotlight_img": "/images/aroyd ins post.png",
   "brands_spotlight_cta_label": "Shop AROY-D →",
   "brands_spotlight_cta_url": "catalogue.html?brand=AROY",
   "brands_sourcing_cta_label": "Make a Sourcing Request →",
-  "brands_sourcing_cta_url": "contact.html",
-
-  "cat_account_cta_label": "Open an Account →",
-  "cat_account_cta_url": "contact.html",
-
-  "farm_sourcing_cta_label": "Discuss Custom Sourcing →",
-  "farm_sourcing_cta_url": "contact.html"
+  "brands_sourcing_cta_url": "contact.html"
 }
