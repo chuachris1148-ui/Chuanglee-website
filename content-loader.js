@@ -331,6 +331,28 @@ async function applyCatalogue() {
   }
 }
 
+
+async function applyDelivery() {
+  const d = await loadJSON('delivery');
+  if (!d || !Object.keys(d).length) return;
+  sel('.del-hero .eyebrow', d.eyebrow);
+  const h1 = document.querySelector('.del-hero h1');
+  if (h1 && d.headline) h1.innerHTML = d.headline.replace('deliver', '<em>deliver</em>');
+  sel('.del-hero .lede', d.lede);
+  const h2 = document.querySelector('.map-header h2');
+  if (h2 && d.map_heading) h2.innerHTML = d.map_heading.replace('delivery', '<em>delivery</em>');
+  sel('.map-header p', d.map_sub);
+}
+
+async function applyBookings() {
+  const d = await loadJSON('bookings');
+  if (!d || !Object.keys(d).length) return;
+  sel('.book-hero .eyebrow', d.eyebrow);
+  const h1 = document.querySelector('.book-hero h1');
+  if (h1 && d.headline) h1.innerHTML = d.headline;
+  sel('.book-hero .lede', d.lede);
+}
+
 (async () => {
   const page = document.body.dataset.page || 'home';
   await applyGlobal();
@@ -339,4 +361,6 @@ async function applyCatalogue() {
   if (page === 'farm') await applyFarm();
   if (page === 'contact') await applyContact();
   if (page === 'catalogue') await applyCatalogue();
+  if (page === 'delivery') await applyDelivery();
+  if (page === 'bookings') await applyBookings();
 })();
