@@ -5,5 +5,12 @@
   "brands_spotlight_cta_url": "catalogue.html?brand=AROY",
   "brands_sourcing_cta_label": "Make a Sourcing Request →",
   "brands_sourcing_cta_url": "contact.html",
-  "contact_cta_url": "contact.html#account-card"
+  "brands_carousel_img_1": "/images/15.jpg",
+  "brands_carousel_img_2": "/images/12.jpg",
+  "brands_carousel_img_3": "/images/24.jpg",
+  "brands_carousel_img_4": "/images/5.jpg",
+  "poster_img_1": "/images/11.jpg",
+  "poster_img_2": "/images/17.jpg",
+  "poster_img_3": "/images/9.jpg",
+  "poster_img_4": "/images/8.jpg"
 }
