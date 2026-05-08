@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact & Open Account — Chuanglee</title>
+<title>Open a Trade Account | Chuanglee Foodservice</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" />
@@ -352,7 +352,7 @@
 <div class="foot-top">
 <div class="foot-brand"><div class="brand">Chuanglee <span class="est">Est. 1989</span></div><p>Family-run UK importer, manufacturing partner and foodservice distributor — bringing authentic East Asian ingredients from soil to stove since 1989.</p></div>
 <div class="foot-col"><h5>Explore</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="brands.html">Our Brands</a></li><li><a href="farm.html">Suree's Farm</a></li><li><a href="index.html#heritage">Heritage</a></li></ul></div>
-<div class="foot-col"><h5>Trade</h5><ul><li><a href="catalogue.html">Order Online</a></li><li><a href="contact.html">Open Account</a></li><li><a href="contact.html">Bespoke Manufacturing</a></li><li><a href="#">Mini C Pantry</a></li></ul></div>
+<div class="foot-col"><h5>Trade</h5><ul><li><a href="catalogue.html">Order Online</a></li><li><a href="contact.html">Open Account</a></li><li><a href="contact.html">Bespoke Manufacturing</a></li></ul></div>
 <div class="foot-col"><h5>Contact</h5><ul><li><a href="mailto:sales@chuanglee.co.uk">sales@chuanglee.co.uk</a></li><li><a href="tel:08453881688">0845 388 1688</a></li><li>Unit 7-9 Meridian Trading Estate</li><li>Bugsby Way, London SE7 7SJ</li></ul></div>
 </div>
 <div class="foot-bottom">
@@ -549,32 +549,55 @@ async function sendAccountEmail(includeCredit) {
   const accFd = new FormData(document.getElementById('form-account'));
   const companyName = accFd.get('company_name') || '';
 
-  // Build account details string
-  let accountDetails = collectFormData(document.getElementById('form-account'));
-  accountDetails += '\nDeclaration Signature: ' + (getSigData('sig-account') ? '✓ Signed digitally' : '✗ Not signed');
-
   let creditDetails = '';
-  let templateId = 'template_zzmh59a'; // quote template repurposed for accounts
-  let subject = 'New Account Application — ' + companyName;
-
   if (includeCredit) {
     creditDetails = collectFormData(document.getElementById('form-credit'));
     creditDetails += '\nDirector 1 Signature: ' + (getSigData('sig-dir1') ? '✓ Signed digitally' : '✗ Not signed') + '\n';
     creditDetails += 'Director 2 Signature: ' + (getSigData('sig-dir2') ? '✓ Signed digitally' : '✗ Not signed');
-    subject = 'New Account + Credit Request — ' + companyName;
     document.getElementById('success-msg').textContent = 'Your account application and credit request have been submitted. We typically process within 24 hours.';
   }
 
+  const today = new Date().toISOString().slice(0,10);
+
   try {
-    await emailjs.send('service_gx55nsk', 'template_zzmh59a', {
-      from_name: accFd.get('signatory_name') || companyName,
-      from_email: accFd.get('account_email') || '',
-      company: companyName,
-      customer_type: accFd.get('trading_activity') || accFd.get('company_type') || 'Trade Account',
-      phone: accFd.get('tel') || 'Not provided',
-      notes: includeCredit ? 'Includes credit request' : 'Account only — no credit request',
-      products: accountDetails + (creditDetails ? '\n\n— CREDIT REQUEST —\n\n' + creditDetails : ''),
-      product_count: includeCredit ? 'Account + Credit' : 'Account Only',
+    await emailjs.send('service_gx55nsk', 'template_account', {
+      // Header
+      badge_class: includeCredit ? 'credit' : '',
+      badge_label: includeCredit ? 'Account + Credit' : 'New Account',
+      email_heading: includeCredit ? 'Account & credit request from' : 'New account application from',
+      application_type: includeCredit ? 'Account Application + Credit Request' : 'Account Application Only',
+      ref_date: today,
+      // Company
+      company_name: companyName,
+      company_reg: accFd.get('company_reg') || '—',
+      vat_reg: accFd.get('vat_reg') || '—',
+      company_type: accFd.get('company_type') || '—',
+      company_address: accFd.get('company_address') || '—',
+      tel: accFd.get('tel') || '—',
+      account_email: accFd.get('account_email') || '—',
+      // Trading
+      trading_as: accFd.get('trading_as') || '—',
+      years_trading: accFd.get('years_trading') || '—',
+      trading_activity: accFd.get('trading_activity') || '—',
+      awrs: accFd.get('awrs') || '—',
+      alcohol_licence: accFd.get('alcohol_licence') || '—',
+      // Bank
+      bank_name: accFd.get('bank_name') || '—',
+      account_number: accFd.get('account_number') || '—',
+      sort_code: accFd.get('sort_code') || '—',
+      // References
+      ref1_company: accFd.get('ref1_company') || '—',
+      ref1_contact: accFd.get('ref1_contact') || '—',
+      ref1_email: accFd.get('ref1_email') || '—',
+      ref2_company: accFd.get('ref2_company') || '—',
+      ref2_contact: accFd.get('ref2_contact') || '—',
+      ref2_email: accFd.get('ref2_email') || '—',
+      // Signatory
+      signatory_name: accFd.get('signatory_name') || '—',
+      signatory_title: accFd.get('signatory_title') || '—',
+      sign_date: accFd.get('sign_date') || today,
+      // Credit section
+      credit_details: creditDetails || 'No credit request submitted.',
     });
     setStep(3);
   } catch(err) {
