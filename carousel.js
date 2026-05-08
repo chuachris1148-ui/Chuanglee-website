@@ -18,7 +18,7 @@ function initCarousel(wrapperId, images) {
 
   // Build slides
   track.innerHTML = imgs.map((src, i) =>
-    `<div class="carousel-slide" style="background-image:url('${src}')"></div>`
+    `<div class="carousel-slide"><img src="${src}" alt="Chuanglee" loading="lazy" /></div>`
   ).join('');
 
   // Build dots
