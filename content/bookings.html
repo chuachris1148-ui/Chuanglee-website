@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warehouse Booking — Chuanglee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ====================================================
+       BOOKING PAGE
+    ==================================================== */
+
+    .book-hero {
+      padding: 140px 48px 64px;
+      text-align: center;
+    }
+    .book-hero .eyebrow { justify-content: center; }
+    .book-hero h1 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 68px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      max-width: 18ch;
+      margin: 0 auto 20px;
+    }
+    .book-hero h1 em { font-style: italic; color: var(--vermillion); font-weight: 300; }
+    .book-hero .lede {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 52ch;
+      margin: 0 auto;
+    }
+
+    /* Info strip */
+    .book-info-strip {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 28px 48px;
+    }
+    .book-info-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .bii {
+      padding: 0 32px;
+      border-left: 1px solid rgba(244,237,225,0.15);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .bii:first-child { border-left: none; padding-left: 0; }
+    .bii-icon { font-size: 22px; flex-shrink: 0; }
+    .bii-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+    .bii-text span {
+      font-size: 12px;
+      color: rgba(244,237,225,0.6);
+    }
+
+    /* Week selector */
+    .week-bar {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 48px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    .week-bar h2 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(22px, 2.5vw, 34px);
+      letter-spacing: -0.02em;
+    }
+    .week-bar h2 em { font-style: italic; color: var(--vermillion); font-weight: 300; }
+    .week-nav-btns { display: flex; gap: 10px; }
+    .wk-btn {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s;
+    }
+    .wk-btn:hover { background: var(--vermillion); transform: translateY(-1px); }
+    .wk-btn:disabled { background: rgba(21,33,47,0.2); color: rgba(21,33,47,0.4); cursor: not-allowed; transform: none; }
+    .wk-btn.ghost {
+      background: transparent;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+    }
+    .wk-btn.ghost:hover { background: var(--ink); color: var(--paper); }
+    .wk-btn.ghost:disabled { border-color: rgba(21,33,47,0.2); color: rgba(21,33,47,0.3); background: transparent; }
+
+    /* Calendar */
+    .calendar-section {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 28px 48px 80px;
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: 72px repeat(5, 1fr);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--rule);
+      gap: 1px;
+    }
+    .cal-corner { background: var(--paper-2); }
+    .cal-day-hdr {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 18px 12px;
+      text-align: center;
+    }
+    .cal-day-hdr .dh-name {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      display: block;
+    }
+    .cal-day-hdr .dh-date {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244,237,225,0.55);
+      margin-top: 4px;
+      display: block;
+    }
+    .cal-time {
+      background: var(--paper-2);
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      min-height: 58px;
+    }
+    .cal-slot {
+      background: var(--paper);
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.18s;
+      position: relative;
+    }
+    .cal-slot.available { cursor: pointer; color: #065f46; }
+    .cal-slot.available::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      background: #d1fae5;
+      border-radius: 2px;
+      z-index: 0;
+      transition: background 0.18s;
+    }
+    .cal-slot.available:hover::before { background: #6ee7b7; }
+    .cal-slot.one-left { cursor: pointer; color: #92400e; }
+    .cal-slot.one-left::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      background: #fef3c7;
+      border-radius: 2px;
+      z-index: 0;
+      transition: background 0.18s;
+    }
+    .cal-slot.one-left:hover::before { background: #fde68a; }
+    .cal-slot.booked { color: #991b1b; }
+    .cal-slot.booked::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      background: #fee2e2;
+      border-radius: 2px;
+      z-index: 0;
+    }
+    .cal-slot.blocked { background: var(--paper-2); color: rgba(21,33,47,0.25); }
+    .cal-slot.past { color: rgba(21,33,47,0.2); }
+    .cal-slot span { position: relative; z-index: 1; }
+
+    .cal-loading {
+      grid-column: 1 / -1;
+      padding: 64px;
+      text-align: center;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--ink-soft);
+      background: var(--paper);
+    }
+
+    .cal-legend {
+      display: flex;
+      gap: 24px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .cl-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--ink-soft);
+      letter-spacing: 0.04em;
+    }
+    .cl-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ====================================================
+       MODAL
+    ==================================================== */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(21,33,47,0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-card {
+      background: var(--paper);
+      border-radius: 4px;
+      max-width: 580px;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 40px 80px -20px rgba(21,33,47,0.5);
+      animation: slideUp 0.3s cubic-bezier(0.2,0.7,0.2,1);
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .modal-hdr {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 32px 36px;
+      position: relative;
+    }
+    .modal-hdr .eyebrow { color: rgba(244,237,225,0.55); margin-bottom: 10px; }
+    .modal-hdr .eyebrow::before { color: var(--vermillion); }
+    .modal-hdr h2 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .modal-hdr h2 em { font-style: italic; color: var(--vermillion); font-weight: 300; }
+    .modal-hdr .modal-slot-label {
+      margin-top: 8px;
+      font-size: 13px;
+      color: rgba(244,237,225,0.6);
+      letter-spacing: 0.06em;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(244,237,225,0.1);
+      border: 1px solid rgba(244,237,225,0.18);
+      color: var(--paper);
+      font-size: 16px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-family: inherit;
+      line-height: 1;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { background: var(--vermillion); border-color: var(--vermillion); }
+
+    .modal-body { padding: 36px; }
+
+    .form-row { margin-bottom: 22px; }
+    .form-row label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .form-row label .req { color: var(--vermillion); }
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      padding: 11px 0;
+      border: none;
+      border-bottom: 1.5px solid var(--rule);
+      background: transparent;
+      font-family: var(--body);
+      font-size: 15px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus { border-bottom-color: var(--vermillion); }
+    .form-row textarea { resize: vertical; min-height: 72px; }
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
+    .form-submit {
+      width: 100%;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 18px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: background 0.25s;
+      margin-top: 6px;
+    }
+    .form-submit:hover { background: var(--vermillion); }
+    .form-submit:disabled { background: rgba(21,33,47,0.28); cursor: not-allowed; }
+
+    /* Success */
+    .booking-success { display: none; text-align: center; padding: 52px 36px; }
+    .booking-success.show { display: block; }
+    .bs-icon {
+      width: 60px; height: 60px;
+      background: #2f4a3a;
+      color: var(--paper);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 26px;
+      margin: 0 auto 24px;
+    }
+    .booking-success h3 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .booking-success p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+
+    /* CTA band */
+    .book-cta-band {
+      background: var(--paper-2);
+      border-top: 1px solid var(--rule);
+      padding: 64px 48px;
+    }
+    .bcb-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+    .bcb-inner h3 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(24px, 3vw, 40px);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .bcb-inner h3 em { font-style: italic; color: var(--vermillion); font-weight: 300; }
+    .bcb-inner p { margin-top: 10px; font-size: 15px; color: var(--ink-soft); max-width: 48ch; }
+    .bcb-btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .book-hero { padding: 120px 24px 48px; }
+      .book-info-strip { padding: 24px; }
+      .book-info-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .bii { border-left: none; padding-left: 0; }
+      .week-bar { padding: 28px 24px 0; flex-wrap: wrap; }
+      .calendar-section { padding: 24px 24px 60px; }
+      .book-cta-band { padding: 48px 24px; }
+      .bcb-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .cal-grid { grid-template-columns: 46px repeat(5, 1fr); }
+      .cal-time { font-size: 9px; padding: 0 4px; min-height: 48px; }
+      .cal-day-hdr { padding: 12px 4px; }
+      .cal-day-hdr .dh-name { font-size: 11px; }
+      .cal-day-hdr .dh-date { font-size: 9px; }
+      .cal-slot { min-height: 48px; font-size: 9px; }
+      .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+      .modal-hdr { padding: 24px 20px; }
+      .modal-body { padding: 24px 20px; }
+      .book-info-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="booking">
+
+  <div class="topbar"><div class="marquee"></div></div>
+
+  <nav class="main"><div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="/images/logo.png" alt="Chuanglee" />
+      <div class="brand-name">Chuanglee<span>Est. 1989</span></div>
+    </a>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">☰</button>
+    <div class="nav-links">
+      <button class="nav-close" onclick="toggleNav()">✕</button>
+      <a href="index.html">Home</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="brands.html">Brands</a>
+      <a href="farm.html">The Farm</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <span class="phone">0845 388 1688</span>
+      <a href="https://chuanglee.choco.com/" target="_blank" class="order-btn">Order Online ↗</a>
+    </div>
+  </div></nav>
+
+  <!-- HERO -->
+  <section class="book-hero">
+    <div class="eyebrow">Warehouse Operations</div>
+    <h1>Book a <em>delivery</em> slot</h1>
+    <p class="lede">Select an available time slot to schedule your warehouse delivery. Monday to Friday, 9:00 AM – 3:00 PM in 30-minute slots.</p>
+  </section>
+
+  <!-- INFO STRIP -->
+  <div class="book-info-strip">
+    <div class="book-info-inner">
+      <div class="bii">
+        <div class="bii-icon">🕘</div>
+        <div class="bii-text"><strong>Operating Hours</strong><span>Mon – Fri, 09:00 – 15:00</span></div>
+      </div>
+      <div class="bii">
+        <div class="bii-icon">📦</div>
+        <div class="bii-text"><strong>Slot Capacity</strong><span>Max 2 deliveries · 6+ pallets = full slot</span></div>
+      </div>
+      <div class="bii">
+        <div class="bii-icon">⏱</div>
+        <div class="bii-text"><strong>Advance Notice</strong><span>Minimum 2 hours prior</span></div>
+      </div>
+      <div class="bii">
+        <div class="bii-icon">📞</div>
+        <div class="bii-text"><strong>Questions?</strong><span>0845 388 1688</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK BAR -->
+  <div class="week-bar">
+    <h2 id="weekRange">Loading<em>…</em></h2>
+    <div class="week-nav-btns">
+      <button class="wk-btn ghost" onclick="changeWeek(-1)" id="prevBtn">← Prev week</button>
+      <button class="wk-btn ghost" onclick="changeWeek(0)">This week</button>
+      <button class="wk-btn" onclick="changeWeek(1)">Next week →</button>
+    </div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="calendar-section">
+    <div class="cal-grid" id="calendar">
+      <div class="cal-loading">Loading available slots…</div>
+    </div>
+    <div class="cal-legend">
+      <div class="cl-item"><div class="cl-swatch" style="background:#d1fae5;border:1px solid #a7f3d0;"></div>Available</div>
+      <div class="cl-item"><div class="cl-swatch" style="background:#fef3c7;border:1px solid #fde68a;"></div>1 slot left</div>
+      <div class="cl-item"><div class="cl-swatch" style="background:#fee2e2;border:1px solid #fecaca;"></div>Fully booked</div>
+      <div class="cl-item"><div class="cl-swatch" style="background:var(--paper-2);border:1px solid var(--rule);"></div>Blocked</div>
+      <div class="cl-item"><div class="cl-swatch" style="background:var(--paper);border:1px solid var(--rule);opacity:0.4;"></div>Past</div>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="book-cta-band">
+    <div class="bcb-inner">
+      <div>
+        <h3>Need to open a <em>trade account</em>?</h3>
+        <p>Get access to our full 2,700+ product range with dedicated account management and credit terms available.</p>
+      </div>
+      <div class="bcb-btns">
+        <a href="contact.html" class="btn-primary">Open an Account →</a>
+        <a href="https://chuanglee.choco.com/" target="_blank" class="btn-ghost">Order Online <span class="arrow">↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer><div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand">
+          <img src="/images/logo.png" alt="Chuanglee" />
+          <div class="brand-name">Chuanglee<span>Est. 1989</span></div>
+        </div>
+        <p>Family-run UK importer, manufacturing partner and foodservice distributor — bringing authentic East Asian ingredients from soil to stove since 1989.</p>
+      </div>
+      <div class="foot-col"><h5>Explore</h5><ul>
+        <li><a href="catalogue.html">Catalogue</a></li>
+        <li><a href="brands.html">Our Brands</a></li>
+        <li><a href="farm.html">Suree's Farm</a></li>
+        <li><a href="delivery.html">Delivery</a></li>
+      </ul></div>
+      <div class="foot-col"><h5>Trade</h5><ul>
+        <li><a href="https://chuanglee.choco.com/" target="_blank">Order Online</a></li>
+        <li><a href="contact.html">Open Account</a></li>
+        <li><a href="contact.html">Bespoke Manufacturing</a></li>
+      </ul></div>
+      <div class="foot-col"><h5>Contact</h5><ul>
+        <li><a href="mailto:sales@chuanglee.co.uk">sales@chuanglee.co.uk</a></li>
+        <li><a href="tel:08453881688">0845 388 1688</a></li>
+        <li>Unit 7-9 Meridian Trading Estate</li>
+        <li>Bugsby Way, London SE7 7SJ</li>
+      </ul></div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 1989–2025 Chuanglee Limited. All rights reserved.</div>
+      <div class="center">創立 一九八九 &nbsp;·&nbsp; <span class="thai">ก่อตั้ง ๑๙๘๙</span></div>
+      <div class="right"><a href="#">Modern Slavery</a><a href="#">Terms &amp; Conditions</a><a href="#">Privacy</a></div>
+    </div>
+  </div></footer>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal" id="bookingModal">
+    <div class="modal-card">
+      <div class="modal-hdr">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="eyebrow">Confirm Booking</div>
+        <h2>Book <em>delivery</em> slot</h2>
+        <p class="modal-slot-label" id="modalSubtitle"></p>
+      </div>
+      <div class="modal-body">
+        <div class="booking-success" id="successMessage">
+          <div class="bs-icon">✓</div>
+          <h3>Booking confirmed</h3>
+          <p>Your delivery slot has been reserved.<br>You'll receive a confirmation shortly.</p>
+        </div>
+        <form id="bookingForm" onsubmit="submitBooking(event)">
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label>Company Name <span class="req">*</span></label>
+              <input type="text" id="companyName" required />
+            </div>
+            <div class="form-row">
+              <label>Contact Person <span class="req">*</span></label>
+              <input type="text" id="contactPerson" required />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label>Phone Number <span class="req">*</span></label>
+              <input type="tel" id="phone" required />
+            </div>
+            <div class="form-row">
+              <label>Email Address <span class="req">*</span></label>
+              <input type="email" id="email" required />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label>Number of Pallets <span class="req">*</span></label>
+              <input type="number" id="pallets" min="1" required />
+            </div>
+            <div class="form-row">
+              <label>Reference (PO / Container)</label>
+              <input type="text" id="reference" />
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Special Notes</label>
+            <textarea id="notes" placeholder="Any special requirements or notes…"></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="/content-loader.js"></script>
+  <script>
+    // ============================================================
+    //  CONFIGURATION
+    // ============================================================
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwTQNz_XlMBVCMCHOMc2O2F-OX0sDlT_d2IZxfpXaCz6E55RIvelohLvDAZ43u-VHaOIA/exec';
+    const START_HOUR = 9;
+    const END_HOUR = 15;
+    const ADVANCE_BOOKING_HOURS = 2;
+
+    let currentWeekStart = new Date();
+    let bookings = [];
+    let blockedSlots = [];
+    let selectedSlot = null;
+
+    setMondayOfWeek(currentWeekStart, 0);
+    loadData();
+
+    // ============================================================
+    //  WEEK HELPERS
+    // ============================================================
+    function setMondayOfWeek(date, weekOffset) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const day = today.getDay();
+      const diff = day === 0 ? -6 : 1 - day;
+      date.setTime(today.getTime());
+      date.setDate(today.getDate() + diff + (weekOffset * 7));
+    }
+
+    function changeWeek(offset) {
+      if (offset === 0) {
+        currentWeekStart = new Date();
+        setMondayOfWeek(currentWeekStart, 0);
+      } else {
+        currentWeekStart.setDate(currentWeekStart.getDate() + (offset * 7));
+      }
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      document.getElementById('prevBtn').disabled = currentWeekStart <= today;
+      renderCalendar();
+    }
+
+    // ============================================================
+    //  DATA LOADING
+    // ============================================================
+    async function loadData() {
+      try {
+        const [bRes, blRes] = await Promise.all([
+          fetch(`${APPS_SCRIPT_URL}?action=getBookings`),
+          fetch(`${APPS_SCRIPT_URL}?action=getBlockedSlots`)
+        ]);
+        bookings = await bRes.json();
+        blockedSlots = await blRes.json();
+      } catch (e) {
+        console.error('Error loading data:', e);
+      }
+      renderCalendar();
+    }
+
+    // ============================================================
+    //  SLOT LOGIC
+    // ============================================================
+    function getSlotInfo(date, time) {
+      const [y, m, d] = date.split('-').map(Number);
+      const [hh, mm] = time.split(':').map(Number);
+      const slotDateTime = new Date(y, m - 1, d, hh, mm, 0);
+      const twoHoursFromNow = new Date(Date.now() + ADVANCE_BOOKING_HOURS * 3600000);
+
+      if (slotDateTime < twoHoursFromNow) return { status: 'past', spotsLeft: 0 };
+
+      const isBlocked = blockedSlots.some(s => s.date === date && s.time === time);
+      if (isBlocked) return { status: 'blocked', spotsLeft: 0 };
+
+      const slotBookings = bookings.filter(b => b.date === date && b.time === time);
+      const hasLargeDelivery = slotBookings.some(b => parseInt(b.pallets, 10) > 6);
+      if (hasLargeDelivery) return { status: 'booked', spotsLeft: 0 };
+
+      const spotsLeft = 2 - slotBookings.length;
+      if (spotsLeft <= 0) return { status: 'booked', spotsLeft: 0 };
+
+      return { status: 'available', spotsLeft };
+    }
+
+    function generateTimeSlots() {
+      const slots = [];
+      for (let hour = START_HOUR; hour < END_HOUR; hour++) {
+        slots.push(`${String(hour).padStart(2, '0')}:00`);
+        slots.push(`${String(hour).padStart(2, '0')}:30`);
+      }
+      return slots;
+    }
+
+    // ============================================================
+    //  RENDER
+    // ============================================================
+    function renderCalendar() {
+      const endDate = new Date(currentWeekStart);
+      endDate.setDate(endDate.getDate() + 4);
+      const wkStart = currentWeekStart.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      const wkEnd   = endDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      document.getElementById('weekRange').innerHTML = `Week of ${wkStart} – <em>${wkEnd}</em>`;
+
+      let html = '<div class="cal-corner"></div>';
+
+      for (let day = 0; day < 5; day++) {
+        const date = new Date(currentWeekStart);
+        date.setDate(date.getDate() + day);
+        const dayName = date.toLocaleDateString('en-GB', { weekday: 'short' });
+        const dayDate = date.toLocaleDateString('en-GB', { month: 'short', day: 'numeric' });
+        html += `<div class="cal-day-hdr"><span class="dh-name">${dayName}</span><span class="dh-date">${dayDate}</span></div>`;
+      }
+
+      generateTimeSlots().forEach(time => {
+        html += `<div class="cal-time">${time}</div>`;
+        for (let day = 0; day < 5; day++) {
+          const date = new Date(currentWeekStart);
+          date.setDate(date.getDate() + day);
+          const dateStr = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+          const { status, spotsLeft } = getSlotInfo(dateStr, time);
+          const isOneLeft = status === 'available' && spotsLeft === 1;
+          const cls = `cal-slot ${status}${isOneLeft ? ' one-left' : ''}`;
+
+          if (status === 'available') {
+            html += `<div class="${cls}" onclick='openBookingModal("${dateStr}","${time}")'><span>${isOneLeft ? '1 left' : 'Available'}</span></div>`;
+          } else if (status === 'booked') {
+            html += `<div class="${cls}"><span>Booked</span></div>`;
+          } else if (status === 'blocked') {
+            html += `<div class="${cls}"><span>Blocked</span></div>`;
+          } else {
+            html += `<div class="${cls}"><span>—</span></div>`;
+          }
+        }
+      });
+
+      document.getElementById('calendar').innerHTML = html;
+    }
+
+    // ============================================================
+    //  MODAL
+    // ============================================================
+    function openBookingModal(date, time) {
+      const { status } = getSlotInfo(date, time);
+      if (status !== 'available') return;
+      selectedSlot = { date, time };
+      const [year, month, day] = date.split('-').map(Number);
+      const dateObj = new Date(year, month - 1, day);
+      const formatted = dateObj.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      document.getElementById('modalSubtitle').textContent = `${formatted} at ${time}`;
+      document.getElementById('bookingModal').classList.add('active');
+      document.getElementById('successMessage').classList.remove('show');
+      document.getElementById('bookingForm').style.display = '';
+      document.getElementById('bookingForm').reset();
+    }
+
+    function closeModal() {
+      document.getElementById('bookingModal').classList.remove('active');
+      selectedSlot = null;
+    }
+
+    document.getElementById('bookingModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // ============================================================
+    //  SUBMIT
+    // ============================================================
+    async function submitBooking(event) {
+      event.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      const params = new URLSearchParams({
+        action: 'createBooking',
+        date: selectedSlot.date,
+        time: selectedSlot.time,
+        companyName: document.getElementById('companyName').value,
+        contactPerson: document.getElementById('contactPerson').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        pallets: document.getElementById('pallets').value,
+        reference: document.getElementById('reference').value,
+        notes: document.getElementById('notes').value
+      });
+
+      try {
+        await fetch(`${APPS_SCRIPT_URL}?${params}`);
+      } catch (e) {
+        console.error('Booking error:', e);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Confirm Booking';
+      }
+
+      document.getElementById('successMessage').classList.add('show');
+      document.getElementById('bookingForm').style.display = 'none';
+
+      setTimeout(() => {
+        closeModal();
+        loadData();
+        document.getElementById('bookingForm').style.display = '';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
