@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book a Delivery Slot | Chuanglee</title>
+  <title>Warehouse Booking — Chuanglee</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -434,15 +434,15 @@
     }
   </style>
 </head>
-<body data-page="bookings">
+<body data-page="booking">
 
-  <div class="topbar">
-  <div class="marquee"></div>
-</div>
+  <div class="topbar"><div class="marquee"></div></div>
 
-<nav class="main">
-  <div class="nav-inner">
-    <a href="index.html" class="brand"><img src="/images/logo.png" alt="Chuanglee" /><div class="brand-name">Chuanglee<span>Est. 1989</span></div></a>
+  <nav class="main"><div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="/images/logo.png" alt="Chuanglee" />
+      <div class="brand-name">Chuanglee<span>Est. 1989</span></div>
+    </a>
     <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">☰</button>
     <div class="nav-links">
       <button class="nav-close" onclick="toggleNav()">✕</button>
@@ -455,11 +455,9 @@
     </div>
     <div class="nav-cta">
       <span class="phone">0845 388 1688</span>
-      <a href="https://chuanglee.choco.com/" class="order-btn" target="_blank" rel="noopener">Order Online ↗</a>
-      <a href="bookings.html" class="supplier-btn">Supplier Bookings</a>
+      <a href="https://chuanglee.choco.com/" target="_blank" class="order-btn">Order Online ↗</a>
     </div>
-  </div>
-</nav>
+  </div></nav>
 
   <!-- HERO -->
   <section class="book-hero">
@@ -559,7 +557,7 @@
     <div class="foot-bottom">
       <div>© 1989–2025 Chuanglee Limited. All rights reserved.</div>
       <div class="center">創立 一九八九 &nbsp;·&nbsp; <span class="thai">ก่อตั้ง ๑๙๘๙</span></div>
-      <div class="right"><a href="/docs/modern-slavery.pdf" target="_blank">Modern Slavery</a><a href="/docs/terms-and-conditions.pdf" target="_blank">Terms &amp; Conditions</a><a href="/docs/csr-policy.pdf" target="_blank">CSR Policy</a><a href="/docs/environmental-policy.pdf" target="_blank">Environmental Policy</a></div>
+      <div class="right"><a href="#">Modern Slavery</a><a href="#">Terms &amp; Conditions</a><a href="#">Privacy</a></div>
     </div>
   </div></footer>
 
@@ -619,37 +617,13 @@
     </div>
   </div>
 
-
-<footer>
-  <div class="foot-inner">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <div class="brand">
-          <img src="/images/logo.png" alt="Chuanglee" />
-          <div class="brand-name">Chuanglee<span>Est. 1989</span></div>
-        </div>
-        <p>Family-run UK importer, manufacturing partner and foodservice distributor — bringing authentic East Asian ingredients from soil to stove since 1989.</p>
-      </div>
-      <div class="foot-col"><h5>Explore</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="brands.html">Our Brands</a></li><li><a href="farm.html">Suree's Farm</a></li><li><a href="#heritage">Heritage</a></li></ul></div>
-      <div class="foot-col"><h5>Trade</h5><ul><li><a href="catalogue.html">Order Online</a></li><li><a href="contact.html">Open Account</a></li><li><a href="contact.html">Bespoke Manufacturing</a></li></ul></div>
-      <div class="foot-col"><h5>Contact</h5><ul><li><a href="mailto:sales@chuanglee.co.uk">sales@chuanglee.co.uk</a></li><li><a href="tel:08453881688">0845 388 1688</a></li><li>Unit 7-9 Meridian Trading Estate</li><li>Bugsby Way, London SE7 7SJ</li></ul></div>
-    </div>
-    <div class="foot-bottom">
-      <div>© 1989–2025 Chuanglee Limited. All rights reserved.</div>
-      <div class="center">創立 一九八九 &nbsp;·&nbsp; <span class="thai">ก่อตั้ง ๑๙๘๙</span></div>
-      <div class="right"><a href="/docs/modern-slavery.pdf" target="_blank">Modern Slavery</a><a href="/docs/terms-and-conditions.pdf" target="_blank">Terms &amp; Conditions</a><a href="/docs/csr-policy.pdf" target="_blank">CSR Policy</a><a href="/docs/environmental-policy.pdf" target="_blank">Environmental Policy</a></div>
-    </div>
-  </div>
-</footer>
-
-  <script src="/carousel.js"></script>
   <script src="script.js"></script>
   <script src="/content-loader.js"></script>
   <script>
     // ============================================================
     //  CONFIGURATION
     // ============================================================
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwysJLvZtCw11jeMzswzrJnTLLJTVOddTM29FwPIZH5zkOh3TyDnYkyv7gB9MPNtn253w/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx1gDVAqIkesvV432X3ggxdg7pfy3Rl4seBwtjVEtZBrjcKJInhDDeGoYW7mB1QnOESRQ/exec';
     const START_HOUR = 9;
     const END_HOUR = 15;
     const ADVANCE_BOOKING_HOURS = 2;
