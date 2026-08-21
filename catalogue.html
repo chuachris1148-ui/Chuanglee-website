@@ -46,7 +46,8 @@
 
 /* Category banners */
 .cat-banners{max-width:1440px;margin:0 auto;padding:0 48px 32px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-.cat-ban{position:relative;border-radius:4px;overflow:hidden;cursor:pointer;transition:transform .4s}
+/* tile-anchor reset */
+.cat-ban{display:block;text-decoration:none;color:inherit;position:relative;border-radius:4px;overflow:hidden;cursor:pointer;transition:transform .4s}
 .cat-ban:hover{transform:translateY(-4px)}
 .cat-ban .cb-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s}
 .cat-ban:hover .cb-bg{transform:scale(1.05)}
@@ -273,27 +274,33 @@
 
 <!-- CATEGORY BANNERS -->
 <div class="cat-banners">
-<div class="cat-ban cb-7" onclick="filterSuper('S')">
+<a href="/catalogue/sauces-curry" class="cat-ban cb-7">
 <div class="cb-bg" id="cat-img-sauces"></div>
 <div class="cb-label"><h3 id="cat-ban-1-h3">Sauces & <em>Curry</em></h3><div class="cb-count" id="cnt-S"></div></div>
-</div>
-<div class="cat-ban cb-5" onclick="filterSuper('F')">
+</a>
+<a href="/catalogue/fresh-produce" class="cat-ban cb-5">
 <div class="cb-bg" id="cat-img-fresh"></div>
 <div class="cb-label"><h3 id="cat-ban-2-h3">Fresh <em>Produce</em></h3><div class="cb-count" id="cnt-F"></div></div>
-</div>
-<div class="cat-ban cb-4" onclick="filterSuper('Z')">
+</a>
+<a href="/catalogue/frozen-range" class="cat-ban cb-4">
 <div class="cb-bg" id="cat-img-frozen"></div>
 <div class="cb-label"><h3 id="cat-ban-3-h3">Frozen <em>Range</em></h3><div class="cb-count" id="cnt-Z"></div></div>
-</div>
-<div class="cat-ban cb-4" onclick="filterSuper('P')">
+</a>
+<a href="/catalogue/pantry-dry-goods" class="cat-ban cb-4">
 <div class="cb-bg" id="cat-img-pantry"></div>
 <div class="cb-label"><h3 id="cat-ban-4-h3">Pantry & <em>Dry Goods</em></h3><div class="cb-count" id="cnt-P"></div></div>
-</div>
-<div class="cat-ban cb-4" onclick="filterSuper('D')">
+</a>
+<a href="/catalogue/beverages-drinks" class="cat-ban cb-4">
 <div class="cb-bg" id="cat-img-drinks"></div>
 <div class="cb-label"><h3 id="cat-ban-5-h3">Beverages & <em>Drinks</em></h3><div class="cb-count" id="cnt-D"></div></div>
+</a>
 </div>
-</div>
+
+
+
+
+
+
 
 
 
@@ -435,7 +442,7 @@
           <img src="/images/logo.png" alt="Chuanglee" />
           <div class="brand-name">Chuanglee<span>Est. 1989</span></div>
         </div><p>Family-run UK importer, manufacturing partner and foodservice distributor — bringing authentic East Asian ingredients from soil to stove since 1989.</p></div>
-<div class="foot-col"><h5>Explore</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="brands.html">Our Brands</a></li><li><a href="farm.html">Suree's Farm</a></li><li><a href="index.html#heritage">Heritage</a></li></ul></div>
+<div class="foot-col"><h5>Explore</h5><ul><li><a href="catalogue.html">Catalogue</a></li><li><a href="brands.html">Our Brands</a></li><li><a href="farm.html">Suree's Farm</a></li><li><a href="index.html#heritage">Heritage</a></li><li><a href="https://chuanglee.cc" target="_blank" rel="noopener">Cash &amp; Carry ↗</a></li></ul></div>
 <div class="foot-col"><h5>Trade</h5><ul><li><a href="catalogue.html">Order Online</a></li><li><a href="contact.html">Open Account</a></li><li><a href="contact.html">Bespoke Manufacturing</a></li></ul></div>
 <div class="foot-col"><h5>Contact</h5><ul><li><a href="mailto:sales@chuanglee.co.uk">sales@chuanglee.co.uk</a></li><li><a href="tel:08453881688">0845 388 1688</a></li><li>Unit 7-9 Meridian Trading Estate</li><li>Bugsby Way, London SE7 7SJ</li></ul></div>
 </div>
