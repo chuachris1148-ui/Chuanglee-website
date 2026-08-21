@@ -436,7 +436,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://chuanglee.co.uk/brands/bala-bala</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://chuanglee.co.uk/brands/busaba</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://chuanglee.co.uk/brands/chang</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -487,6 +497,11 @@
   </url>
   <url>
     <loc>https://chuanglee.co.uk/brands/kirin</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://chuanglee.co.uk/brands/kwong-cheong-thye</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

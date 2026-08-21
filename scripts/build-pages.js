@@ -293,23 +293,61 @@ ${links}
 ${END}`;
 }
 
+// The index goes ABOVE the search grid. Placed after it, the 2,618 cards the
+// grid renders push it to 99% of a 132,000px page — 182 screens of scrolling,
+// which is not navigation.
+const CAT_ANCHOR = '<!-- FILTER BAR -->';
+
 function injectIndex(cats) {
   const p = path.join(ROOT, 'catalogue.html');
   let s = fs.readFileSync(p, 'utf8');
   const block = indexBlock(cats);
 
+  // Always strip any previous block first, so re-runs reposition rather than
+  // leaving a stale copy behind wherever it used to sit.
   const from = s.indexOf(START);
   const to = s.indexOf(END);
   if (from !== -1 && to !== -1 && to > from) {
-    // Plain slicing rather than a regex: the markers contain characters that
-    // would need escaping, and there is only ever one block to replace.
-    s = s.slice(0, from) + block + s.slice(to + END.length);
-  } else {
-    const at = s.lastIndexOf('<footer');
-    if (at === -1) throw new Error('catalogue.html: no <footer> to insert before');
-    s = s.slice(0, at) + block + '\n\n' + s.slice(at);
+    s = s.slice(0, from) + s.slice(to + END.length);
   }
+
+  let at = s.indexOf(CAT_ANCHOR);
+  if (at === -1) at = s.lastIndexOf('<footer');
+  if (at === -1) throw new Error('catalogue.html: nowhere to insert the index');
+  s = s.slice(0, at) + block + '\n\n' + s.slice(at);
+
   fs.writeFileSync(p, s);
+}
+
+// The 24 featured cards on brands.html link into the JS grid via
+// catalogue.html?brand=X. Where a real brand page now exists, point at it
+// instead. Card ids are already "bc-<slug>", so they map directly.
+function retargetBrandCards(brands) {
+  const p = path.join(ROOT, 'brands.html');
+  let s = fs.readFileSync(p, 'utf8');
+  let hits = 0;
+
+  for (const b of brands) {
+    const marker = `id="bc-${b.slug}"`;
+    const at = s.indexOf(marker);
+    if (at === -1) continue;
+
+    const tagStart = s.lastIndexOf('<a ', at);
+    if (tagStart === -1 || tagStart > at) continue;
+    const hrefStart = s.indexOf('href="', tagStart);
+    if (hrefStart === -1 || hrefStart > at) continue;
+    const valueStart = hrefStart + 'href="'.length;
+    const valueEnd = s.indexOf('"', valueStart);
+    if (valueEnd === -1) continue;
+
+    const target = `/brands/${b.slug}`;
+    if (s.slice(valueStart, valueEnd) === target) { hits++; continue; }
+    s = s.slice(0, valueStart) + target + s.slice(valueEnd);
+    hits++;
+  }
+
+  fs.writeFileSync(p, s);
+  return hits;
 }
 
 /* ---------- sitemap ---------- */
@@ -552,6 +590,7 @@ for (const [dir, pages, render] of [
 
 injectIndex(cats);
 injectBrandIndex(brands);
+const retargeted = retargetBrandCards(brands);
 const urlCount = writeSitemap(cats, brands);
 
 const catProducts = cats.reduce((a, c) => a + c.items.length, 0);
@@ -559,3 +598,4 @@ const brandProducts = brands.reduce((a, b) => a + b.items.length, 0);
 console.log(`${cats.length} category pages -> catalogue/   (${catProducts} products)`);
 console.log(`${brands.length} brand pages    -> brands/      (${brandProducts} products)`);
 console.log(`sitemap.xml: ${urlCount} urls`);
+console.log(`${retargeted} featured brand cards on brands.html now link to brand pages`);

@@ -1,48 +1,157 @@
 {
-  "AROY-D":          ["AROY-D", "AROY D", "AROYD"],
-  "Mae Ploy":        ["MAE PLOY", "MAEPLOY"],
-  "Healthy Boy":     ["HEALTHY BOY", "HBOY"],
-  "Megachef":        ["MEGACHEF"],
-  "Chaokoh":         ["CHAOKOH"],
-  "Cock Brand":      ["COCK "],
-  "Golden Mountain": ["GOLDEN MOUNTAIN"],
-  "Por Kwan":        ["POR KWAN", "PORKWAN"],
-  "Sriraja Panich":  ["SRIRAJA"],
-  "Singha":          ["SINGHA"],
-  "Tsingtao":        ["TSINGTAO"],
-  "Maggi":           ["MAGGI"],
-  "Kikkoman":        ["KIKKOMAN"],
-  "Lee Kum Kee":     ["LEE KUM KEE", "LKK "],
-  "Nittaya":         ["NITTAYA"],
-  "Wai Wai":         ["WAI WAI"],
-  "FOCO":            ["FOCO"],
-  "Manora":          ["MANORA"],
-  "Khaohom":         ["KHAOHOM"],
-  "Chatramue":       ["CHATRAMUE", "CHA TRA MUE"],
-  "Squid Brand":     ["SQUID"],
-  "Pantai":          ["PANTAI"],
-  "Valcom":          ["VALCOM"],
-  "Nongshim":        ["NONGSHIM"],
-  "Samyang":         ["SAMYANG"],
-  "Mama":            ["MAMA "],
-  "Mizkan":          ["MIZKAN"],
-  "Kimlan":          ["KIMLAN"],
-  "Amoy":            ["AMOY"],
-  "Ottogi":          ["OTTOGI"],
-  "Kirin":           ["KIRIN"],
-  "Hylander":        ["HYLANDER"],
-  "Shinho":          ["SHINHO"],
-  "Fuchi":           ["FUCHI"],
-  "PFP":             ["PFP"],
-  "PA Foods":        ["PA "],
-  "Dollee":          ["DOLLEE"],
-  "Pearl River":     ["PEARL RIVER"],
-  "Thai Wah":        ["THAI WAH"],
-  "Yee Kwan":        ["YEE KWAN"],
-  "Blue Dragon":     ["BLUE DRAGON"],
-  "Busaba":          ["BUSABA"],
-  "East Asia":       ["EAST ASIA"],
-  "Winner":          ["WINNER"],
-  "Heera":           ["HEERA"],
-  "Winflo":          ["WINFLO"]
+  "AROY-D": [
+    "AROY-D",
+    "AROY D",
+    "AROYD"
+  ],
+  "Amoy": [
+    "AMOY"
+  ],
+  "Bala Bala": [
+    "BALA"
+  ],
+  "Blue Dragon": [
+    "BLUE DRAGON"
+  ],
+  "Busaba": [
+    "BUSABA"
+  ],
+  "Chang": [
+    "CHANG"
+  ],
+  "Chaokoh": [
+    "CHAOKOH"
+  ],
+  "Chatramue": [
+    "CHATRAMUE",
+    "CHA TRA MUE"
+  ],
+  "Cock Brand": [
+    "COCK "
+  ],
+  "Dollee": [
+    "DOLLEE"
+  ],
+  "East Asia": [
+    "EAST ASIA"
+  ],
+  "FOCO": [
+    "FOCO"
+  ],
+  "Fuchi": [
+    "FUCHI"
+  ],
+  "Golden Mountain": [
+    "GOLDEN MOUNTAIN"
+  ],
+  "Healthy Boy": [
+    "HEALTHY BOY",
+    "HBOY"
+  ],
+  "Heera": [
+    "HEERA"
+  ],
+  "Hylander": [
+    "HYLANDER"
+  ],
+  "Khaohom": [
+    "KHAOHOM"
+  ],
+  "Kikkoman": [
+    "KIKKOMAN"
+  ],
+  "Kimlan": [
+    "KIMLAN"
+  ],
+  "Kirin": [
+    "KIRIN"
+  ],
+  "Kwong Cheong Thye": [
+    "KWONG CHEONG THYE",
+    "KCT"
+  ],
+  "Lee Kum Kee": [
+    "LEE KUM KEE",
+    "LKK "
+  ],
+  "Mae Ploy": [
+    "MAE PLOY",
+    "MAEPLOY"
+  ],
+  "Maggi": [
+    "MAGGI"
+  ],
+  "Mama": [
+    "MAMA "
+  ],
+  "Manora": [
+    "MANORA"
+  ],
+  "Megachef": [
+    "MEGACHEF"
+  ],
+  "Mizkan": [
+    "MIZKAN"
+  ],
+  "Nittaya": [
+    "NITTAYA"
+  ],
+  "Nongshim": [
+    "NONGSHIM"
+  ],
+  "Ottogi": [
+    "OTTOGI"
+  ],
+  "PA Foods": [
+    "PA "
+  ],
+  "PFP": [
+    "PFP"
+  ],
+  "Pantai": [
+    "PANTAI"
+  ],
+  "Pearl River": [
+    "PEARL RIVER"
+  ],
+  "Por Kwan": [
+    "POR KWAN",
+    "PORKWAN"
+  ],
+  "Samyang": [
+    "SAMYANG"
+  ],
+  "Shinho": [
+    "SHINHO"
+  ],
+  "Singha": [
+    "SINGHA"
+  ],
+  "Squid Brand": [
+    "SQUID"
+  ],
+  "Sriraja Panich": [
+    "SRIRAJA"
+  ],
+  "Thai Wah": [
+    "THAI WAH"
+  ],
+  "Tsingtao": [
+    "TSINGTAO"
+  ],
+  "Valcom": [
+    "VALCOM"
+  ],
+  "Wai Wai": [
+    "WAI WAI"
+  ],
+  "Winflo": [
+    "WINFLO"
+  ],
+  "Winner": [
+    "WINNER"
+  ],
+  "Yee Kwan": [
+    "YEE KWAN"
+  ]
 }
