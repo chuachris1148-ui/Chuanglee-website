@@ -48,16 +48,27 @@ function loadCategories() {
     const name = caseName || singleName;
     if (!name) continue;
 
-    if (!groups.has(cat)) groups.set(cat, []);
-    groups.get(cat).push({
+    // Group case-insensitively: the data carries "Busaba"/"busaba" and
+    // "Coconut product"/"Coconut Product", which would otherwise split one
+    // category across two pages and strand the smaller half below the
+    // minimum. Display name is whichever casing is most common.
+    const key = cat.toLowerCase();
+    if (!groups.has(key)) groups.set(key, { items: [], casings: new Map() });
+    const g = groups.get(key);
+    g.casings.set(cat, (g.casings.get(cat) || 0) + 1);
+    g.items.push({
       code: String(r[COL.code] || '').trim(),
       name,
       single: caseName && singleName ? singleName : '',
     });
   }
 
-  const kept = [...groups.entries()]
-    .filter(([, items]) => items.length >= MIN_PRODUCTS)
+  const kept = [...groups.values()]
+    .filter(g => g.items.length >= MIN_PRODUCTS)
+    .map(g => {
+      const label = [...g.casings.entries()].sort((a, b) => b[1] - a[1])[0][0];
+      return [label, g.items];
+    })
     .sort((a, b) => a[0].localeCompare(b[0]));
 
   // Guard against two category names slugging to the same file.
