@@ -481,6 +481,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://chuanglee.co.uk/brands/golden-mountain</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://chuanglee.co.uk/brands/healthy-boy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -586,7 +591,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://chuanglee.co.uk/brands/sriraja-panich</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://chuanglee.co.uk/brands/tsingtao</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://chuanglee.co.uk/brands/wai-wai</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
