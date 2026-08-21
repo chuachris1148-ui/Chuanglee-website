@@ -1,13 +1,21 @@
 /*
- * Generates a crawlable page per product category from content/products.json.
+ * Generates crawlable category and brand pages from content/products.json.
  *
  * Why this exists: the catalogue grid is built client-side from a 210KB JSON
- * file, so none of the 2,652 product names appear in any HTML Google can read.
- * Rather than emit one page per product — which would be ~40 words of unique
- * text each, i.e. thin content at scale — this groups products into category
- * pages that carry real listings.
+ * file, so none of the 2,652 product names appear in any HTML Google can read,
+ * and no product has a URL of its own.
  *
- * Run after products.json changes:   node scripts/build-catalogue.js
+ * One page per product would be ~40 words of unique text each — thin content
+ * at 2,652x scale. Grouping instead gives pages with real listings on them:
+ *
+ *   /catalogue/<slug>   by category, for "thai curry paste wholesale"
+ *   /brands/<slug>      by brand, for "nittaya curry paste"
+ *
+ * Brand pages are the ones that answer a branded product search, because the
+ * title pairs the brand with what it makes.
+ *
+ * Run after products.json or brand-map.json changes:
+ *   node scripts/build-pages.js
  */
 
 const fs = require('fs');
@@ -16,6 +24,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const ORIGIN = 'https://chuanglee.co.uk';
 const OUT_DIR = path.join(ROOT, 'catalogue');
+const BRAND_DIR = path.join(ROOT, 'brands');
 const MIN_PRODUCTS = 3;   // below this a page is too thin to be worth indexing
 
 // products.json rows: [code, category, storageFlag, singleUnitName, caseName]
@@ -305,7 +314,7 @@ function injectIndex(cats) {
 
 /* ---------- sitemap ---------- */
 
-function writeSitemap(cats) {
+function writeSitemap(cats, brands) {
   const main = [
     ['/', 'weekly', '1.0'], ['/catalogue', 'weekly', '0.9'], ['/brands', 'monthly', '0.8'],
     ['/farm', 'monthly', '0.7'], ['/delivery', 'monthly', '0.7'],
@@ -314,6 +323,9 @@ function writeSitemap(cats) {
   const urls = [
     ...main.map(([p, f, pr]) => ({ loc: ORIGIN + p, f, pr })),
     ...cats.map(c => ({ loc: `${ORIGIN}/catalogue/${c.slug}`, f: 'monthly', pr: '0.6' })),
+    // Brand pages carry the branded-search intent, so they rank above
+    // categories in priority.
+    ...brands.map(b => ({ loc: `${ORIGIN}/brands/${b.slug}`, f: 'monthly', pr: '0.7' })),
   ];
   const body = urls.map(u =>
     `  <url>\n    <loc>${u.loc}</loc>\n    <changefreq>${u.f}</changefreq>\n    <priority>${u.pr}</priority>\n  </url>`
@@ -323,20 +335,227 @@ function writeSitemap(cats) {
   return urls.length;
 }
 
+/* main lives at the end of this file */
+
+/* ---------- brand pages ---------- */
+
+const MIN_BRAND_PRODUCTS = 3;
+
+// Whole-token comparison without regex escaping: both sides collapse every
+// non-alphanumeric run to a single space, so "AROY-D" matches "AROY D" and
+// alias "PA" can never match inside "PANANG".
+function tokens(s) {
+  return ' ' + String(s).toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim() + ' ';
+}
+
+function loadBrands(cats) {
+  const map = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/brand-map.json'), 'utf8'));
+
+  // Longest alias first: "LEE KUM KEE" must win before a shorter alias could
+  // claim the same product.
+  const pairs = Object.entries(map)
+    .flatMap(([brand, aliases]) => aliases.map(a => [tokens(a).trim(), brand]))
+    .sort((x, y) => y[0].length - x[0].length);
+
+  const groups = new Map();
+  for (const cat of cats) {
+    for (const item of cat.items) {
+      const hay = tokens(item.name);
+      const hit = pairs.find(([alias]) => hay.includes(' ' + alias + ' '));
+      if (!hit) continue;
+      const brand = hit[1];
+      if (!groups.has(brand)) groups.set(brand, { items: [], cats: new Map() });
+      const g = groups.get(brand);
+      g.items.push(item);
+      g.cats.set(cat.name, (g.cats.get(cat.name) || 0) + 1);
+    }
+  }
+
+  const seen = new Set();
+  return [...groups.entries()]
+    .filter(([, g]) => g.items.length >= MIN_BRAND_PRODUCTS)
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([name, g]) => {
+      let slug = slugify(name), s = slug, n = 2;
+      while (seen.has(s)) s = `${slug}-${n++}`;
+      seen.add(s);
+      g.items.sort((a, b) => a.name.localeCompare(b.name));
+      // The category the brand is best known for, used in the page title so it
+      // targets "<brand> <product type>" rather than the bare brand name.
+      const topCat = [...g.cats.entries()].sort((a, b) => b[1] - a[1])[0][0];
+      return { name, slug, items: g.items, topCat };
+    });
+}
+
+function brandPage(brand, all) {
+  const url = `${ORIGIN}/brands/${brand.slug}`;
+  // Titles read "Nittaya Thai Curry Paste — Wholesale UK", so the page targets
+  // the way people actually search: brand plus what the brand makes. Category
+  // names like "Thai curry paste/powder" keep only the part before the slash —
+  // "Thai Curry Paste" is the phrase someone types, "paste powder" is not.
+  const kind = brand.topCat
+    .split('/')[0]
+    .trim()
+    .replace(/\b[a-z]/g, c => c.toUpperCase());
+  const title = `${brand.name} ${kind} — Wholesale UK | Chuanglee`;
+  const desc = `${brand.name} ${kind} for foodservice — ${brand.items.length} lines `
+             + `stocked and delivered across London and nationwide by Chuanglee, `
+             + `East Asian importer and distributor since 1989.`;
+
+  const items = brand.items.map(p => `      <li>
+        <span class="pn">${esc(p.name)}${p.single ? `<span class="pv">Also single: ${esc(p.single)}</span>` : ''}</span>
+        <span class="pc">#${esc(p.code)}</span>
+      </li>`).join('\n');
+
+  const others = all.filter(b => b.slug !== brand.slug)
+    .map(b => `<a href="/brands/${b.slug}">${esc(b.name)}</a>`).join('');
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${brand.name} — wholesale from Chuanglee`,
+    description: desc,
+    url,
+    about: { '@type': 'Brand', name: brand.name },
+    isPartOf: { '@type': 'WebSite', name: 'Chuanglee', url: `${ORIGIN}/` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: brand.items.length,
+      itemListElement: brand.items.slice(0, 100).map((p, i) => ({
+        '@type': 'ListItem', position: i + 1, name: p.name,
+      })),
+    },
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="${url}" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="${esc(title)}" />
+<meta property="og:description" content="${esc(desc)}" />
+<meta property="og:url" content="${url}" />
+<meta property="og:image" content="${ORIGIN}/images/logo.png" />
+<meta property="og:site_name" content="Chuanglee" />
+<meta property="og:locale" content="en_GB" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+<style>${PAGE_CSS}</style>
+<script type="application/ld+json">
+${JSON.stringify(ld, null, 2)}
+</script>
+</head>
+<body data-page="brand">
+${NAV(brand.slug)}
+
+<section class="cat-hero">
+  <div class="eyebrow"><a href="/brands" style="color:inherit">Brands</a> → ${esc(brand.name)}</div>
+  <h1>${esc(brand.name)}</h1>
+  <p>${brand.items.length} ${esc(brand.name)} lines stocked for foodservice wholesale, delivered across London and nationwide. Product codes shown are case codes unless noted.</p>
+</section>
+
+<div class="cat-wrap">
+  <ul class="cat-list">
+${items}
+  </ul>
+
+  <div class="cat-cta">
+    <p>Need pricing or availability on ${esc(brand.name)}?</p>
+    <a href="/contact">Open a trade account →</a>
+  </div>
+
+  <div class="cat-other">
+    <h2>Other brands we stock</h2>
+    <div class="links">${others}</div>
+  </div>
+</div>
+
+${FOOTER}
+<script src="/script.js"></script>
+<script src="/content-loader.js"></script>
+</body>
+</html>
+`;
+}
+
+/* ---------- brands.html index block ---------- */
+
+const B_START = '<!-- BRAND-INDEX:START (generated by scripts/build-pages.js) -->';
+const B_END = '<!-- BRAND-INDEX:END -->';
+
+function injectBrandIndex(brands) {
+  const p = path.join(ROOT, 'brands.html');
+  let s = fs.readFileSync(p, 'utf8');
+
+  const links = brands.map(b =>
+    `      <li><a href="/brands/${b.slug}">${esc(b.name)}</a> <span>${b.items.length}</span></li>`
+  ).join('\n');
+
+  const block = `${B_START}
+<section class="cat-index">
+  <div class="ci-inner">
+    <h2>Every brand we stock</h2>
+    <p>Full product lists by brand, with case codes.</p>
+    <ul class="ci-list">
+${links}
+    </ul>
+  </div>
+</section>
+<style>
+.cat-index{max-width:1200px;margin:0 auto;padding:56px 48px}
+.cat-index h2{font-family:var(--display);font-weight:400;font-size:clamp(24px,3vw,36px);letter-spacing:-.02em;margin-bottom:8px}
+.cat-index > .ci-inner > p{color:var(--ink-soft);font-size:15px;margin-bottom:24px}
+.ci-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2px 24px}
+.ci-list li{display:flex;justify-content:space-between;gap:12px;padding:9px 2px;border-bottom:1px solid var(--rule);font-size:14px}
+.ci-list a{color:var(--ink);text-decoration:none}
+.ci-list a:hover{color:var(--vermillion)}
+.ci-list span{color:var(--ink-soft);font-size:12px;font-variant-numeric:tabular-nums}
+@media(max-width:800px){.cat-index{padding:40px 22px}}
+</style>
+${B_END}`;
+
+  const from = s.indexOf(B_START);
+  const to = s.indexOf(B_END);
+  if (from !== -1 && to !== -1 && to > from) {
+    s = s.slice(0, from) + block + s.slice(to + B_END.length);
+  } else {
+    const at = s.lastIndexOf('<footer');
+    if (at === -1) throw new Error('brands.html: no <footer> to insert before');
+    s = s.slice(0, at) + block + '\n\n' + s.slice(at);
+  }
+  fs.writeFileSync(p, s);
+}
+
 /* ---------- main ---------- */
 
 const cats = loadCategories();
-fs.rmSync(OUT_DIR, { recursive: true, force: true });
-fs.mkdirSync(OUT_DIR, { recursive: true });
+const brands = loadBrands(cats);
 
-let products = 0;
-for (const c of cats) {
-  fs.writeFileSync(path.join(OUT_DIR, `${c.slug}.html`), categoryPage(c, cats));
-  products += c.items.length;
+for (const [dir, pages, render] of [
+  [OUT_DIR, cats, c => categoryPage(c, cats)],
+  [BRAND_DIR, brands, b => brandPage(b, brands)],
+]) {
+  fs.rmSync(dir, { recursive: true, force: true });
+  fs.mkdirSync(dir, { recursive: true });
+  for (const p of pages) fs.writeFileSync(path.join(dir, `${p.slug}.html`), render(p));
 }
-injectIndex(cats);
-const urlCount = writeSitemap(cats);
 
-console.log(`${cats.length} category pages -> catalogue/`);
-console.log(`${products} products rendered as HTML`);
+injectIndex(cats);
+injectBrandIndex(brands);
+const urlCount = writeSitemap(cats, brands);
+
+const catProducts = cats.reduce((a, c) => a + c.items.length, 0);
+const brandProducts = brands.reduce((a, b) => a + b.items.length, 0);
+console.log(`${cats.length} category pages -> catalogue/   (${catProducts} products)`);
+console.log(`${brands.length} brand pages    -> brands/      (${brandProducts} products)`);
 console.log(`sitemap.xml: ${urlCount} urls`);
