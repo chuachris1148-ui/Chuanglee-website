@@ -28,7 +28,7 @@ const BRAND_DIR = path.join(ROOT, 'brands');
 const MIN_PRODUCTS = 3;   // below this a page is too thin to be worth indexing
 
 // products.json rows: [code, category, storageFlag, singleUnitName, caseName]
-const COL = { code: 0, category: 1, single: 3, name: 4 };
+const COL = { code: 0, category: 1, flag: 2, single: 3, name: 4 };
 
 const esc = s => String(s ?? '')
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -127,7 +127,7 @@ const FOOTER = `
           <img src="/images/logo.png" alt="Chuanglee" />
           <div class="brand-name">Chuanglee<span>Est. 1989</span></div>
         </div><p>Family-run UK importer, manufacturing partner and foodservice distributor — bringing authentic East Asian ingredients from soil to stove since 1989.</p></div>
-      <div class="foot-col"><h5>Explore</h5><ul><li><a href="/catalogue">Catalogue</a></li><li><a href="/brands">Our Brands</a></li><li><a href="/farm">Suree's Farm</a></li><li><a href="/#heritage">Heritage</a></li></ul></div>
+      <div class="foot-col"><h5>Explore</h5><ul><li><a href="/catalogue">Catalogue</a></li><li><a href="/brands">Our Brands</a></li><li><a href="/farm">Suree's Farm</a></li><li><a href="/#heritage">Heritage</a></li><li><a href="https://chuanglee.cc" target="_blank" rel="noopener">Cash &amp; Carry ↗</a></li></ul></div>
       <div class="foot-col"><h5>Trade</h5><ul><li><a href="/catalogue">Order Online</a></li><li><a href="/contact">Open Account</a></li><li><a href="/contact">Bespoke Manufacturing</a></li></ul></div>
       <div class="foot-col"><h5>Contact</h5><ul><li><a href="mailto:sales@chuanglee.co.uk">sales@chuanglee.co.uk</a></li><li><a href="tel:08453881688">0845 388 1688</a></li><li>Unit 7-9 Meridian Trading Estate</li><li>Bugsby Way, London SE7 7SJ</li></ul></div>
     </div>
@@ -352,7 +352,7 @@ function retargetBrandCards(brands) {
 
 /* ---------- sitemap ---------- */
 
-function writeSitemap(cats, brands) {
+function writeSitemap(cats, brands, supers) {
   const main = [
     ['/', 'weekly', '1.0'], ['/catalogue', 'weekly', '0.9'], ['/brands', 'monthly', '0.8'],
     ['/farm', 'monthly', '0.7'], ['/delivery', 'monthly', '0.7'],
@@ -360,6 +360,7 @@ function writeSitemap(cats, brands) {
   ];
   const urls = [
     ...main.map(([p, f, pr]) => ({ loc: ORIGIN + p, f, pr })),
+    ...supers.map(x => ({ loc: `${ORIGIN}/catalogue/${x.slug}`, f: 'monthly', pr: '0.8' })),
     ...cats.map(c => ({ loc: `${ORIGIN}/catalogue/${c.slug}`, f: 'monthly', pr: '0.6' })),
     // Brand pages carry the branded-search intent, so they rank above
     // categories in priority.
@@ -574,10 +575,149 @@ ${B_END}`;
   fs.writeFileSync(p, s);
 }
 
+
+
+/* ---------- super-group pages ---------- */
+
+// The five tiles at the top of /catalogue filter on the storage flag in
+// column 2, not on category. They were plain divs with an onclick, so they
+// passed no authority to anything. These pages give them a real destination.
+const SUPER = [
+  { flag: 'S', slug: 'sauces-curry',      name: 'Sauces & Curry' },
+  { flag: 'F', slug: 'fresh-produce',     name: 'Fresh Produce' },
+  { flag: 'Z', slug: 'frozen-range',      name: 'Frozen Range' },
+  { flag: 'P', slug: 'pantry-dry-goods',  name: 'Pantry & Dry Goods' },
+  { flag: 'D', slug: 'beverages-drinks',  name: 'Beverages & Drinks' },
+];
+
+function loadSuperGroups(cats) {
+  const rows = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/products.json'), 'utf8'));
+
+  // Seven categories carry products under two different flags. Assign each
+  // category to whichever flag holds most of it, so it appears on exactly one
+  // super-group page rather than being listed twice.
+  const flagCounts = new Map();
+  for (const r of rows) {
+    const flag = String(r[COL.flag] || '').trim();
+    const cat = String(r[COL.category] || '').trim().toLowerCase();
+    if (!flag || !cat) continue;
+    if (!flagCounts.has(cat)) flagCounts.set(cat, new Map());
+    const m = flagCounts.get(cat);
+    m.set(flag, (m.get(flag) || 0) + 1);
+  }
+
+  const dominant = new Map();
+  for (const [cat, m] of flagCounts) {
+    dominant.set(cat, [...m.entries()].sort((a, b) => b[1] - a[1])[0][0]);
+  }
+
+  return SUPER.map(sg => ({
+    ...sg,
+    cats: cats.filter(c => dominant.get(c.name.toLowerCase()) === sg.flag),
+  })).filter(sg => sg.cats.length > 0);
+}
+
+function superPage(sg, all) {
+  const url = `${ORIGIN}/catalogue/${sg.slug}`;
+  const products = sg.cats.reduce((a, c) => a + c.items.length, 0);
+  const title = `${sg.name} — Wholesale Foodservice | Chuanglee`;
+  const desc = `${products} ${sg.name.toLowerCase()} lines across ${sg.cats.length} categories, `
+             + `stocked for foodservice wholesale by Chuanglee — East Asian importer and `
+             + `distributor delivering across London and nationwide since 1989.`;
+
+  const items = sg.cats.map(c => `      <li>
+        <span class="pn"><a href="/catalogue/${c.slug}">${esc(c.name)}</a></span>
+        <span class="pc">${c.items.length}</span>
+      </li>`).join('\n');
+
+  const others = all.filter(s => s.slug !== sg.slug)
+    .map(s => `<a href="/catalogue/${s.slug}">${esc(s.name)}</a>`).join('');
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${sg.name} — Chuanglee`,
+    description: desc,
+    url,
+    isPartOf: { '@type': 'WebSite', name: 'Chuanglee', url: `${ORIGIN}/` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: sg.cats.length,
+      itemListElement: sg.cats.map((c, i) => ({
+        '@type': 'ListItem', position: i + 1, name: c.name,
+        url: `${ORIGIN}/catalogue/${c.slug}`,
+      })),
+    },
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="${url}" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="${esc(title)}" />
+<meta property="og:description" content="${esc(desc)}" />
+<meta property="og:url" content="${url}" />
+<meta property="og:image" content="${ORIGIN}/images/logo.png" />
+<meta property="og:site_name" content="Chuanglee" />
+<meta property="og:locale" content="en_GB" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+<style>${PAGE_CSS}
+.cat-list .pn a{color:var(--ink);text-decoration:none}
+.cat-list .pn a:hover{color:var(--vermillion)}</style>
+<script type="application/ld+json">
+${JSON.stringify(ld, null, 2)}
+</script>
+</head>
+<body data-page="supergroup">
+${NAV(sg.slug)}
+
+<section class="cat-hero">
+  <div class="eyebrow"><a href="/catalogue" style="color:inherit">Catalogue</a> → ${esc(sg.name)}</div>
+  <h1>${esc(sg.name)}</h1>
+  <p>${products} products across ${sg.cats.length} categories, available for foodservice wholesale across London and nationwide.</p>
+</section>
+
+<div class="cat-wrap">
+  <ul class="cat-list">
+${items}
+  </ul>
+
+  <div class="cat-cta">
+    <p>Need pricing or availability?</p>
+    <a href="/contact">Open a trade account →</a>
+  </div>
+
+  <div class="cat-other">
+    <h2>Other ranges</h2>
+    <div class="links">${others}</div>
+  </div>
+</div>
+
+${FOOTER}
+<script src="/script.js"></script>
+<script src="/content-loader.js"></script>
+</body>
+</html>
+`;
+}
+
 /* ---------- main ---------- */
 
 const cats = loadCategories();
 const brands = loadBrands(cats);
+const supers = loadSuperGroups(cats);
 
 for (const [dir, pages, render] of [
   [OUT_DIR, cats, c => categoryPage(c, cats)],
@@ -588,14 +728,72 @@ for (const [dir, pages, render] of [
   for (const p of pages) fs.writeFileSync(path.join(dir, `${p.slug}.html`), render(p));
 }
 
+for (const sg of supers) {
+  fs.writeFileSync(path.join(OUT_DIR, `${sg.slug}.html`), superPage(sg, supers));
+}
+
 injectIndex(cats);
 injectBrandIndex(brands);
 const retargeted = retargetBrandCards(brands);
-const urlCount = writeSitemap(cats, brands);
+const tiles = linkSuperTiles(supers);
+const urlCount = writeSitemap(cats, brands, supers);
 
 const catProducts = cats.reduce((a, c) => a + c.items.length, 0);
 const brandProducts = brands.reduce((a, b) => a + b.items.length, 0);
 console.log(`${cats.length} category pages -> catalogue/   (${catProducts} products)`);
 console.log(`${brands.length} brand pages    -> brands/      (${brandProducts} products)`);
+console.log(`${supers.length} super-group pages -> catalogue/`);
 console.log(`sitemap.xml: ${urlCount} urls`);
 console.log(`${retargeted} featured brand cards on brands.html now link to brand pages`);
+console.log(`${tiles} catalogue tiles converted to real links`);
+
+/* ---------- make the catalogue tiles real links ---------- */
+
+// The five tiles were <div onclick="filterSuper('S')"> — no href, so no crawl
+// path and no authority passed to anything. Convert each to an anchor pointing
+// at its super-group page. Requires retagging the matching </div> too, so scan
+// forward keeping a depth count rather than guessing.
+function linkSuperTiles(supers) {
+  const p = path.join(ROOT, 'catalogue.html');
+  let s = fs.readFileSync(p, 'utf8');
+  let converted = 0;
+
+  for (const sg of supers) {
+    const needle = `onclick="filterSuper('${sg.flag}')"`;
+    const hit = s.indexOf(needle);
+    if (hit === -1) continue;
+
+    const open = s.lastIndexOf('<div', hit);
+    if (open === -1) continue;
+    const openEnd = s.indexOf('>', hit);
+    if (openEnd === -1) continue;
+
+    // Walk forward to the </div> that closes this tile.
+    let depth = 1, i = openEnd + 1, closeStart = -1;
+    while (i < s.length && depth > 0) {
+      const nextOpen = s.indexOf('<div', i);
+      const nextClose = s.indexOf('</div>', i);
+      if (nextClose === -1) break;
+      if (nextOpen !== -1 && nextOpen < nextClose) { depth++; i = nextOpen + 4; }
+      else { depth--; if (depth === 0) closeStart = nextClose; i = nextClose + 6; }
+    }
+    if (closeStart === -1) continue;
+
+    const attrs = s.slice(open + '<div'.length, openEnd).replace(needle, '').trim();
+    const anchor = `<a href="/catalogue/${sg.slug}" ${attrs}>`;
+
+    s = s.slice(0, closeStart) + '</a>' + s.slice(closeStart + '</div>'.length);
+    s = s.slice(0, open) + anchor + s.slice(openEnd + 1);
+    converted++;
+  }
+
+  // An <a> in a grid blockifies on its own, but it still inherits link colour
+  // and underline, which would show through the tile label.
+  if (converted && !s.includes('/* tile-anchor reset */')) {
+    s = s.replace('.cat-ban{position:relative;',
+      '/* tile-anchor reset */\n.cat-ban{display:block;text-decoration:none;color:inherit;position:relative;');
+  }
+
+  fs.writeFileSync(p, s);
+  return converted;
+}
