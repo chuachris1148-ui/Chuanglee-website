@@ -222,6 +222,19 @@
 @media(max-width:600px){
   .quote-sidebar{max-height:80vh}
 }
+
+/* ===== FORM FALLBACK ===== */
+.form-fallback{padding:44px 32px;text-align:left}
+.form-fallback .mark{width:56px;height:56px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;margin:0 auto 20px;font-size:26px;font-weight:700}
+.form-fallback h3{font-family:var(--display);font-size:26px;font-weight:500;margin-bottom:10px;text-align:center}
+.form-fallback > p{font-size:14px;color:var(--ink-soft);line-height:1.6;text-align:center;max-width:54ch;margin:0 auto 20px}
+.form-fallback > p a{color:var(--vermillion);text-decoration:underline;text-underline-offset:3px}
+.form-fallback textarea{width:100%;min-height:190px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.55;color:var(--ink);background:var(--paper-2);border:1px solid var(--rule);border-radius:8px;padding:14px;resize:vertical}
+.form-fallback .fb-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.form-fallback .fb-btn{font-family:var(--body);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:12px 24px;border-radius:999px;border:0;cursor:pointer;background:var(--vermillion);color:var(--paper);text-decoration:none;display:inline-block}
+.form-fallback .fb-btn:hover{background:var(--vermillion-deep)}
+.form-fallback .fb-btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--rule)}
+.form-fallback .fb-btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 </style>
 </head>
 <body data-page="catalogue">
@@ -896,10 +909,64 @@ async function submitQuote() {
     document.getElementById('q-success').style.display = '';
   } catch (err) {
     console.error('EmailJS error:', err);
-    alert('Sorry, there was an error sending your quote. Please email us directly at sales@chuanglee.co.uk');
-    btn.disabled = false;
-    btn.textContent = 'Send Quote Request →';
+    var details = 'QUOTE REQUEST\n\n'
+                + 'Name: ' + first + ' ' + last + '\n'
+                + 'Email: ' + email + '\n'
+                + 'Phone: ' + (phone || 'Not provided') + '\n'
+                + 'Company: ' + company + '\n'
+                + 'Customer type: ' + type + '\n'
+                + 'Notes: ' + (notes || 'None') + '\n\n'
+                + '--- PRODUCTS (' + Object.keys(quoteItems).length + ') ---\n' + products;
+    enquiryFallback(document.getElementById('q-form-fields'), 'Quote request', details);
   }
+}
+
+
+/* ============================================================
+   Shared failure path for every form on the site.
+   EmailJS can fail for reasons that have nothing to do with this
+   page — an expired Outlook grant, a missing template. When it
+   does, the customer's details must survive: show them back,
+   ready to copy or mail, instead of an alert and an empty form.
+   ============================================================ */
+function enquiryFallback(formEl, heading, bodyText) {
+  if (!formEl) { alert('Sorry, there was an error. Please email sales@chuanglee.co.uk'); return; }
+
+  var wrap = document.createElement('div');
+  wrap.className = 'form-fallback';
+  wrap.setAttribute('role', 'alert');
+  wrap.innerHTML =
+    '<div class="mark">!</div>' +
+    '<h3>We could not send this automatically</h3>' +
+    '<p>Nothing you typed has been lost. Copy the details below and email them to ' +
+    '<a href="mailto:sales@chuanglee.co.uk">sales@chuanglee.co.uk</a>, ' +
+    'or call us on <a href="tel:08453881688">0845 388 1688</a> and we will take it over the phone.</p>' +
+    '<textarea readonly aria-label="Your details"></textarea>' +
+    '<div class="fb-actions">' +
+      '<button type="button" class="fb-btn" data-copy>Copy details</button>' +
+      '<a class="fb-btn ghost" data-mail>Open in email</a>' +
+    '</div>';
+
+  wrap.querySelector('textarea').value = bodyText;
+
+  // mailto has a practical URL ceiling, so the link carries a trimmed body
+  // while the textarea above always holds the full text.
+  var mail = wrap.querySelector('[data-mail]');
+  mail.href = 'mailto:sales@chuanglee.co.uk?subject=' + encodeURIComponent(heading) +
+              '&body=' + encodeURIComponent(bodyText.slice(0, 1400));
+
+  var copyBtn = wrap.querySelector('[data-copy]');
+  copyBtn.addEventListener('click', function () {
+    var done = function () { copyBtn.textContent = 'Copied'; };
+    var manual = function () { wrap.querySelector('textarea').select(); copyBtn.textContent = 'Press Ctrl+C'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(bodyText).then(done, manual);
+    } else { manual(); }
+  });
+
+  formEl.style.display = 'none';
+  formEl.parentNode.insertBefore(wrap, formEl.nextSibling);
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function resetQuote() {
