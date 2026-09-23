@@ -607,7 +607,7 @@ async function submitEnquiry(e) {
   btn.disabled = true;
   btn.textContent = 'Sending…';
   try {
-    await emailjs.send('service_gx55nsk', 'template_8mc9axm', {
+    await emailjs.send('service_09ytfx4', 'template_8mc9axm', {
       from_name: (fd.get('first_name')||'') + ' ' + (fd.get('last_name')||''),
       from_email: fd.get('email') || '',
       business_name: fd.get('business') || 'Not provided',
@@ -653,7 +653,7 @@ async function sendAccountEmail(includeCredit) {
   const today = new Date().toISOString().slice(0,10);
 
   try {
-    await emailjs.send('service_gx55nsk', 'template_account', {
+    await emailjs.send('service_09ytfx4', 'template_account', {
       // Header
       badge_class: includeCredit ? 'credit' : '',
       badge_label: includeCredit ? 'Account + Credit' : 'New Account',
