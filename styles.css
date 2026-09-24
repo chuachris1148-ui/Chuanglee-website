@@ -250,6 +250,8 @@ h1.headline .cjk {
   letter-spacing: 0;
 }
 
+/* h1.title: the contact page's main heading uses the same look */
+h1.title,
 h2.title {
   font-family: var(--display);
   font-weight: 400;
@@ -258,6 +260,7 @@ h2.title {
   letter-spacing: -0.025em;
   max-width: 16ch;
 }
+h1.title em,
 h2.title em { font-style: italic; color: var(--vermillion); font-weight: 300; }
 h2.title.center { margin: 0 auto; text-align: center; }
 
@@ -414,6 +417,31 @@ section.editorial {
 }
 
 /* ---------- Ecosystem ---------- */
+/* ---------- Who We Supply (home): Thai, Chinese, procurement ---------- */
+.supply { padding: 120px 48px; }
+.supply-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.supply-card { display: flex; flex-direction: column; }
+.supply-card h3 { max-width: 18ch; }
+.supply-links { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.supply-links a { display: inline-block; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px; font-size: 13px; transition: all 0.2s; }
+.supply-links a:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.supply-card .supply-brands { margin-top: auto; padding-top: 22px; font-size: 13px; }
+.supply-brands a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rule); }
+.supply-brands a:hover { color: var(--vermillion); text-decoration-color: currentColor; }
+.supply-card.dark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.supply-card.dark h3 { color: var(--paper); }
+.supply-card.dark .num { color: var(--gold); }
+.supply-card.dark p { color: rgba(244,237,225,0.75); }
+.supply-facts { list-style: none; display: grid; gap: 8px; margin: 22px 0 28px; font-size: 13px; }
+.supply-facts li { position: relative; padding-left: 20px; }
+.supply-facts li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+.supply-card.dark .btn-ghost { margin-top: auto; align-self: flex-start; color: var(--paper); border-color: var(--paper); }
+.supply-card.dark .btn-ghost:hover { background: var(--paper); color: var(--ink); }
+@media (max-width: 1100px) {
+  .supply { padding: 80px 24px; }
+  .supply-grid { grid-template-columns: 1fr; }
+}
+
 .ecosystem { padding: 120px 48px; max-width: 1440px; margin: 0 auto; }
 .eco-head { text-align: center; max-width: 700px; margin: 0 auto 80px; }
 .eco-head .eyebrow { justify-content: center; }
@@ -586,7 +614,7 @@ section.editorial {
 /* ---------- Contact ---------- */
 .contact { background: var(--paper-2); padding: 140px 48px; }
 .contact-inner { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 100px; align-items: start; }
-.contact h2.title { font-size: clamp(48px, 6.5vw, 92px); }
+.contact .title { font-size: clamp(48px, 6.5vw, 92px); }
 .contact .lead { font-size: 18px; line-height: 1.6; margin-top: 28px; color: var(--ink-soft); max-width: 44ch; }
 .contact-meta { margin-top: 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
 .contact-meta .item { border-top: 1px solid var(--ink); padding-top: 16px; }

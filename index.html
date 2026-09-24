@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chuanglee — Authentic East Asian Foodservice Since 1989</title>
-<meta name="description" content="Family-run UK importer, manufacturing partner and foodservice distributor specialising in authentic Thai, Chinese, Malaysian and Vietnamese ingredients. Trusted by 450+ kitchens since 1989." />
+<title>Asian Foodservice Wholesaler UK — Thai &amp; Chinese | Chuanglee</title>
+<meta name="description" content="Asian foodservice wholesaler and importer since 1989. Thai and Chinese ingredients for restaurants, chefs and procurement teams across London and the UK." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://chuanglee.co.uk/" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Chuanglee — Authentic East Asian Foodservice Since 1989" />
-<meta property="og:description" content="Family-run UK importer, manufacturing partner and foodservice distributor specialising in authentic Thai, Chinese, Malaysian and Vietnamese ingredients. Trusted by 450+ kitchens since 1989." />
+<meta property="og:title" content="Asian Foodservice Wholesaler UK — Thai &amp; Chinese | Chuanglee" />
+<meta property="og:description" content="Asian foodservice wholesaler and importer since 1989. Thai and Chinese ingredients for restaurants, chefs and procurement teams across London and the UK." />
 <meta property="og:url" content="https://chuanglee.co.uk/" />
 <meta property="og:image" content="https://chuanglee.co.uk/images/logo.png" />
 <meta property="og:site_name" content="Chuanglee" />
@@ -19,20 +19,25 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Chuanglee — Authentic East Asian Foodservice Since 1989" />
-<meta name="twitter:description" content="Family-run UK importer, manufacturing partner and foodservice distributor specialising in authentic Thai, Chinese, Malaysian and Vietnamese ingredients. Trusted by 450+ kitchens since 1989." />
+<meta name="twitter:title" content="Asian Foodservice Wholesaler UK — Thai &amp; Chinese | Chuanglee" />
+<meta name="twitter:description" content="Asian foodservice wholesaler and importer since 1989. Thai and Chinese ingredients for restaurants, chefs and procurement teams across London and the UK." />
 <meta name="twitter:image" content="https://chuanglee.co.uk/images/logo.png" />
 
-<!-- Schema.org -->
+<!-- Schema.org: a wholesaler, not a FoodEstablishment (Google's type for
+     restaurants). The other main pages point back to #organization. -->
 <script type="application/ld+json">
-  {
-      "@context": "https://schema.org",
-      "@type": "FoodEstablishment",
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WholesaleStore",
       "@id": "https://chuanglee.co.uk/#organization",
       "name": "Chuanglee Limited",
-      "url": "https://chuanglee.co.uk",
+      "alternateName": "Chuanglee Foodservice",
+      "url": "https://chuanglee.co.uk/",
       "logo": "https://chuanglee.co.uk/images/logo.png",
-      "description": "Family-run UK importer, manufacturing partner and foodservice distributor specialising in authentic Thai, Chinese, Malaysian and Vietnamese ingredients.",
+      "image": "https://chuanglee.co.uk/images/logo.png",
+      "description": "Asian foodservice wholesaler and importer supplying authentic Thai, Chinese, Malaysian and Vietnamese ingredients to restaurants, chefs and procurement teams across London and the UK.",
       "foundingDate": "1989",
       "telephone": "+448453881688",
       "email": "sales@chuanglee.co.uk",
@@ -43,9 +48,41 @@
         "postalCode": "SE7 7SJ",
         "addressCountry": "GB"
       },
-      "areaServed": "GB",
-      "sameAs": []
+      "areaServed": [
+        { "@type": "City", "name": "London" },
+        { "@type": "Country", "name": "United Kingdom" }
+      ],
+      "knowsAbout": [
+        "Asian foodservice",
+        "Thai foodservice",
+        "Chinese foodservice",
+        "Foodservice wholesale",
+        "Asian food import",
+        "Bespoke sauce manufacturing"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+448453881688",
+        "email": "sales@chuanglee.co.uk",
+        "areaServed": "GB",
+        "availableLanguage": ["English", "Thai", "Mandarin", "Cantonese"]
+      },
+      "subOrganization": {
+        "@type": "GroceryStore",
+        "name": "Chuanglee Cash & Carry",
+        "url": "https://chuanglee.cc/"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://chuanglee.co.uk/#website",
+      "name": "Chuanglee",
+      "url": "https://chuanglee.co.uk/",
+      "publisher": { "@id": "https://chuanglee.co.uk/#organization" }
     }
+  ]
+}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -104,19 +141,14 @@
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-text">
-      <div class="hero-meta reveal" id="hero-meta">Volume I · Heritage Foodservice</div>
+      <div class="hero-meta reveal" id="hero-meta">Asian Foodservice Wholesaler &amp; Importer · Since 1989</div>
       <h1 class="headline reveal">
         The flavour<br />
         of <span class="ital">East Asia</span>,<br />
         from soil to <span class="ital">stove</span>.
         <span class="cjk">創立</span><span class="thai-deco">ก่อตั้ง</span>
       </h1>
-      <p class="hero-sub reveal" id="hero-sub">
-        Chuanglee is a third-generation family business importing, manufacturing
-        and distributing authentic Thai, Chinese, Malaysian and Vietnamese
-        ingredients to over 450 restaurant kitchens, retailers and wholesalers
-        across the United Kingdom.
-      </p>
+      <p class="hero-sub reveal" id="hero-sub">UK importer and foodservice wholesaler of authentic Thai, Chinese and South East Asian ingredients for restaurants, chefs and procurement teams. 30+ heritage brands, a family farm in Thailand and 3,000+ product lines in stock.</p>
       <div class="hero-actions reveal">
         <a href="catalogue.html" class="btn-primary" id="hero-cta-primary">Browse Catalogue</a>
         <a href="#capabilities" class="btn-ghost" id="hero-cta-secondary">Our Capabilities <span class="arrow">→</span></a>
@@ -239,6 +271,64 @@
     </div>
   </div>
 </div>
+
+<!-- WHO WE SUPPLY — Thai foodservice, Chinese foodservice and procurement teams.
+     Links point at the matching generated catalogue and brand pages. -->
+<section class="supply" id="foodservice">
+  <div class="cap-inner">
+    <div class="cap-head">
+      <div>
+        <div class="eyebrow">Who We Supply</div>
+        <h2 class="title">Asian foodservice for <em>restaurants</em>, chefs and buyers.</h2>
+      </div>
+      <p>From independent Thai and Chinese restaurants to hotel kitchens and multi-site groups, we supply the ingredients and packaging a professional kitchen runs on: imported direct, held in our London warehouse and delivered on our own fleet.</p>
+    </div>
+    <div class="supply-grid">
+      <article class="cap-card supply-card">
+        <span class="num">01 / Thai Foodservice</span>
+        <h3>Thai foodservice, from curry paste to fresh herbs.</h3>
+        <p>Curry pastes, fish sauce, coconut milk, jasmine and sticky rice and rice noodles from the brands Thai kitchens rely on, plus fresh Thai herbs and vegetables flown in weekly from Suree's Farm.</p>
+        <ul class="supply-links">
+          <li><a href="/catalogue/thai-curry-paste-powder">Thai curry pastes</a></li>
+          <li><a href="/catalogue/thai-chilli-sauce-and-paste">Thai chilli sauces</a></li>
+          <li><a href="/catalogue/fish-sauce">Fish sauce</a></li>
+          <li><a href="/catalogue/coconut-product">Coconut milk &amp; cream</a></li>
+          <li><a href="/catalogue/thai-veg-fruit">Thai vegetables &amp; herbs</a></li>
+          <li><a href="/catalogue/rice">Jasmine &amp; sticky rice</a></li>
+          <li><a href="/catalogue/noodle">Rice noodles</a></li>
+        </ul>
+        <p class="supply-brands">Brands include <a href="/brands/mae-ploy">Mae Ploy</a>, <a href="/brands/healthy-boy">Healthy Boy</a>, <a href="/brands/aroy-d">AROY-D</a>, <a href="/brands/chaokoh">Chaokoh</a>, <a href="/brands/squid-brand">Squid Brand</a> and <a href="/brands/por-kwan">Por Kwan</a>.</p>
+      </article>
+      <article class="cap-card supply-card">
+        <span class="num">02 / Chinese Foodservice</span>
+        <h3>Chinese foodservice and wholesale.</h3>
+        <p>Light and dark soy, oyster and hoisin sauces, Shaoxing wine and vinegars, frozen dumplings and bao, and aromatic crispy duck for Chinese restaurants and takeaways, with the packaging to send it all out in.</p>
+        <ul class="supply-links">
+          <li><a href="/catalogue/soy-sauce-light-and-thin">Light soy sauce</a></li>
+          <li><a href="/catalogue/soy-sauce-dark-and-thick">Dark soy sauce</a></li>
+          <li><a href="/catalogue/oyster-mushroom-sauce">Oyster sauce</a></li>
+          <li><a href="/catalogue/plum-hoisin-teriyaki-sauce">Hoisin &amp; plum sauce</a></li>
+          <li><a href="/catalogue/dumpling">Dumplings &amp; gyoza</a></li>
+          <li><a href="/catalogue/frozen-bun">Bao &amp; buns</a></li>
+          <li><a href="/catalogue/frozen-duck">Aromatic &amp; roast duck</a></li>
+          <li><a href="/catalogue/packaging-food-container">Takeaway packaging</a></li>
+        </ul>
+        <p class="supply-brands">Brands include <a href="/brands/lee-kum-kee">Lee Kum Kee</a> and <a href="/brands/amoy">Amoy</a>.</p>
+      </article>
+      <article class="cap-card supply-card dark">
+        <span class="num">03 / Procurement &amp; Multi-site</span>
+        <h3>Built for procurement teams.</h3>
+        <p>One trade account for ambient, chilled, frozen and fresh, from 3,000+ product lines. Direct importing keeps pricing competitive and supply consistent, the Chuanglee app gives every site its own pricing and order guides, credit accounts are available, and our manufacturing partner can produce sauces to your recipe at scale.</p>
+        <ul class="supply-facts">
+          <li>London &amp; Greater London: deliveries several times a week</li>
+          <li>UK nationwide: weekly delivery</li>
+          <li>£300 minimum order for own-fleet delivery</li>
+        </ul>
+        <a href="contact.html#account-card" class="btn-ghost">Open a trade account <span class="arrow">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
 
 <!-- ECOSYSTEM -->
 <section class="ecosystem">
