@@ -1,14 +1,20 @@
 {
   "arrivals": [
     {
-      "image": "/images/grill choice (18)-1.png",
+      "image": "/images/grill choice (13).png",
       "title": "Grill Choice Chicken Pandan",
       "date": "2026-09-16",
       "text": "NEW GRILL CHOICE Chicken Pandan – fragrant, aromatic & uniquely Thai"
     },
     {
       "image": "/images/grill choice (10).png",
+      "title": "Grill Choice Satay Chicken",
       "date": "2026-09-01"
+    },
+    {
+      "image": "/images/grill choice (11).png",
+      "title": "Grill Choice Chicken Lemongrass Charcoal Grill",
+      "date": "2026-09-10"
     }
   ]
 }
