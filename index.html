@@ -23,16 +23,21 @@
 <meta name="twitter:description" content="Asian foodservice wholesaler and importer since 1989. Thai and Chinese ingredients for restaurants, chefs and procurement teams across London and the UK." />
 <meta name="twitter:image" content="https://chuanglee.co.uk/images/logo.png" />
 
-<!-- Schema.org -->
+<!-- Schema.org: a wholesaler, not a FoodEstablishment (Google's type for
+     restaurants). The other main pages point back to #organization. -->
 <script type="application/ld+json">
-  {
-      "@context": "https://schema.org",
-      "@type": "FoodEstablishment",
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WholesaleStore",
       "@id": "https://chuanglee.co.uk/#organization",
       "name": "Chuanglee Limited",
-      "url": "https://chuanglee.co.uk",
+      "alternateName": "Chuanglee Foodservice",
+      "url": "https://chuanglee.co.uk/",
       "logo": "https://chuanglee.co.uk/images/logo.png",
-      "description": "Family-run UK importer, manufacturing partner and foodservice distributor specialising in authentic Thai, Chinese, Malaysian and Vietnamese ingredients.",
+      "image": "https://chuanglee.co.uk/images/logo.png",
+      "description": "Asian foodservice wholesaler and importer supplying authentic Thai, Chinese, Malaysian and Vietnamese ingredients to restaurants, chefs and procurement teams across London and the UK.",
       "foundingDate": "1989",
       "telephone": "+448453881688",
       "email": "sales@chuanglee.co.uk",
@@ -43,9 +48,41 @@
         "postalCode": "SE7 7SJ",
         "addressCountry": "GB"
       },
-      "areaServed": "GB",
-      "sameAs": []
+      "areaServed": [
+        { "@type": "City", "name": "London" },
+        { "@type": "Country", "name": "United Kingdom" }
+      ],
+      "knowsAbout": [
+        "Asian foodservice",
+        "Thai foodservice",
+        "Chinese foodservice",
+        "Foodservice wholesale",
+        "Asian food import",
+        "Bespoke sauce manufacturing"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+448453881688",
+        "email": "sales@chuanglee.co.uk",
+        "areaServed": "GB",
+        "availableLanguage": ["English", "Thai", "Mandarin", "Cantonese"]
+      },
+      "subOrganization": {
+        "@type": "GroceryStore",
+        "name": "Chuanglee Cash & Carry",
+        "url": "https://chuanglee.cc/"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://chuanglee.co.uk/#website",
+      "name": "Chuanglee",
+      "url": "https://chuanglee.co.uk/",
+      "publisher": { "@id": "https://chuanglee.co.uk/#organization" }
     }
+  ]
+}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
