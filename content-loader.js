@@ -396,6 +396,7 @@ function renderHomePosters(d) {
     const frame = tile.querySelector('.hp-frame');
     const img = makeEl('img');
     img.src = post.image;
+    img.loading = 'lazy';
     // The caption below carries the title, so only an untitled post needs alt text
     img.alt = post.title ? '' : `${tile.querySelector('.hp-cat').textContent} poster`;
     frame.replaceChildren(img);
