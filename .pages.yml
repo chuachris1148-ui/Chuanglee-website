@@ -485,7 +485,7 @@ content:
             collapsed: true
             summary: "{date} · {title}"
         fields:
-          - { name: image, label: Image, type: image, required: true, description: "Square works best. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
+          - { name: image, label: Image, type: image, required: true, description: "A4 portrait artwork fits the frame exactly. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
           - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
@@ -500,7 +500,7 @@ content:
             collapsed: true
             summary: "{date} · {title}"
         fields:
-          - { name: image, label: Image, type: image, required: true, description: "Square works best. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
+          - { name: image, label: Image, type: image, required: true, description: "A4 portrait artwork fits the frame exactly. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
           - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
@@ -515,7 +515,7 @@ content:
             collapsed: true
             summary: "{date} · {title}"
         fields:
-          - { name: image, label: Image, type: image, required: true, description: "Square works best. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
+          - { name: image, label: Image, type: image, required: true, description: "A4 portrait artwork fits the frame exactly. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
           - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
@@ -530,7 +530,7 @@ content:
             collapsed: true
             summary: "{date} · {title}"
         fields:
-          - { name: image, label: Image, type: image, required: true, description: "Square works best. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
+          - { name: image, label: Image, type: image, required: true, description: "A4 portrait artwork fits the frame exactly. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
           - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }

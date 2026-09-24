@@ -1221,7 +1221,8 @@ footer { background: var(--ink); color: var(--paper); padding: 80px 48px 36px; }
 .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 24px; align-items: start; }
 .news-item { display: block; width: 100%; padding: 0; font: inherit; text-align: left; color: inherit; }
 .news-item:focus-visible { outline: 2px solid var(--vermillion); outline-offset: 4px; }
-.ni-img { display: block; aspect-ratio: 1; overflow: hidden; border-radius: 4px; background: var(--paper-2); }
+/* A4 portrait, the shape of the artwork posted here, so none of it is cropped */
+.ni-img { display: block; aspect-ratio: 210 / 297; overflow: hidden; border-radius: 4px; background: var(--paper-2); }
 .news-section.alt .ni-img { background: var(--paper); }
 .ni-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
 .news-item:hover .ni-img img { transform: scale(1.04); }
