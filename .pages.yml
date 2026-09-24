@@ -96,11 +96,6 @@ content:
         label: "§ Stats — Stat 5 label"
         type: string
 
-      - { name: cc_text, label: "§ Cash & Carry — Paragraph", type: text }
-      - { name: cc_btn, label: "§ Cash & Carry — Button label", type: string }
-      - { name: cc_url, label: "§ Cash & Carry — Button link", type: string, description: "Normally https://chuanglee.cc/" }
-      - { name: cc_img, label: "§ Cash & Carry — Image", type: image }
-
       - name: story_eyebrow
         label: "§ Story — Eyebrow"
         type: string
@@ -448,6 +443,10 @@ content:
       - { name: form_heading, label: Form Heading, type: string }
       - { name: form_sub, label: Form Sub-line, type: string }
       - { name: form_submit, label: Submit Button, type: string }
+      - { name: cc_text, label: "§ Cash & Carry banner — Paragraph", type: text }
+      - { name: cc_btn, label: "§ Cash & Carry banner — Button label", type: string }
+      - { name: cc_url, label: "§ Cash & Carry banner — Button link", type: string, description: "Normally https://chuanglee.cc/" }
+      - { name: cc_img, label: "§ Cash & Carry banner — Image", type: image }
 
   - name: catalogue
     label: Catalogue Page
