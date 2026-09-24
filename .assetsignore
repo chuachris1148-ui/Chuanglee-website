@@ -1,0 +1,20 @@
+# Files that must not be published as website assets.
+#
+# assets.directory is "." in wrangler.jsonc, so without this list wrangler
+# tries to upload the repository itself — including .git, whose pack files
+# exceed the 25 MiB per-asset limit and fail the build outright.
+
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+
+# CMS and build config — read from the repo, never served
+.pages.yml
+pages.yml
+scripts
+
+# Kept public deliberately: content/ (content-loader.js fetches it at runtime),
+# images/, docs/ (linked from the footer), googleb*.html (Search Console
+# verification), robots.txt, sitemap.xml, favicon.ico, styles.css and the
+# top-level .js files.
