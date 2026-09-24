@@ -382,15 +382,21 @@ function makeEl(tag, className, text) {
   return el;
 }
 
-// Home page squares take their section's newest image
-function renderNewsCubes(d) {
-  document.querySelectorAll('.news-cube[data-news]').forEach(cube => {
-    const latest = newestFirst(d[cube.dataset.news])[0];
-    if (!latest) return;
-    let img = cube.querySelector('img');
-    if (!img) { img = makeEl('img'); img.alt = ''; cube.prepend(img); }
-    img.src = latest.image;
-    cube.classList.add('has-img');
+// Home page posters: slot 0 is a section's newest post, slot 1 the next, and
+// so on. A slot with no post keeps its Coming soon tile.
+function renderHomePosters(d) {
+  document.querySelectorAll('.home-poster[data-news]').forEach(tile => {
+    const post = newestFirst(d[tile.dataset.news])[Number(tile.dataset.slot) || 0];
+    if (!post) return;
+    const frame = tile.querySelector('.hp-frame');
+    const img = makeEl('img');
+    img.src = post.image;
+    // The caption below carries the title, so only an untitled post needs alt text
+    img.alt = post.title ? '' : `${tile.querySelector('.hp-cat').textContent} poster`;
+    frame.replaceChildren(img);
+    tile.querySelector('.hp-title')?.remove();
+    if (post.title) tile.append(makeEl('span', 'hp-title', post.title));
+    tile.classList.add('has-img');
   });
 }
 
@@ -450,7 +456,7 @@ async function applyNews() {
 (async () => {
   const page = document.body.dataset.page || 'home';
   await applyGlobal();
-  if (page === 'home') { await applyHome(); renderNewsCubes(await loadJSON('news')); }
+  if (page === 'home') { await applyHome(); renderHomePosters(await loadJSON('news')); }
   if (page === 'brands') await applyBrands();
   if (page === 'farm') await applyFarm();
   if (page === 'contact') await applyContact();

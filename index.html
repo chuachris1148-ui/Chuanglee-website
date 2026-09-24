@@ -148,7 +148,8 @@
   </div>
 </div>
 
-<!-- NEWS & PROMOTIONS — each square shows its section's newest image from content/news.json -->
+<!-- NEWS & PROMOTIONS — A4 posters from content/news.json. data-slot 0 is a
+     section's newest post, 1 the next, and so on; empty slots say Coming soon. -->
 <section class="whats-new" id="whats-new">
   <div class="whats-new-head">
     <div>
@@ -157,11 +158,15 @@
     </div>
     <a href="news.html" class="btn-ghost">See everything <span class="arrow">→</span></a>
   </div>
-  <div class="news-cubes">
-    <a href="news.html#arrivals" class="news-cube nc-arrivals" data-news="arrivals"><span class="nc-arrow">↗</span><div class="nc-label"><span class="nc-num">01</span><h3>New Product <em>Arrivals</em></h3></div></a>
-    <a href="news.html#promotions" class="news-cube nc-promotions" data-news="promotions"><span class="nc-arrow">↗</span><div class="nc-label"><span class="nc-num">02</span><h3><em>Promotions</em></h3></div></a>
-    <a href="news.html#recipes" class="news-cube nc-recipes" data-news="recipes"><span class="nc-arrow">↗</span><div class="nc-label"><span class="nc-num">03</span><h3><em>Recipes</em></h3></div></a>
-    <a href="news.html#news" class="news-cube nc-news" data-news="news"><span class="nc-arrow">↗</span><div class="nc-label"><span class="nc-num">04</span><h3><em>News</em></h3></div></a>
+  <div class="home-posters">
+    <a href="news.html#arrivals" class="home-poster hp-arrivals" data-news="arrivals" data-slot="0"><span class="hp-frame"><span class="hp-soon">Coming soon</span></span><span class="hp-cat">New Arrival</span></a>
+    <a href="news.html#arrivals" class="home-poster hp-arrivals" data-news="arrivals" data-slot="1"><span class="hp-frame"><span class="hp-soon">Coming soon</span></span><span class="hp-cat">New Arrival</span></a>
+    <a href="news.html#arrivals" class="home-poster hp-arrivals" data-news="arrivals" data-slot="2"><span class="hp-frame"><span class="hp-soon">Coming soon</span></span><span class="hp-cat">New Arrival</span></a>
+    <a href="news.html#news" class="home-poster hp-news" data-news="news" data-slot="0"><span class="hp-frame"><span class="hp-soon">Coming soon</span></span><span class="hp-cat">News</span></a>
+    <a href="news.html#promotions" class="home-poster hp-promotions" data-news="promotions" data-slot="0"><span class="hp-frame"><span class="hp-soon">Coming soon</span></span><span class="hp-cat">Promotion</span></a>
+    <a href="news.html#promotions" class="home-poster hp-promotions" data-news="promotions" data-slot="1"><span class="hp-frame"><span class="hp-soon">Coming soon</span></span><span class="hp-cat">Promotion</span></a>
+    <a href="news.html#promotions" class="home-poster hp-promotions" data-news="promotions" data-slot="2"><span class="hp-frame"><span class="hp-soon">Coming soon</span></span><span class="hp-cat">Promotion</span></a>
+    <a href="news.html#recipes" class="home-poster hp-recipes" data-news="recipes" data-slot="0"><span class="hp-frame"><span class="hp-soon">Coming soon</span></span><span class="hp-cat">Recipe</span></a>
   </div>
 </section>
 
