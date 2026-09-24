@@ -291,6 +291,11 @@ async function applyContact() {
     if (label.textContent.includes('Delivery') && d.delivery) val.textContent = d.delivery;
     if (label.textContent.includes('Minimum') && d.min_order) val.textContent = d.min_order;
   });
+
+  // CASH & CARRY BANNER
+  id('cc-text', d.cc_text);
+  btn('cc-btn', d.cc_btn, d.cc_url);
+  bg('cc-img', d.cc_img);
 }
 
 async function applyCatalogue() {
