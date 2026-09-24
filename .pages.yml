@@ -469,4 +469,71 @@ content:
       - { name: cat_promo_h3, label: "§ Promo — Headline", type: string }
       - { name: cat_promo_p, label: "§ Promo — Description", type: string }
 
+  # Each section keeps up to 100 posts; the website shows the 6 newest by date.
+  - name: news
+    label: News & Promotions
+    type: file
+    path: content/news.json
+    fields:
+      - name: arrivals
+        label: "§ New Product Arrivals"
+        description: "The 6 newest by date show on the website. Up to 100 are kept."
+        type: object
+        list:
+          max: 100
+          collapsible:
+            collapsed: true
+            summary: "{date} · {title}"
+        fields:
+          - { name: image, label: Image, type: image, required: true }
+          - { name: title, label: Title, type: string }
+          - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
+          - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
+          - { name: link, label: Button link, type: string, description: "Optional. e.g. /catalogue/sauces-curry or a full web address." }
+      - name: promotions
+        label: "§ Promotions"
+        description: "The 6 newest by date show on the website. Up to 100 are kept."
+        type: object
+        list:
+          max: 100
+          collapsible:
+            collapsed: true
+            summary: "{date} · {title}"
+        fields:
+          - { name: image, label: Image, type: image, required: true }
+          - { name: title, label: Title, type: string }
+          - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
+          - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
+          - { name: link, label: Button link, type: string, description: "Optional. e.g. /catalogue/sauces-curry or a full web address." }
+      - name: recipes
+        label: "§ Recipes"
+        description: "The 6 newest by date show on the website. Up to 100 are kept."
+        type: object
+        list:
+          max: 100
+          collapsible:
+            collapsed: true
+            summary: "{date} · {title}"
+        fields:
+          - { name: image, label: Image, type: image, required: true }
+          - { name: title, label: Title, type: string }
+          - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
+          - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
+          - { name: link, label: Button link, type: string, description: "Optional. e.g. /catalogue/sauces-curry or a full web address." }
+      - name: news
+        label: "§ News"
+        description: "The 6 newest by date show on the website. Up to 100 are kept."
+        type: object
+        list:
+          max: 100
+          collapsible:
+            collapsed: true
+            summary: "{date} · {title}"
+        fields:
+          - { name: image, label: Image, type: image, required: true }
+          - { name: title, label: Title, type: string }
+          - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
+          - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
+          - { name: link, label: Button link, type: string, description: "Optional. e.g. /catalogue/sauces-curry or a full web address." }
+
 
