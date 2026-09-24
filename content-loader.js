@@ -277,8 +277,8 @@ async function applyContact() {
 
   sel('.contact .eyebrow', d.eyebrow);
   if (d.headline) {
-    const h2 = document.querySelector('.contact h2.title');
-    if (h2) h2.innerHTML = d.headline;
+    const heading = document.querySelector('.contact .title');
+    if (heading) heading.innerHTML = d.headline;
   }
   sel('.contact .lead', d.lead);
   sel('.contact-form h3', d.form_heading);
