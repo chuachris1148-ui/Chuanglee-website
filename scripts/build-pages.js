@@ -108,11 +108,11 @@ const NAV = (slug) => `
       <a href="/catalogue" class="active">Catalogue</a>
       <a href="/brands">Brands</a>
       <a href="/farm">The Farm</a>
+      <a href="/news">News &amp; Promotions</a>
       <a href="/delivery">Delivery</a>
       <a href="/contact">Contact</a>
     </div>
     <div class="nav-cta">
-      <span class="phone">0845 388 1688</span>
       <a href="https://chuanglee.choco.com/" class="order-btn" target="_blank" rel="noopener">Order Online ↗</a>
       <a href="/bookings" class="supplier-btn">Supplier Bookings</a>
     </div>
@@ -355,7 +355,7 @@ function retargetBrandCards(brands) {
 function writeSitemap(cats, brands, supers) {
   const main = [
     ['/', 'weekly', '1.0'], ['/catalogue', 'weekly', '0.9'], ['/brands', 'monthly', '0.8'],
-    ['/farm', 'monthly', '0.7'], ['/delivery', 'monthly', '0.7'],
+    ['/farm', 'monthly', '0.7'], ['/news', 'weekly', '0.7'], ['/delivery', 'monthly', '0.7'],
     ['/contact', 'monthly', '0.7'], ['/bookings', 'monthly', '0.5'],
   ];
   const urls = [

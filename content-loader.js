@@ -353,14 +353,109 @@ async function applyBookings() {
   sel('.book-hero .lede', d.lede);
 }
 
+// NEWS & PROMOTIONS
+// content/news.json keeps up to 100 posts per section; the site shows the
+// newest by date. CMS text goes in via textContent, never innerHTML.
+const NEWS_SHOWN = 6;
+
+function newestFirst(list) {
+  if (!Array.isArray(list)) return [];
+  return list
+    .map((post, i) => ({ post, i }))
+    .filter(({ post }) => post && post.image)
+    // Dates are yyyy-MM-dd, so they sort as text. On a tie, later in the
+    // CMS list counts as newer.
+    .sort((a, b) => String(b.post.date || '').localeCompare(String(a.post.date || '')) || b.i - a.i)
+    .map(({ post }) => post);
+}
+
+function newsDate(value) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(value || '');
+  if (!m) return '';
+  return new Date(+m[1], +m[2] - 1, +m[3]).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function makeEl(tag, className, text) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text) el.textContent = text;
+  return el;
+}
+
+// Home page squares take their section's newest image
+function renderNewsCubes(d) {
+  document.querySelectorAll('.news-cube[data-news]').forEach(cube => {
+    const latest = newestFirst(d[cube.dataset.news])[0];
+    if (!latest) return;
+    let img = cube.querySelector('img');
+    if (!img) { img = makeEl('img'); img.alt = ''; cube.prepend(img); }
+    img.src = latest.image;
+    cube.classList.add('has-img');
+  });
+}
+
+function openNewsPost(post) {
+  const dlg = document.getElementById('news-dialog');
+  if (!dlg || !dlg.showModal) return;
+  const img = dlg.querySelector('.nd-img img');
+  img.src = post.image;
+  img.alt = post.title || '';
+  dlg.querySelector('.nd-date').textContent = newsDate(post.date);
+  dlg.querySelector('.nd-title').textContent = post.title || '';
+  dlg.querySelector('.nd-text').textContent = post.text || '';
+  const link = dlg.querySelector('.nd-link');
+  link.hidden = !post.link;
+  if (post.link) {
+    link.href = post.link;
+    const external = /^https?:\/\//i.test(post.link) && !/^https?:\/\/(www\.)?chuanglee\.co\.uk/i.test(post.link);
+    if (external) { link.target = '_blank'; link.rel = 'noopener'; }
+    else { link.removeAttribute('target'); link.removeAttribute('rel'); }
+  }
+  dlg.showModal();
+}
+
+function renderNews(d) {
+  document.querySelectorAll('.news-grid[data-news]').forEach(grid => {
+    const posts = newestFirst(d[grid.dataset.news]).slice(0, NEWS_SHOWN);
+    if (!posts.length) return; // keep the "nothing posted yet" line
+    grid.replaceChildren(...posts.map(post => {
+      const item = makeEl('button', 'news-item');
+      item.type = 'button';
+      const frame = makeEl('span', 'ni-img');
+      const img = makeEl('img');
+      img.src = post.image;
+      img.alt = post.title || '';
+      img.loading = 'lazy';
+      frame.append(img);
+      item.append(frame);
+      const date = newsDate(post.date);
+      if (date) item.append(makeEl('span', 'ni-date', date));
+      if (post.title) item.append(makeEl('span', 'ni-title', post.title));
+      item.addEventListener('click', () => openNewsPost(post));
+      return item;
+    }));
+  });
+}
+
+async function applyNews() {
+  const dlg = document.getElementById('news-dialog');
+  if (dlg) {
+    dlg.querySelector('.nd-close').addEventListener('click', () => dlg.close());
+    // A click on the dimmed backdrop lands on the dialog element itself
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  }
+  renderNews(await loadJSON('news'));
+}
+
 (async () => {
   const page = document.body.dataset.page || 'home';
   await applyGlobal();
-  if (page === 'home') await applyHome();
+  if (page === 'home') { await applyHome(); renderNewsCubes(await loadJSON('news')); }
   if (page === 'brands') await applyBrands();
   if (page === 'farm') await applyFarm();
   if (page === 'contact') await applyContact();
   if (page === 'catalogue') await applyCatalogue();
   if (page === 'delivery') await applyDelivery();
   if (page === 'bookings') await applyBookings();
+  if (page === 'news') await applyNews();
 })();
