@@ -1,6 +1,10 @@
 {
-  "arrivals": [],
-  "promotions": [],
-  "recipes": [],
-  "news": []
+  "arrivals": [
+    {
+      "image": "/images/grill choice (18)-1.png",
+      "title": "Grill Choice Chicken Pandan",
+      "date": "2026-09-24",
+      "text": "NEW GRILL CHOICE Chicken Pandan – fragrant, aromatic & uniquely Thai"
+    }
+  ]
 }
