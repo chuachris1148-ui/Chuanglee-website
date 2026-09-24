@@ -136,6 +136,11 @@ async function applyHome() {
   id('stat-4-num', d.stat_4_num); id('stat-4-label', d.stat_4_label);
   id('stat-5-num', d.stat_5_num); id('stat-5-label', d.stat_5_label);
 
+  // CASH & CARRY
+  id('cc-text', d.cc_text);
+  btn('cc-btn', d.cc_btn, d.cc_url);
+  bg('cc-img', d.cc_img);
+
   // STORY
   id('story-eyebrow', d.story_eyebrow);
   id('story-lead', d.story_lead);

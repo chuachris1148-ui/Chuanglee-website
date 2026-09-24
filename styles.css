@@ -792,6 +792,12 @@ footer { background: var(--ink); color: var(--paper); padding: 80px 48px 36px; }
 .promo-band.gold .btn-primary { background: var(--ink); color: var(--paper); box-shadow: none; }
 .promo-band.gold .btn-primary:hover { background: var(--paper); color: var(--ink); }
 
+/* Home page Cash & Carry band: a gap from the dark stats strip above,
+   超市 ("supermarket") behind it, and the stamp kept inside the photo */
+.cc-band { margin-top: 80px; }
+.cc-band.vermillion::after { content: '超市'; }
+.cc-band .promo-visual .stamp { top: 16px; right: 16px; }
+
 /* Brand strip scrolling row */
 .brand-strip {
   background: var(--paper-2); padding: 48px; overflow: hidden;
