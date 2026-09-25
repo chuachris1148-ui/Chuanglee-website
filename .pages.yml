@@ -490,6 +490,7 @@ content:
             summary: "{date} · {title}"
         fields:
           - { name: image, label: Image, type: image, required: true, description: "A4 portrait artwork fits the frame exactly. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
+          - { name: reel, label: Instagram reel link, type: string, description: "Optional. Paste the reel's link, e.g. https://www.instagram.com/reel/ABC123/. The post then plays it when clicked, with the image above as its cover. The Instagram account must be public." }
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
           - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
@@ -505,6 +506,7 @@ content:
             summary: "{date} · {title}"
         fields:
           - { name: image, label: Image, type: image, required: true, description: "A4 portrait artwork fits the frame exactly. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
+          - { name: reel, label: Instagram reel link, type: string, description: "Optional. Paste the reel's link, e.g. https://www.instagram.com/reel/ABC123/. The post then plays it when clicked, with the image above as its cover. The Instagram account must be public." }
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
           - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
@@ -520,6 +522,7 @@ content:
             summary: "{date} · {title}"
         fields:
           - { name: image, label: Image, type: image, required: true, description: "A4 portrait artwork fits the frame exactly. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
+          - { name: reel, label: Instagram reel link, type: string, description: "Optional. Paste the reel's link, e.g. https://www.instagram.com/reel/ABC123/. The post then plays it when clicked, with the image above as its cover. The Instagram account must be public." }
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
           - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }
@@ -535,6 +538,7 @@ content:
             summary: "{date} · {title}"
         fields:
           - { name: image, label: Image, type: image, required: true, description: "A4 portrait artwork fits the frame exactly. Resize to 1600px wide and under 1MB first; files over about 3MB are rejected." }
+          - { name: reel, label: Instagram reel link, type: string, description: "Optional. Paste the reel's link, e.g. https://www.instagram.com/reel/ABC123/. The post then plays it when clicked, with the image above as its cover. The Instagram account must be public." }
           - { name: title, label: Title, type: string }
           - { name: date, label: Date, type: date, description: "Newest dates show first.", options: { format: yyyy-MM-dd } }
           - { name: text, label: Description, type: text, description: "Optional. Shown when someone clicks the image." }

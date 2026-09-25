@@ -387,6 +387,47 @@ function makeEl(tag, className, text) {
   return el;
 }
 
+// A post's optional Instagram reel link, rebuilt from its shortcode so only a
+// clean instagram.com permalink ever reaches the page. Accepts /reel/, /reels/,
+// /p/ and /tv/ links, with or without a username in front.
+function reelPermalink(url) {
+  const m = /^https?:\/\/(?:www\.)?instagram\.com\/(?:[\w.]+\/)?(reels?|p|tv)\/([\w-]+)/i.exec(String(url || '').trim());
+  if (!m) return '';
+  const kind = { p: 'p', tv: 'tv' }[m[1].toLowerCase()] || 'reel';
+  return `https://www.instagram.com/${kind}/${m[2]}/`;
+}
+
+function playBadge(className) {
+  const badge = makeEl('span', className, '▶');
+  badge.setAttribute('aria-hidden', 'true');
+  return badge;
+}
+
+// Instagram's embed script is only fetched the first time someone opens a
+// reel, so the page itself loads nothing from Instagram.
+function showReel(box, permalink) {
+  const quote = makeEl('blockquote', 'instagram-media');
+  quote.dataset.instgrmPermalink = permalink;
+  quote.dataset.instgrmVersion = '14';
+  // Instagram copies these onto its player; without a width it shrinks to 326px
+  quote.style.cssText = 'width:calc(100% - 2px);max-width:540px;min-width:326px;margin:0 auto;padding:0;border:0;background:#fff;border-radius:3px;';
+  // Shown until Instagram's script swaps in the player, or if it can't load
+  const fallback = makeEl('a', null, 'Watch on Instagram ↗');
+  fallback.href = permalink;
+  fallback.target = '_blank';
+  fallback.rel = 'noopener';
+  quote.append(fallback);
+  box.replaceChildren(quote);
+  if (window.instgrm) { window.instgrm.Embeds.process(); return; }
+  if (!document.getElementById('instagram-embed')) {
+    const script = makeEl('script');
+    script.id = 'instagram-embed';
+    script.src = 'https://www.instagram.com/embed.js';
+    script.async = true;
+    document.body.append(script);
+  }
+}
+
 // Home page posters: slot 0 is a section's newest post, slot 1 the next, and
 // so on. A slot with no post keeps its Coming soon tile.
 function renderHomePosters(d) {
@@ -400,6 +441,7 @@ function renderHomePosters(d) {
     // The caption below carries the title, so only an untitled post needs alt text
     img.alt = post.title ? '' : `${tile.querySelector('.hp-cat').textContent} poster`;
     frame.replaceChildren(img);
+    if (reelPermalink(post.reel)) frame.append(playBadge('hp-play'));
     tile.querySelector('.hp-title')?.remove();
     if (post.title) tile.append(makeEl('span', 'hp-title', post.title));
     tile.classList.add('has-img');
@@ -412,6 +454,15 @@ function openNewsPost(post) {
   const img = dlg.querySelector('.nd-img img');
   img.src = post.image;
   img.alt = post.title || '';
+  // A reel plays in place of the cover image
+  dlg.querySelector('.nd-reel')?.remove();
+  const reel = reelPermalink(post.reel);
+  img.hidden = !!reel;
+  if (reel) {
+    const box = makeEl('div', 'nd-reel');
+    dlg.querySelector('.nd-img').append(box);
+    showReel(box, reel);
+  }
   dlg.querySelector('.nd-date').textContent = newsDate(post.date);
   dlg.querySelector('.nd-title').textContent = post.title || '';
   dlg.querySelector('.nd-text').textContent = post.text || '';
@@ -435,10 +486,12 @@ function renderNews(d) {
       item.type = 'button';
       const frame = makeEl('span', 'ni-img');
       const img = makeEl('img');
+      const reel = reelPermalink(post.reel);
       img.src = post.image;
-      img.alt = post.title || '';
+      img.alt = reel ? `${post.title ? post.title + ', ' : ''}video` : post.title || '';
       img.loading = 'lazy';
       frame.append(img);
+      if (reel) frame.append(playBadge('ni-play'));
       item.append(frame);
       const date = newsDate(post.date);
       if (date) item.append(makeEl('span', 'ni-date', date));
@@ -455,6 +508,9 @@ async function applyNews() {
     dlg.querySelector('.nd-close').addEventListener('click', () => dlg.close());
     // A click on the dimmed backdrop lands on the dialog element itself
     dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    // Removing the player on close stops the reel playing on. The close event
+    // arrives a moment later, so skip it if a post has been reopened since.
+    dlg.addEventListener('close', () => { if (!dlg.open) dlg.querySelector('.nd-reel')?.remove(); });
   }
   renderNews(await loadJSON('news'));
 }
