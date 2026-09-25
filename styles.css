@@ -428,7 +428,8 @@ section.editorial {
 .supply-card .supply-brands { margin-top: auto; padding-top: 22px; font-size: 13px; }
 .supply-brands a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rule); }
 .supply-brands a:hover { color: var(--vermillion); text-decoration-color: currentColor; }
-.supply-card.dark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+/* Five cards: the procurement card spans two columns to finish the second row */
+.supply-card.dark { grid-column: span 2; background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .supply-card.dark h3 { color: var(--paper); }
 .supply-card.dark .num { color: var(--gold); }
 .supply-card.dark p { color: rgba(244,237,225,0.75); }
@@ -440,6 +441,7 @@ section.editorial {
 @media (max-width: 1100px) {
   .supply { padding: 80px 24px; }
   .supply-grid { grid-template-columns: 1fr; }
+  .supply-card.dark { grid-column: auto; }
 }
 
 .ecosystem { padding: 120px 48px; max-width: 1440px; margin: 0 auto; }
